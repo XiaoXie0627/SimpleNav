@@ -1,0 +1,231 @@
+---
+import Layout from '../../layouts/Layout.astro'
+---
+
+<Layout title="站点设置 - FastNav">
+  <main class="admin-page">
+    <header class="admin-header">
+      <a href="/admin" class="back-btn">← 返回</a>
+      <h1>站点设置</h1>
+      <button id="save-btn" class="primary-btn">保存设置</button>
+    </header>
+    
+    <form id="site-config-form" class="config-form">
+      <section class="form-section">
+        <h2>基本信息</h2>
+        <div class="form-group">
+          <label for="title">网站标题</label>
+          <input type="text" id="title" name="title" placeholder="FastNav导航" />
+        </div>
+        <div class="form-group">
+          <label for="description">网站描述</label>
+          <textarea id="description" name="description" rows="3" placeholder="收集国内外优秀设计网站"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="keywords">网站关键词</label>
+          <input type="text" id="keywords" name="keywords" placeholder="设计导航,设计资源" />
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>外观设置</h2>
+        <div class="form-group">
+          <label for="theme">主题模式</label>
+          <select id="theme" name="theme">
+            <option value="system">跟随系统</option>
+            <option value="light">浅色</option>
+            <option value="dark">深色</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="hoverEffect">悬停效果</label>
+          <select id="hoverEffect" name="hoverEffect">
+            <option value="default">默认</option>
+            <option value="lift">上浮</option>
+            <option value="glass">毛玻璃</option>
+            <option value="tilt">倾斜</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2>导航设置</h2>
+        <div class="form-group">
+          <label for="linkTarget">链接打开方式</label>
+          <select id="linkTarget" name="linkTarget">
+            <option value="_blank">新窗口打开</option>
+            <option value="_self">当前窗口</option>
+          </select>
+        </div>
+      </section>
+    </form>
+  </main>
+</Layout>
+
+<style>
+  .admin-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+
+  .admin-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .back-btn {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .admin-header h1 {
+    flex: 1;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--on-surface);
+  }
+
+  .primary-btn {
+    padding: 10px 20px;
+    border-radius: 9999px;
+    background: var(--primary);
+    color: var(--on-primary);
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .config-form {
+    background: var(--surface-container);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .form-section {
+    margin-bottom: 32px;
+  }
+
+  .form-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .form-section h2 {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--on-surface);
+    margin: 0 0 16px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--on-surface-variant);
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--outline-variant);
+    border-radius: 8px;
+    background: var(--surface);
+    font-size: 14px;
+    color: var(--on-surface);
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--primary-container);
+  }
+</style>
+
+<script>
+  // 加载配置
+  async function loadConfig() {
+    try {
+      const response = await fetch('/api/site-config')
+      const result = await response.json()
+      
+      if (result.success && result.data) {
+        const config = result.data
+        const form = document.getElementById('site-config-form') as HTMLFormElement
+        
+        if (form) {
+          const title = form.querySelector('#title') as HTMLInputElement
+          const description = form.querySelector('#description') as HTMLTextAreaElement
+          const keywords = form.querySelector('#keywords') as HTMLInputElement
+          const theme = form.querySelector('#theme') as HTMLSelectElement
+          const hoverEffect = form.querySelector('#hoverEffect') as HTMLSelectElement
+          const linkTarget = form.querySelector('#linkTarget') as HTMLSelectElement
+          
+          if (title) title.value = config.basic?.title || ''
+          if (description) description.value = config.basic?.description || ''
+          if (keywords) keywords.value = config.basic?.keywords || ''
+          if (theme) theme.value = config.appearance?.theme || 'system'
+          if (hoverEffect) hoverEffect.value = config.navigation?.hoverEffect || 'default'
+          if (linkTarget) linkTarget.value = config.navigation?.linkTarget || '_blank'
+        }
+      }
+    } catch (error) {
+      console.error('Failed to load config:', error)
+    }
+  }
+
+  // 保存配置
+  document.getElementById('save-btn')?.addEventListener('click', async () => {
+    const form = document.getElementById('site-config-form') as HTMLFormElement
+    if (!form) return
+    
+    const formData = new FormData(form)
+    
+    const config = {
+      basic: {
+        title: formData.get('title') as string,
+        description: formData.get('description') as string,
+        keywords: formData.get('keywords') as string,
+        defaultCategory: 'common'
+      },
+      appearance: {
+        theme: formData.get('theme') as string,
+        logo: '',
+        favicon: ''
+      },
+      navigation: {
+        linkTarget: formData.get('linkTarget') as string,
+        hoverEffect: formData.get('hoverEffect') as string
+      }
+    }
+    
+    try {
+      const response = await fetch('/api/site-config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(config)
+      })
+      
+      if (response.ok) {
+        alert('设置已保存')
+      }
+    } catch (error) {
+      console.error('Failed to save config:', error)
+      alert('保存失败')
+    }
+  })
+
+  loadConfig()
+</script>

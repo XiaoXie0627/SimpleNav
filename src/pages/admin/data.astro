@@ -1,0 +1,117 @@
+---
+import Layout from '../../layouts/Layout.astro'
+---
+
+<Layout title="数据管理 - FastNav">
+  <main class="admin-page">
+    <header class="admin-header">
+      <a href="/admin" class="back-btn">← 返回</a>
+      <h1>数据管理</h1>
+    </header>
+    
+    <div class="data-actions">
+      <button id="export-btn" class="action-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        <span>导出数据</span>
+        <p>下载所有数据为JSON文件</p>
+      </button>
+      
+      <label class="action-card">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        <span>导入数据</span>
+        <p>从JSON文件恢复数据</p>
+        <input type="file" id="import-input" accept=".json" style="display: none;" />
+      </label>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .admin-page { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+  .admin-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .back-btn { color: var(--primary); text-decoration: none; }
+  .admin-header h1 { flex: 1; font-size: 24px; font-weight: 600; margin: 0; color: var(--on-surface); }
+  
+  .data-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .action-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 32px;
+    border-radius: 16px;
+    background: var(--surface-container);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+  }
+
+  .action-card:hover {
+    background: var(--surface-container-high);
+    transform: translateY(-4px);
+  }
+
+  .action-card svg { color: var(--primary); }
+  .action-card span { font-size: 16px; font-weight: 500; color: var(--on-surface); }
+  .action-card p { font-size: 14px; color: var(--on-surface-variant); margin: 0; }
+</style>
+
+<script>
+  // 导出数据
+  document.getElementById('export-btn')?.addEventListener('click', async () => {
+    try {
+      const response = await fetch('/api/data/export')
+      if (response.ok) {
+        const data = await response.json()
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `fastnav-backup-${new Date().toISOString().split('T')[0]}.json`
+        a.click()
+        URL.revokeObjectURL(url)
+      }
+    } catch (error) {
+      console.error('Export failed:', error)
+      alert('导出失败')
+    }
+  })
+
+  // 导入数据
+  document.getElementById('import-input')?.addEventListener('change', async (e) => {
+    const file = (e.target as HTMLInputElement).files?.[0]
+    if (!file) return
+
+    try {
+      const text = await file.text()
+      const data = JSON.parse(text)
+      
+      const response = await fetch('/api/data/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+
+      if (response.ok) {
+        alert('导入成功')
+      }
+    } catch (error) {
+      console.error('Import failed:', error)
+      alert('导入失败：文件格式错误')
+    }
+  })
+</script>

@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro'
+---
+
+<Layout title="资源管理 - FastNav">
+  <main class="admin-page">
+    <header class="admin-header">
+      <a href="/admin" class="back-btn">← 返回</a>
+      <h1>资源管理</h1>
+      <button class="primary-btn">添加资源</button>
+    </header>
+    <div class="placeholder">
+      <p>资源管理功能开发中...</p>
+      <p>支持资源分类管理、资源项目管理</p>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .admin-page { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
+  .admin-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .back-btn { color: var(--primary); text-decoration: none; }
+  .admin-header h1 { flex: 1; font-size: 24px; font-weight: 600; margin: 0; color: var(--on-surface); }
+  .primary-btn { padding: 10px 20px; border-radius: 9999px; background: var(--primary); color: var(--on-primary); border: none; font-size: 14px; font-weight: 500; cursor: pointer; }
+  .placeholder { background: var(--surface-container); border-radius: 16px; padding: 48px; text-align: center; color: var(--on-surface-variant); }
+</style>

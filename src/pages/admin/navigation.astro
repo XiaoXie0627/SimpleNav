@@ -1,0 +1,234 @@
+---
+import Layout from '../../layouts/Layout.astro'
+---
+
+<Layout title="导航管理 - FastNav">
+  <main class="admin-page">
+    <header class="admin-header">
+      <a href="/admin" class="back-btn">← 返回</a>
+      <h1>导航管理</h1>
+      <button id="add-category-btn" class="primary-btn">添加分类</button>
+    </header>
+    
+    <div id="navigation-list" class="navigation-list">
+      <div class="loading">加载中...</div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .admin-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+
+  .admin-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .back-btn {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .admin-header h1 {
+    flex: 1;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--on-surface);
+  }
+
+  .primary-btn {
+    padding: 10px 20px;
+    border-radius: 9999px;
+    background: var(--primary);
+    color: var(--on-primary);
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+
+  .primary-btn:hover {
+    opacity: 0.9;
+  }
+
+  .navigation-list {
+    background: var(--surface-container);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .loading {
+    padding: 48px;
+    text-align: center;
+    color: var(--on-surface-variant);
+  }
+
+  .category-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--outline-variant);
+  }
+
+  .category-item:last-child {
+    border-bottom: none;
+  }
+
+  .category-item__icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+  }
+
+  .category-item__content {
+    flex: 1;
+  }
+
+  .category-item__title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--on-surface);
+  }
+
+  .category-item__count {
+    font-size: 12px;
+    color: var(--on-surface-variant);
+  }
+
+  .category-item__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .action-btn {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid var(--outline-variant);
+    color: var(--on-surface-variant);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .action-btn:hover {
+    background: var(--surface-container-high);
+    color: var(--on-surface);
+  }
+
+  .action-btn--delete:hover {
+    background: rgba(179, 38, 30, 0.1);
+    color: var(--error);
+    border-color: var(--error);
+  }
+</style>
+
+<script>
+  interface Category {
+    id: string
+    title: string
+    icon?: string
+    items: unknown[]
+    subCategories: unknown[]
+    enabled: boolean
+  }
+
+  // 加载导航数据
+  async function loadNavigation() {
+    const listEl = document.getElementById('navigation-list')
+    if (!listEl) return
+
+    try {
+      const response = await fetch('/api/navigation')
+      const result = await response.json()
+      
+      if (result.success && result.data?.navigationItems) {
+        const categories: Category[] = result.data.navigationItems
+        
+        if (categories.length === 0) {
+          listEl.innerHTML = '<div class="empty">暂无分类，点击上方按钮添加</div>'
+          return
+        }
+        
+        listEl.innerHTML = categories.map(cat => `
+          <div class="category-item" data-id="${cat.id}">
+            <div class="category-item__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+            <div class="category-item__content">
+              <div class="category-item__title">${cat.title}</div>
+              <div class="category-item__count">${cat.items.length} 个项目</div>
+            </div>
+            <div class="category-item__actions">
+              <button class="action-btn" title="编辑" onclick="editCategory('${cat.id}')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                  <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+              </button>
+              <button class="action-btn action-btn--delete" title="删除" onclick="deleteCategory('${cat.id}')">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3 6 5 6 21 6"></polyline>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        `).join('')
+      }
+    } catch (error) {
+      listEl.innerHTML = '<div class="error">加载失败</div>'
+      console.error(error)
+    }
+  }
+
+  // 编辑分类
+  window.editCategory = (id: string) => {
+    console.log('Edit category:', id)
+    // TODO: 打开编辑弹窗
+  }
+
+  // 删除分类
+  window.deleteCategory = async (id: string) => {
+    if (!confirm('确定要删除这个分类吗？此操作不可撤销。')) return
+    
+    try {
+      const response = await fetch(`/api/navigation/${id}`, {
+        method: 'DELETE'
+      })
+      
+      if (response.ok) {
+        loadNavigation()
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  // 添加分类
+  document.getElementById('add-category-btn')?.addEventListener('click', () => {
+    console.log('Add category')
+    // TODO: 打开添加弹窗
+  })
+
+  loadNavigation()
+</script>
