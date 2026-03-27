@@ -1,0 +1,279 @@
+---
+interface Props {
+  title?: string
+}
+
+const { title } = Astro.props
+---
+
+<header class="header">
+  <button id="menu-toggle" class="header__menu-btn" aria-label="打开菜单">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
+  
+  <div class="header__time" id="time-display">
+    <span class="header__time-value">--:--</span>
+    <span class="header__date-value">----年--月--日</span>
+  </div>
+  
+  <div class="header__search">
+    <div class="search-bar">
+      <button class="search-bar__engine" id="search-engine-btn">
+        <img src="/assets/images/search/bing.svg" alt="Bing" width="20" height="20" />
+      </button>
+      <input 
+        type="text" 
+        id="network-search-input"
+        class="search-bar__input"
+        placeholder="搜索网络..."
+      />
+      <button class="search-bar__submit" id="search-submit-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+  
+  <div class="header__actions">
+    <button id="back-to-top" class="header__action-btn" title="返回顶部" style="display: none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 240px;
+    right: 0;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--outline-variant);
+    z-index: 100;
+  }
+
+  .header__menu-btn {
+    display: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    color: var(--on-surface);
+    cursor: pointer;
+  }
+
+  .header__time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+  }
+
+  .header__time-value {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--on-surface);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .header__date-value {
+    font-size: 12px;
+    color: var(--on-surface-variant);
+  }
+
+  .header__search {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .search-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    height: 48px;
+    border-radius: 9999px;
+    background: var(--surface-container);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .search-bar:focus-within {
+    box-shadow: 0 0 0 2px var(--primary), 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .search-bar__engine {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+
+  .search-bar__engine:hover {
+    opacity: 1;
+  }
+
+  .search-bar__input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    color: var(--on-surface);
+    outline: none;
+  }
+
+  .search-bar__input::placeholder {
+    color: var(--on-surface-variant);
+  }
+
+  .search-bar__submit {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary);
+    color: var(--on-primary);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .search-bar__submit:hover {
+    transform: scale(1.05);
+  }
+
+  .header__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .header__action-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--secondary-container);
+    color: var(--on-secondary-container);
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .header__action-btn:hover {
+    transform: scale(1.05);
+    background: var(--primary-container);
+  }
+
+  @media (max-width: 768px) {
+    .header {
+      left: 0;
+      padding: 0 16px;
+    }
+
+    .header__menu-btn {
+      display: flex;
+    }
+
+    .header__time {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { scrollToTop, setScrollToTopVisible } from '../../stores/ui'
+  
+  // 时间显示
+  function updateTime() {
+    const now = new Date()
+    const timeEl = document.querySelector('.header__time-value')
+    const dateEl = document.querySelector('.header__date-value')
+    
+    if (timeEl) {
+      timeEl.textContent = now.toLocaleTimeString('zh-CN', { 
+        hour: '2-digit', 
+        minute: '2-digit' 
+      })
+    }
+    
+    if (dateEl) {
+      dateEl.textContent = now.toLocaleDateString('zh-CN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        weekday: 'long'
+      })
+    }
+  }
+  
+  updateTime()
+  setInterval(updateTime, 1000)
+  
+  // 返回顶部按钮
+  const backToTopBtn = document.getElementById('back-to-top')
+  
+  window.addEventListener('scroll', () => {
+    if (backToTopBtn) {
+      backToTopBtn.style.display = window.scrollY > 300 ? 'flex' : 'none'
+    }
+  }, { passive: true })
+  
+  backToTopBtn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  })
+  
+  // 搜索功能
+  const searchInput = document.getElementById('network-search-input') as HTMLInputElement
+  const searchSubmitBtn = document.getElementById('search-submit-btn')
+  
+  searchSubmitBtn?.addEventListener('click', () => {
+    const query = searchInput?.value.trim()
+    if (query) {
+      window.open(`https://www.bing.com/search?q=${encodeURIComponent(query)}`, '_blank')
+    }
+  })
+  
+  searchInput?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const query = searchInput.value.trim()
+      if (query) {
+        window.open(`https://www.bing.com/search?q=${encodeURIComponent(query)}`, '_blank')
+      }
+    }
+  })
+  
+  // 菜单切换
+  const menuToggle = document.getElementById('menu-toggle')
+  menuToggle?.addEventListener('click', () => {
+    document.querySelector('.sidebar')?.classList.toggle('open')
+  })
+</script>

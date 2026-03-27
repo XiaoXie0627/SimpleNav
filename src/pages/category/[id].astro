@@ -1,0 +1,156 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import Sidebar from '../../components/astro/Sidebar.astro'
+import Header from '../../components/astro/Header.astro'
+import Footer from '../../components/astro/Footer.astro'
+import NavigationCard from '../../components/astro/NavigationCard.astro'
+import NavSearch from '../../components/astro/NavSearch.astro'
+import type { NavigationData, NavigationItem } from '../../types'
+
+// 获取导航数据
+async function getNavigationData(): Promise<NavigationData> {
+  try {
+    // 这里应该从GitHub API获取数据，暂时返回空数据
+    return { navigationItems: [] }
+  } catch {
+    return { navigationItems: [] }
+  }
+}
+
+const data = await getNavigationData()
+const { id } = Astro.params
+
+// 查找当前分类
+const currentCategory = data.navigationItems.find(item => item.id === id)
+const activeCategory = id || data.navigationItems[0]?.id || ''
+---
+
+<Layout title={currentCategory ? `${currentCategory.title} - FastNav` : 'FastNav'}>
+  <Sidebar 
+    categories={data.navigationItems.filter(item => item.enabled)} 
+    activeCategory={activeCategory}
+  />
+  
+  <Header />
+  
+  <main class="main-content">
+    <div class="main-content__inner">
+      <NavSearch />
+      
+      <h1 class="category-title">{currentCategory?.title || '分类'}</h1>
+      
+      <div class="nav-grid">
+        {currentCategory?.items
+          .filter(item => item.enabled)
+          .sort((a, b) => a.order - b.order)
+          .map(item => (
+            <NavigationCard 
+              item={{
+                ...currentCategory,
+                items: [item],
+                subCategories: []
+              }} 
+            />
+          ))}
+        
+        {currentCategory?.subCategories
+          .filter(sub => sub.enabled !== false)
+          .sort((a, b) => a.order - b.order)
+          .map(sub => (
+            <NavigationCard 
+              item={{
+                id: sub.id,
+                title: sub.title,
+                items: sub.items.filter(item => item.enabled),
+                subCategories: [],
+                enabled: sub.enabled !== false,
+                order: sub.order
+              }} 
+            />
+          ))}
+      </div>
+      
+      {(!currentCategory?.items.length && !currentCategory?.subCategories.length) && (
+        <div class="empty-state">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <p>暂无导航项目</p>
+          <span>点击管理后台添加项目</span>
+        </div>
+      )}
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .main-content {
+    margin-left: 240px;
+    margin-top: 72px;
+    margin-bottom: 48px;
+    min-height: calc(100vh - 120px);
+    padding: 24px;
+  }
+
+  .main-content__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .category-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--on-surface);
+    margin: 0 0 24px;
+  }
+
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 24px;
+    text-align: center;
+    color: var(--on-surface-variant);
+  }
+
+  .empty-state svg {
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  .empty-state p {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+
+  .empty-state span {
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+      padding: 16px;
+    }
+
+    .nav-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  import { initTheme } from '../../stores/theme'
+  
+  initTheme()
+</script>

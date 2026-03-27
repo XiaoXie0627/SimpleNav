@@ -1,0 +1,109 @@
+---
+import type { NavigationItem } from '../../types'
+
+interface Props {
+  item: NavigationItem
+  hoverEffect?: 'default' | 'glass' | 'lift' | 'tilt'
+}
+
+const { item, hoverEffect = 'default' } = Astro.props
+---
+
+<a href={`/category/${item.id}`} class={`nav-card nav-card--${hoverEffect}`}>
+  <div class="nav-card__icon">
+    {item.icon ? (
+      <img src={item.icon} alt={item.title} width="24" height="24" loading="lazy" />
+    ) : (
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+      </svg>
+    )}
+  </div>
+  <div class="nav-card__content">
+    <h3 class="nav-card__title">{item.title}</h3>
+    {item.description && (
+      <p class="nav-card__description">{item.description}</p>
+    )}
+    <span class="nav-card__count">{item.items.length + item.subCategories.length} 个项目</span>
+  </div>
+</a>
+
+<style>
+  .nav-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--surface-container);
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .nav-card:hover {
+    background: var(--surface-container-high);
+  }
+
+  .nav-card--lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .nav-card--glass:hover {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-card--tilt:hover {
+    transform: perspective(500px) rotateX(5deg);
+  }
+
+  .nav-card__icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+  }
+
+  .nav-card__icon img {
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .nav-card__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .nav-card__title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--on-surface);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-card__description {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--on-surface-variant);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-card__count {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--on-surface-variant);
+  }
+</style>

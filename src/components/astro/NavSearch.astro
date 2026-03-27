@@ -1,0 +1,131 @@
+---
+---
+
+<div class="nav-search">
+  <svg class="nav-search__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+  </svg>
+  <input 
+    type="text" 
+    id="nav-search-local"
+    class="nav-search__input"
+    placeholder="搜索导航项目..."
+  />
+</div>
+
+<style>
+  .nav-search {
+    position: relative;
+    margin-bottom: 16px;
+  }
+
+  .nav-search__icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--on-surface-variant);
+    pointer-events: none;
+  }
+
+  .nav-search__input {
+    width: 100%;
+    height: 40px;
+    padding: 8px 12px 8px 36px;
+    border: 1px solid var(--outline-variant);
+    border-radius: 8px;
+    background: var(--surface);
+    font-size: 14px;
+    color: var(--on-surface);
+  }
+
+  .nav-search__input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-container);
+    outline: none;
+  }
+
+  .nav-search__input::placeholder {
+    color: var(--on-surface-variant);
+  }
+</style>
+
+<script>
+  import Fuse from 'fuse.js'
+  import type { NavigationData } from '../../types'
+  
+  let fuse: Fuse<unknown> | null = null
+  
+  // 初始化搜索
+  async function initSearch() {
+    try {
+      const response = await fetch('/api/navigation')
+      if (response.ok) {
+        const result = await response.json()
+        if (result.success) {
+          const data: NavigationData = result.data
+          
+          // 扁平化所有项目
+          const items: Array<{ id: string; title: string; href: string; category: string }> = []
+          
+          data.navigationItems.forEach(category => {
+            category.items.forEach(item => {
+              items.push({
+                id: item.id,
+                title: item.title,
+                href: item.href,
+                category: category.title
+              })
+            })
+          })
+          
+          fuse = new Fuse(items, {
+            keys: ['title', 'category'],
+            threshold: 0.3
+          })
+        }
+      }
+    } catch (error) {
+      console.error('Failed to init search:', error)
+    }
+  }
+  
+  // 搜索输入处理
+  const searchInput = document.getElementById('nav-search-local') as HTMLInputElement
+  
+  searchInput?.addEventListener('input', (e) => {
+    const query = (e.target as HTMLInputElement).value.trim()
+    
+    if (!query || !fuse) {
+      // 显示所有项目
+      document.querySelectorAll('.sidebar__category-item').forEach(el => {
+        (el as HTMLElement).style.display = ''
+      })
+      return
+    }
+    
+    const results = fuse.search(query)
+    const matchedIds = new Set(results.map(r => (r.item as { id: string }).id))
+    
+    // 高亮匹配的项目
+    document.querySelectorAll('[data-item-id]').forEach(el => {
+      const itemId = el.getAttribute('data-item-id')
+      if (itemId && matchedIds.has(itemId)) {
+        (el as HTMLElement).style.display = ''
+      } else {
+        (el as HTMLElement).style.display = 'none'
+      }
+    })
+  })
+  
+  // 快捷键 Ctrl+F
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+      e.preventDefault()
+      searchInput?.focus()
+    }
+  })
+  
+  initSearch()
+</script>
