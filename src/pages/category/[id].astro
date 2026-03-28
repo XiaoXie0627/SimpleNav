@@ -53,7 +53,7 @@ const activeCategory = id || categories[0]?.id || ''
 
       {
         currentCategory?.subCategories?.map((subCat) => (
-          <div class="subcategory">
+          <div class="subcategory" id={`sub-${subCat.id}`}>
             <h2 class="subcategory__title">{subCat.title}</h2>
             <div class="nav-grid">
               {subCat.items

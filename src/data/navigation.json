@@ -41,24 +41,6 @@
           "icon": "https://www.notion.so/images/favicon.ico",
           "enabled": true,
           "order": 4
-        },
-        {
-          "id": "slack",
-          "title": "Slack",
-          "href": "https://slack.com",
-          "description": "团队沟通平台",
-          "icon": "https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png",
-          "enabled": true,
-          "order": 5
-        },
-        {
-          "id": "drive",
-          "title": "Google Drive",
-          "href": "https://drive.google.com",
-          "description": "云存储服务",
-          "icon": "https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png",
-          "enabled": true,
-          "order": 6
         }
       ],
       "subCategories": [],
@@ -130,6 +112,51 @@
               "icon": "https://iconify.design/favicon.ico",
               "enabled": true,
               "order": 3
+            },
+            {
+              "id": "phosphor",
+              "title": "Phosphor Icons",
+              "href": "https://phosphoricons.com",
+              "description": "简洁图标库",
+              "icon": "https://phosphoricons.com/favicon.ico",
+              "enabled": true,
+              "order": 4
+            },
+            {
+              "id": "heroicons",
+              "title": "Heroicons",
+              "href": "https://heroicons.com",
+              "description": "Tailwind图标库",
+              "icon": "https://heroicons.com/favicon.ico",
+              "enabled": true,
+              "order": 5
+            },
+            {
+              "id": "tabler",
+              "title": "Tabler Icons",
+              "href": "https://tabler-icons.io",
+              "description": "高质量图标集",
+              "icon": "https://tabler-icons.io/favicon.ico",
+              "enabled": true,
+              "order": 6
+            },
+            {
+              "id": "remixicon",
+              "title": "Remix Icon",
+              "href": "https://remixicon.com",
+              "description": "开源图标库",
+              "icon": "https://remixicon.com/favicon.ico",
+              "enabled": true,
+              "order": 7
+            },
+            {
+              "id": "bootstrap-icons",
+              "title": "Bootstrap Icons",
+              "href": "https://icons.getbootstrap.com",
+              "description": "Bootstrap图标库",
+              "icon": "https://icons.getbootstrap.com/favicon.ico",
+              "enabled": true,
+              "order": 8
             }
           ],
           "enabled": true,
@@ -149,17 +176,665 @@
               "order": 1
             },
             {
-              "id": "ls.graphics",
+              "id": "ls-graphics",
               "title": "LS Graphics",
               "href": "https://ls.graphics",
               "description": "高级样机设计",
               "icon": "https://ls.graphics/favicon.ico",
               "enabled": true,
               "order": 2
+            },
+            {
+              "id": "placeit",
+              "title": "Placeit",
+              "href": "https://placeit.net",
+              "description": "在线样机生成",
+              "icon": "https://placeit.net/favicon.ico",
+              "enabled": true,
+              "order": 3
+            },
+            {
+              "id": "mr-mockup",
+              "title": "Mr.Mockup",
+              "href": "https://mrkmockup.com",
+              "description": "PSD样机模板",
+              "icon": "https://mrkmockup.com/favicon.ico",
+              "enabled": true,
+              "order": 4
+            },
+            {
+              "id": "unblast",
+              "title": "Unblast",
+              "href": "https://unblast.com",
+              "description": "创意样机素材",
+              "icon": "https://unblast.com/favicon.ico",
+              "enabled": true,
+              "order": 5
             }
           ],
           "enabled": true,
           "order": 2
+        },
+        {
+          "id": "colors",
+          "title": "配色工具",
+          "items": [
+            {
+              "id": "coolors",
+              "title": "Coolors",
+              "href": "https://coolors.co",
+              "description": "配色方案生成",
+              "icon": "https://coolors.co/favicon.ico",
+              "enabled": true,
+              "order": 1
+            },
+            {
+              "id": "colorhunt",
+              "title": "Color Hunt",
+              "href": "https://colorhunt.co",
+              "description": "配色灵感",
+              "icon": "https://colorhunt.co/favicon.ico",
+              "enabled": true,
+              "order": 2
+            },
+            {
+              "id": "adobe-color",
+              "title": "Adobe Color",
+              "href": "https://color.adobe.com",
+              "description": "Adobe配色工具",
+              "icon": "https://color.adobe.com/favicon.ico",
+              "enabled": true,
+              "order": 3
+            },
+            {
+              "id": "colordot",
+              "title": "Colordot",
+              "href": "https://color.hailpixel.com",
+              "description": "随机配色工具",
+              "icon": "https://color.hailpixel.com/favicon.ico",
+              "enabled": true,
+              "order": 4
+            },
+            {
+              "id": "scheme",
+              "title": "SchemeColor",
+              "href": "https://schemecolor.com",
+              "description": "色彩搭配网站",
+              "icon": "https://schemecolor.com/favicon.ico",
+              "enabled": true,
+              "order": 5
+            },
+            {
+              "id": "paletton",
+              "title": "Paletton",
+              "href": "https://paletton.com",
+              "description": "配色方案设计",
+              "icon": "https://paletton.com/favicon.ico",
+              "enabled": true,
+              "order": 6
+            },
+            {
+              "id": "coolhue",
+              "title": "Cool Hue",
+              "href": "https://webkul.github.io/coolhue",
+              "description": "渐变色生成",
+              "icon": "https://webkul.github.io/coolhue/favicon.ico",
+              "enabled": true,
+              "order": 7
+            }
+          ],
+          "enabled": true,
+          "order": 3
+        },
+        {
+          "id": "fonts",
+          "title": "字体资源",
+          "items": [
+            {
+              "id": "google-fonts",
+              "title": "Google Fonts",
+              "href": "https://fonts.google.com",
+              "description": "免费字体库",
+              "icon": "https://fonts.google.com/favicon.ico",
+              "enabled": true,
+              "order": 1
+            },
+            {
+              "id": "dafont",
+              "title": "DaFont",
+              "href": "https://dafont.com",
+              "description": "英文字体下载",
+              "icon": "https://dafont.com/favicon.ico",
+              "enabled": true,
+              "order": 2
+            },
+            {
+              "id": "fontshare",
+              "title": "Fontshare",
+              "href": "https://fontshare.com",
+              "description": "免费商用字体",
+              "icon": "https://fontshare.com/favicon.ico",
+              "enabled": true,
+              "order": 3
+            },
+            {
+              "id": "fontsquirrel",
+              "title": "Font Squirrel",
+              "href": "https://fontsquirrel.com",
+              "description": "免费商用字体",
+              "icon": "https://fontsquirrel.com/favicon.ico",
+              "enabled": true,
+              "order": 4
+            },
+            {
+              "id": "myfonts",
+              "title": "MyFonts",
+              "href": "https://myfonts.com",
+              "description": "商业字体购买",
+              "icon": "https://myfonts.com/favicon.ico",
+              "enabled": true,
+              "order": 5
+            },
+            {
+              "id": "typekit",
+              "title": "Adobe Fonts",
+              "href": "https://fonts.adobe.com",
+              "description": "Adobe字体订阅",
+              "icon": "https://fonts.adobe.com/favicon.ico",
+              "enabled": true,
+              "order": 6
+            },
+            {
+              "id": "urbanfonts",
+              "title": "Urban Fonts",
+              "href": "https://urbanfonts.com",
+              "description": "免费字体下载",
+              "icon": "https://urbanfonts.com/favicon.ico",
+              "enabled": true,
+              "order": 7
+            }
+          ],
+          "enabled": true,
+          "order": 4
+        },
+        {
+          "id": "ui-kits",
+          "title": "UI组件库",
+          "items": [
+            {
+              "id": "shadcn",
+              "title": "shadcn/ui",
+              "href": "https://ui.shadcn.com",
+              "description": "React UI组件",
+              "icon": "https://ui.shadcn.com/favicon.ico",
+              "enabled": true,
+              "order": 1
+            },
+            {
+              "id": "headlessui",
+              "title": "Headless UI",
+              "href": "https://headlessui.com",
+              "description": "无样式组件库",
+              "icon": "https://headlessui.com/favicon.ico",
+              "enabled": true,
+              "order": 2
+            },
+            {
+              "id": "radix",
+              "title": "Radix UI",
+              "href": "https://radix-ui.com",
+              "description": "无障碍组件库",
+              "icon": "https://radix-ui.com/favicon.ico",
+              "enabled": true,
+              "order": 3
+            },
+            {
+              "id": "mantine",
+              "title": "Mantine",
+              "href": "https://mantine.dev",
+              "description": "React组件库",
+              "icon": "https://mantine.dev/favicon.ico",
+              "enabled": true,
+              "order": 4
+            },
+            {
+              "id": "antd",
+              "title": "Ant Design",
+              "href": "https://ant.design",
+              "description": "企业级组件库",
+              "icon": "https://ant.design/favicon.ico",
+              "enabled": true,
+              "order": 5
+            },
+            {
+              "id": "chakraui",
+              "title": "Chakra UI",
+              "href": "https://chakra-ui.com",
+              "description": "React组件库",
+              "icon": "https://chakra-ui.com/favicon.ico",
+              "enabled": true,
+              "order": 6
+            },
+            {
+              "id": "element",
+              "title": "Element Plus",
+              "href": "https://element-plus.org",
+              "description": "Vue3组件库",
+              "icon": "https://element-plus.org/favicon.ico",
+              "enabled": true,
+              "order": 7
+            }
+          ],
+          "enabled": true,
+          "order": 5
+        },
+        {
+          "id": "inspiration",
+          "title": "设计灵感",
+          "items": [
+            {
+              "id": "awwwards",
+              "title": "Awwwards",
+              "href": "https://awwwards.com",
+              "description": "最佳网页设计",
+              "icon": "https://awwwards.com/favicon.ico",
+              "enabled": true,
+              "order": 1
+            },
+            {
+              "id": "dribbble-shots",
+              "title": "Dribbble Shots",
+              "href": "https://dribbble.com/shots",
+              "description": "设计作品展示",
+              "icon": "https://dribbble.com/favicon.ico",
+              "enabled": true,
+              "order": 2
+            },
+            {
+              "id": "pinterest",
+              "title": "Pinterest",
+              "href": "https://pinterest.com",
+              "description": "图片收藏社区",
+              "icon": "https://pinterest.com/favicon.ico",
+              "enabled": true,
+              "order": 3
+            },
+            {
+              "id": "designspiration",
+              "title": "Designspiration",
+              "href": "https://designspiration.com",
+              "description": "设计灵感搜索",
+              "icon": "https://designspiration.com/favicon.ico",
+              "enabled": true,
+              "order": 4
+            },
+            {
+              "id": "onepagelove",
+              "title": "One Page Love",
+              "href": "https://onepagelove.com",
+              "description": "单页网站灵感",
+              "icon": "https://onepagelove.com/favicon.ico",
+              "enabled": true,
+              "order": 5
+            },
+            {
+              "id": "siteinspire",
+              "title": "SiteInspire",
+              "href": "https://siteinspire.com",
+              "description": "网页设计展示",
+              "icon": "https://siteinspire.com/favicon.ico",
+              "enabled": true,
+              "order": 6
+            },
+            {
+              "id": "land-book",
+              "title": "Land Book",
+              "href": "https://land-book.com",
+              "description": "产品展示网站",
+              "icon": "https://land-book.com/favicon.ico",
+              "enabled": true,
+              "order": 7
+            }
+          ],
+          "enabled": true,
+          "order": 6
+        },
+        {
+          "id": "tools",
+          "title": "设计工具",
+          "items": [
+            {
+              "id": "photopea",
+              "title": "Photopea",
+              "href": "https://photopea.com",
+              "description": "在线图片编辑",
+              "icon": "https://photopea.com/favicon.ico",
+              "enabled": true,
+              "order": 1
+            },
+            {
+              "id": "figma-templates",
+              "title": "Figma Templates",
+              "href": "https://www.figmatemplates.com",
+              "description": "Figma模板",
+              "icon": "https://www.figmatemplates.com/favicon.ico",
+              "enabled": true,
+              "order": 2
+            },
+            {
+              "id": "figma-freebies",
+              "title": "Figma Freebies",
+              "href": "https://www.figmafreebies.com",
+              "description": "免费Figma资源",
+              "icon": "https://www.figmafreebies.com/favicon.ico",
+              "enabled": true,
+              "order": 3
+            },
+            {
+              "id": "ui8",
+              "title": "UI8",
+              "href": "https://ui8.net",
+              "description": "设计资源市场",
+              "icon": "https://ui8.net/favicon.ico",
+              "enabled": true,
+              "order": 4
+            },
+            {
+              "id": "creativemarket",
+              "title": "Creative Market",
+              "href": "https://creativemarket.com",
+              "description": "设计素材市场",
+              "icon": "https://creativemarket.com/favicon.ico",
+              "enabled": true,
+              "order": 5
+            },
+            {
+              "id": "invision",
+              "title": "InVision",
+              "href": "https://www.invisionapp.com",
+              "description": "设计原型工具",
+              "icon": "https://www.invisionapp.com/favicon.ico",
+              "enabled": true,
+              "order": 6
+            },
+            {
+              "id": "figpma",
+              "title": "Figma",
+              "href": "https://www.figma.com",
+              "description": "UI设计工具",
+              "icon": "https://www.figma.com/favicon.ico",
+              "enabled": true,
+              "order": 7
+            }
+          ],
+          "enabled": true,
+          "order": 7
+        },
+        {
+          "id": "3d-assets",
+          "title": "3D资源",
+          "items": [
+            {
+              "id": "spline",
+              "title": "Spline",
+              "href": "https://spline.design",
+              "description": "3D设计工具",
+              "icon": "https://spline.design/favicon.ico",
+              "enabled": true,
+              "order": 1
+            },
+            {
+              "id": "blender",
+              "title": "Blender",
+              "href": "https://blender.org",
+              "description": "开源3D创作",
+              "icon": "https://blender.org/favicon.ico",
+              "enabled": true,
+              "order": 2
+            },
+            {
+              "id": "sketchfab",
+              "title": "Sketchfab",
+              "href": "https://sketchfab.com",
+              "description": "3D模型库",
+              "icon": "https://sketchfab.com/favicon.ico",
+              "enabled": true,
+              "order": 3
+            },
+            {
+              "id": "polyhaven",
+              "title": "Poly Haven",
+              "href": "https://polyhaven.com",
+              "description": "免费3D资产",
+              "icon": "https://polyhaven.com/favicon.ico",
+              "enabled": true,
+              "order": 4
+            },
+            {
+              "id": "mixamo",
+              "title": "Mixamo",
+              "href": "https://mixamo.com",
+              "description": "3D角色动画",
+              "icon": "https://mixamo.com/favicon.ico",
+              "enabled": true,
+              "order": 5
+            },
+            {
+              "id": "turbosquid",
+              "title": "TurboSquid",
+              "href": "https://turbosquid.com",
+              "description": "3D模型市场",
+              "icon": "https://turbosquid.com/favicon.ico",
+              "enabled": true,
+              "order": 6
+            },
+            {
+              "id": "cgtrader",
+              "title": "CGTrader",
+              "href": "https://cgtrader.com",
+              "description": "3D模型交易",
+              "icon": "https://cgtrader.com/favicon.ico",
+              "enabled": true,
+              "order": 7
+            }
+          ],
+          "enabled": true,
+          "order": 8
+        },
+        {
+          "id": "animation",
+          "title": "动效设计",
+          "items": [
+            {
+              "id": "animatecss",
+              "title": "Animate.css",
+              "href": "https://animate.style",
+              "description": "CSS动画库",
+              "icon": "https://animate.style/favicon.ico",
+              "enabled": true,
+              "order": 1
+            },
+            {
+              "id": "framer-motion",
+              "title": "Framer Motion",
+              "href": "https://www.framer.com/motion",
+              "description": "React动画库",
+              "icon": "https://www.framer.com/favicon.ico",
+              "enabled": true,
+              "order": 2
+            },
+            {
+              "id": "lottie",
+              "title": "LottieFiles",
+              "href": "https://lottiefiles.com",
+              "description": "JSON动画库",
+              "icon": "https://lottiefiles.com/favicon.ico",
+              "enabled": true,
+              "order": 3
+            },
+            {
+              "id": "keyframes",
+              "title": "Keyframes",
+              "href": "https://keyframes.app",
+              "description": "CSS动画工具",
+              "icon": "https://keyframes.app/favicon.ico",
+              "enabled": true,
+              "order": 4
+            },
+            {
+              "id": "cubic-bezier",
+              "title": "Cubic Bezier",
+              "href": "https://cubic-bezier.com",
+              "description": "贝塞尔曲线工具",
+              "icon": "https://cubic-bezier.com/favicon.ico",
+              "enabled": true,
+              "order": 5
+            },
+            {
+              "id": "animejs",
+              "title": "Anime.js",
+              "href": "https://animejs.com",
+              "description": "JavaScript动画库",
+              "icon": "https://animejs.com/favicon.ico",
+              "enabled": true,
+              "order": 6
+            },
+            {
+              "id": "gsap",
+              "title": "GSAP",
+              "href": "https://greensock.com",
+              "description": "高级动画平台",
+              "icon": "https://greensock.com/favicon.ico",
+              "enabled": true,
+              "order": 7
+            }
+          ],
+          "enabled": true,
+          "order": 9
+        },
+        {
+          "id": "stock-photos",
+          "title": "图库素材",
+          "items": [
+            {
+              "id": "unsplash",
+              "title": "Unsplash",
+              "href": "https://unsplash.com",
+              "description": "免费高清图库",
+              "icon": "https://unsplash.com/favicon.ico",
+              "enabled": true,
+              "order": 1
+            },
+            {
+              "id": "pexels",
+              "title": "Pexels",
+              "href": "https://pexels.com",
+              "description": "免费图片视频",
+              "icon": "https://pexels.com/favicon.ico",
+              "enabled": true,
+              "order": 2
+            },
+            {
+              "id": "pixabay",
+              "title": "Pixabay",
+              "href": "https://pixabay.com",
+              "description": "免费素材库",
+              "icon": "https://pixabay.com/favicon.ico",
+              "enabled": true,
+              "order": 3
+            },
+            {
+              "id": "coverr",
+              "title": "Coverr",
+              "href": "https://coverr.co",
+              "description": "免费视频素材",
+              "icon": "https://coverr.co/favicon.ico",
+              "enabled": true,
+              "order": 4
+            },
+            {
+              "id": "mixkit",
+              "title": "Mixkit",
+              "href": "https://mixkit.co",
+              "description": "免费视频素材",
+              "icon": "https://mixkit.co/favicon.ico",
+              "enabled": true,
+              "order": 5
+            },
+            {
+              "id": "stocksnap",
+              "title": "StockSnap",
+              "href": "https://stocksnap.io",
+              "description": "免费图片素材",
+              "icon": "https://stocksnap.io/favicon.ico",
+              "enabled": true,
+              "order": 6
+            },
+            {
+              "id": "freepik",
+              "title": "Freepik",
+              "href": "https://freepik.com",
+              "description": "设计素材下载",
+              "icon": "https://freepik.com/favicon.ico",
+              "enabled": true,
+              "order": 7
+            }
+          ],
+          "enabled": true,
+          "order": 10
+        },
+        {
+          "id": "pattern",
+          "title": "背景图案",
+          "items": [
+            {
+              "id": "heropatterns",
+              "title": "Hero Patterns",
+              "href": "https://heropatterns.com",
+              "description": "CSS背景图案",
+              "icon": "https://heropatterns.com/favicon.ico",
+              "enabled": true,
+              "order": 1
+            },
+            {
+              "id": "subtlepatterns",
+              "title": "Subtle Patterns",
+              "href": "https://www.toptal.com/designers/subtlepatterns",
+              "description": "细腻背景纹理",
+              "icon": "https://www.toptal.com/favicon.ico",
+              "enabled": true,
+              "order": 2
+            },
+            {
+              "id": "patternlib",
+              "title": "Pattern Library",
+              "href": "https://patternlib.com",
+              "description": "CSS图案集合",
+              "icon": "https://patternlib.com/favicon.ico",
+              "enabled": true,
+              "order": 3
+            },
+            {
+              "id": "bg-generator",
+              "title": "BG Generator",
+              "href": "https://bg.dev",
+              "description": "背景生成工具",
+              "icon": "https://bg.dev/favicon.ico",
+              "enabled": true,
+              "order": 4
+            },
+            {
+              "id": "gradient",
+              "title": "Gradient",
+              "href": "https://gradient.io",
+              "description": "渐变背景生成",
+              "icon": "https://gradient.io/favicon.ico",
+              "enabled": true,
+              "order": 5
+            }
+          ],
+          "enabled": true,
+          "order": 11
         }
       ],
       "enabled": true,
@@ -199,43 +874,7 @@
           "order": 3
         }
       ],
-      "subCategories": [
-        {
-          "id": "frontend",
-          "title": "前端框架",
-          "items": [
-            {
-              "id": "react",
-              "title": "React",
-              "href": "https://react.dev",
-              "description": "UI组件库",
-              "icon": "https://react.dev/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "vue",
-              "title": "Vue.js",
-              "href": "https://vuejs.org",
-              "description": "渐进式框架",
-              "icon": "https://vuejs.org/logo.svg",
-              "enabled": true,
-              "order": 2
-            },
-            {
-              "id": "astro",
-              "title": "Astro",
-              "href": "https://astro.build",
-              "description": "静态网站构建",
-              "icon": "https://astro.build/favicon.svg",
-              "enabled": true,
-              "order": 3
-            }
-          ],
-          "enabled": true,
-          "order": 1
-        }
-      ],
+      "subCategories": [],
       "enabled": true,
       "order": 3
     },
@@ -264,829 +903,9 @@
           "order": 2
         }
       ],
-      "subCategories": [
-        {
-          "id": "ai-image",
-          "title": "AI图像生成",
-          "items": [
-            {
-              "id": "stable-diffusion",
-              "title": "Stable Diffusion",
-              "href": "https://stability.ai",
-              "description": "开源AI图像生成",
-              "icon": "https://stability.ai/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "dalle",
-              "title": "DALL-E",
-              "href": "https://openai.com/dall-e-3",
-              "description": "OpenAI图像生成",
-              "icon": "https://openai.com/favicon.ico",
-              "enabled": true,
-              "order": 2
-            },
-            {
-              "id": "adobe-firefly",
-              "title": "Adobe Firefly",
-              "href": "https://firefly.adobe.com",
-              "description": "Adobe AI创意工具",
-              "icon": "https://firefly.adobe.com/favicon.ico",
-              "enabled": true,
-              "order": 3
-            }
-          ],
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "ai-video",
-          "title": "AI视频生成",
-          "items": [
-            {
-              "id": "runway",
-              "title": "Runway",
-              "href": "https://runwayml.com",
-              "description": "AI视频创作平台",
-              "icon": "https://runwayml.com/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "pika",
-              "title": "Pika",
-              "href": "https://pika.art",
-              "description": "AI视频生成工具",
-              "icon": "https://pika.art/favicon.ico",
-              "enabled": true,
-              "order": 2
-            }
-          ],
-          "enabled": true,
-          "order": 2
-        }
-      ],
+      "subCategories": [],
       "enabled": true,
       "order": 4
-    },
-    {
-      "id": "productivity",
-      "title": "效率工具",
-      "icon": "/assets/images/categories/productivity.svg",
-      "description": "提升工作效率的应用",
-      "items": [
-        {
-          "id": "notion",
-          "title": "Notion",
-          "href": "https://notion.so",
-          "description": "知识管理工具",
-          "icon": "https://www.notion.so/images/favicon.ico",
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "trello",
-          "title": "Trello",
-          "href": "https://trello.com",
-          "description": "项目管理工具",
-          "icon": "https://trello.com/favicon.ico",
-          "enabled": true,
-          "order": 2
-        },
-        {
-          "id": "linear",
-          "title": "Linear",
-          "href": "https://linear.app",
-          "description": "issue跟踪管理",
-          "icon": "https://linear.app/favicon.ico",
-          "enabled": true,
-          "order": 3
-        },
-        {
-          "id": "raycast",
-          "title": "Raycast",
-          "href": "https://raycast.com",
-          "description": "Mac效率启动器",
-          "icon": "https://raycast.com/favicon.ico",
-          "enabled": true,
-          "order": 4
-        }
-      ],
-      "subCategories": [
-        {
-          "id": "notes",
-          "title": "笔记应用",
-          "items": [
-            {
-              "id": "obsidian",
-              "title": "Obsidian",
-              "href": "https://obsidian.md",
-              "description": "双链笔记软件",
-              "icon": "https://obsidian.md/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "logseq",
-              "title": "Logseq",
-              "href": "https://logseq.com",
-              "description": "大纲笔记工具",
-              "icon": "https://logseq.com/favicon.ico",
-              "enabled": true,
-              "order": 2
-            },
-            {
-              "id": "craft",
-              "title": "Craft",
-              "href": "https://craft.do",
-              "description": "文档创建工具",
-              "icon": "https://craft.do/favicon.ico",
-              "enabled": true,
-              "order": 3
-            }
-          ],
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "collaboration",
-          "title": "团队协作",
-          "items": [
-            {
-              "id": "miro",
-              "title": "Miro",
-              "href": "https://miro.com",
-              "description": "在线白板工具",
-              "icon": "https://miro.com/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "figjam",
-              "title": "FigJam",
-              "href": "https://www.figma.com/figjam/",
-              "description": "Figma白板协作",
-              "icon": "https://figma.com/favicon.ico",
-              "enabled": true,
-              "order": 2
-            },
-            {
-              "id": "mural",
-              "title": "Mural",
-              "href": "https://mural.co",
-              "description": "视觉协作平台",
-              "icon": "https://mural.co/favicon.ico",
-              "enabled": true,
-              "order": 3
-            }
-          ],
-          "enabled": true,
-          "order": 2
-        }
-      ],
-      "enabled": true,
-      "order": 5
-    },
-    {
-      "id": "learning",
-      "title": "学习资源",
-      "icon": "/assets/images/categories/learning.svg",
-      "description": "在线学习平台和教程",
-      "items": [
-        {
-          "id": "coursera",
-          "title": "Coursera",
-          "href": "https://coursera.org",
-          "description": "在线课程平台",
-          "icon": "https://coursera.org/favicon.ico",
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "udemy",
-          "title": "Udemy",
-          "href": "https://udemy.com",
-          "description": "在线学习市场",
-          "icon": "https://udemy.com/favicon.ico",
-          "enabled": true,
-          "order": 2
-        },
-        {
-          "id": "youtube",
-          "title": "YouTube",
-          "href": "https://youtube.com",
-          "description": "视频学习平台",
-          "icon": "https://www.youtube.com/favicon.ico",
-          "enabled": true,
-          "order": 3
-        }
-      ],
-      "subCategories": [
-        {
-          "id": "tutorials",
-          "title": "编程教程",
-          "items": [
-            {
-              "id": "mdn",
-              "title": "MDN Web Docs",
-              "href": "https://developer.mozilla.org",
-              "description": "Web开发文档",
-              "icon": "https://developer.mozilla.org/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "w3schools",
-              "title": "W3Schools",
-              "href": "https://www.w3schools.com",
-              "description": "Web技术教程",
-              "icon": "https://www.w3schools.com/favicon.ico",
-              "enabled": true,
-              "order": 2
-            },
-            {
-              "id": "freecodecamp",
-              "title": "freeCodeCamp",
-              "href": "https://freecodecamp.org",
-              "description": "免费编程学习",
-              "icon": "https://freecodecamp.org/favicon.ico",
-              "enabled": true,
-              "order": 3
-            }
-          ],
-          "enabled": true,
-          "order": 1
-        }
-      ],
-      "enabled": true,
-      "order": 6
-    },
-    {
-      "id": "cloud",
-      "title": "云服务",
-      "icon": "/assets/images/categories/cloud.svg",
-      "description": "云计算和基础设施",
-      "items": [
-        {
-          "id": "aws",
-          "title": "AWS",
-          "href": "https://aws.amazon.com",
-          "description": "亚马逊云服务",
-          "icon": "https://aws.amazon.com/favicon.ico",
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "azure",
-          "title": "Azure",
-          "href": "https://azure.microsoft.com",
-          "description": "微软云平台",
-          "icon": "https://azure.microsoft.com/favicon.ico",
-          "enabled": true,
-          "order": 2
-        },
-        {
-          "id": "gcp",
-          "title": "Google Cloud",
-          "href": "https://cloud.google.com",
-          "description": "谷歌云平台",
-          "icon": "https://cloud.google.com/favicon.ico",
-          "enabled": true,
-          "order": 3
-        },
-        {
-          "id": "digitalocean",
-          "title": "DigitalOcean",
-          "href": "https://digitalocean.com",
-          "description": "云服务器提供商",
-          "icon": "https://digitalocean.com/favicon.ico",
-          "enabled": true,
-          "order": 4
-        }
-      ],
-      "subCategories": [
-        {
-          "id": "serverless",
-          "title": "Serverless",
-          "items": [
-            {
-              "id": "cloudflare",
-              "title": "Cloudflare",
-              "href": "https://cloudflare.com",
-              "description": "CDN和安全服务",
-              "icon": "https://cloudflare.com/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "netlify",
-              "title": "Netlify",
-              "href": "https://netlify.com",
-              "description": "Jamstack部署平台",
-              "icon": "https://netlify.com/favicon.ico",
-              "enabled": true,
-              "order": 2
-            }
-          ],
-          "enabled": true,
-          "order": 1
-        }
-      ],
-      "enabled": true,
-      "order": 7
-    },
-    {
-      "id": "media",
-      "title": "多媒体",
-      "icon": "/assets/images/categories/media.svg",
-      "description": "图片视频音频处理工具",
-      "items": [
-        {
-          "id": "canva",
-          "title": "Canva",
-          "href": "https://canva.com",
-          "description": "在线图形设计",
-          "icon": "https://canva.com/favicon.ico",
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "photopea",
-          "title": "Photopea",
-          "href": "https://photopea.com",
-          "description": "在线图片编辑器",
-          "icon": "https://photopea.com/favicon.ico",
-          "enabled": true,
-          "order": 2
-        },
-        {
-          "id": "removebg",
-          "title": "Remove.bg",
-          "href": "https://remove.bg",
-          "description": "AI自动去背景",
-          "icon": "https://remove.bg/favicon.ico",
-          "enabled": true,
-          "order": 3
-        }
-      ],
-      "subCategories": [
-        {
-          "id": "video-edit",
-          "title": "视频剪辑",
-          "items": [
-            {
-              "id": "capcut",
-              "title": "CapCut",
-              "href": "https://capcut.com",
-              "description": "视频编辑工具",
-              "icon": "https://capcut.com/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "descript",
-              "title": "Descript",
-              "href": "https://descript.com",
-              "description": "视频播客编辑",
-              "icon": "https://descript.com/favicon.ico",
-              "enabled": true,
-              "order": 2
-            }
-          ],
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "audio",
-          "title": "音频处理",
-          "items": [
-            {
-              "id": "elevenlabs",
-              "title": "ElevenLabs",
-              "href": "https://elevenlabs.io",
-              "description": "AI语音生成",
-              "icon": "https://elevenlabs.io/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "murf",
-              "title": "Murf AI",
-              "href": "https://murf.ai",
-              "description": "AI人声合成",
-              "icon": "https://murf.ai/favicon.ico",
-              "enabled": true,
-              "order": 2
-            }
-          ],
-          "enabled": true,
-          "order": 2
-        }
-      ],
-      "enabled": true,
-      "order": 8
-    },
-    {
-      "id": "data",
-      "title": "数据API",
-      "icon": "/assets/images/categories/api.svg",
-      "description": "数据和接口服务",
-      "items": [
-        {
-          "id": "github-api",
-          "title": "GitHub API",
-          "href": "https://docs.github.com/en/rest",
-          "description": "GitHub开发者API",
-          "icon": "https://github.githubassets.com/favicons/favicon.svg",
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "rapidapi",
-          "title": "RapidAPI",
-          "href": "https://rapidapi.com",
-          "description": "API市场",
-          "icon": "https://rapidapi.com/favicon.ico",
-          "enabled": true,
-          "order": 2
-        },
-        {
-          "id": "public-apis",
-          "title": "Public APIs",
-          "href": "https://public-apis.io",
-          "description": "免费公共API集合",
-          "icon": "https://public-apis.io/favicon.ico",
-          "enabled": true,
-          "order": 3
-        }
-      ],
-      "subCategories": [
-        {
-          "id": "ai-apis",
-          "title": "AI API",
-          "items": [
-            {
-              "id": "openai-api",
-              "title": "OpenAI API",
-              "href": "https://platform.openai.com",
-              "description": "GPT模型API",
-              "icon": "https://openai.com/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "anthropic-api",
-              "title": "Anthropic API",
-              "href": "https://docs.anthropic.com",
-              "description": "Claude模型API",
-              "icon": "https://anthropic.com/favicon.ico",
-              "enabled": true,
-              "order": 2
-            },
-            {
-              "id": "replicate",
-              "title": "Replicate",
-              "href": "https://replicate.com",
-              "description": "开源模型API",
-              "icon": "https://replicate.com/favicon.ico",
-              "enabled": true,
-              "order": 3
-            }
-          ],
-          "enabled": true,
-          "order": 1
-        }
-      ],
-      "enabled": true,
-      "order": 9
-    },
-    {
-      "id": "hosting",
-      "title": "域名主机",
-      "icon": "/assets/images/categories/hosting.svg",
-      "description": "域名注册和托管服务",
-      "items": [
-        {
-          "id": "namecheap",
-          "title": "Namecheap",
-          "href": "https://namecheap.com",
-          "description": "域名注册商",
-          "icon": "https://namecheap.com/favicon.ico",
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "cloudflare-dns",
-          "title": "Cloudflare DNS",
-          "href": "https://cloudflare.com/dns",
-          "description": "DNS解析服务",
-          "icon": "https://cloudflare.com/favicon.ico",
-          "enabled": true,
-          "order": 2
-        },
-        {
-          "id": "dnspod",
-          "title": "DNSPod",
-          "href": "https://dnspod.cloud",
-          "description": "腾讯DNS服务",
-          "icon": "https://dnspod.cloud/favicon.ico",
-          "enabled": true,
-          "order": 3
-        }
-      ],
-      "subCategories": [],
-      "enabled": true,
-      "order": 10
-    },
-    {
-      "id": "colors",
-      "title": "配色工具",
-      "icon": "/assets/images/categories/colors.svg",
-      "description": "颜色相关设计工具",
-      "items": [
-        {
-          "id": "coolors",
-          "title": "Coolors",
-          "href": "https://coolors.co",
-          "description": "配色方案生成",
-          "icon": "https://coolors.co/favicon.ico",
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "colorhunt",
-          "title": "Color Hunt",
-          "href": "https://colorhunt.co",
-          "description": "配色灵感",
-          "icon": "https://colorhunt.co/favicon.ico",
-          "enabled": true,
-          "order": 2
-        },
-        {
-          "id": "adobe-color",
-          "title": "Adobe Color",
-          "href": "https://color.adobe.com",
-          "description": "Adobe配色工具",
-          "icon": "https://color.adobe.com/favicon.ico",
-          "enabled": true,
-          "order": 3
-        }
-      ],
-      "subCategories": [],
-      "enabled": true,
-      "order": 11
-    },
-    {
-      "id": "fonts",
-      "title": "字体资源",
-      "icon": "/assets/images/categories/fonts.svg",
-      "description": "字体下载和在线预览",
-      "items": [
-        {
-          "id": "google-fonts",
-          "title": "Google Fonts",
-          "href": "https://fonts.google.com",
-          "description": "免费字体库",
-          "icon": "https://fonts.google.com/favicon.ico",
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "dafont",
-          "title": "DaFont",
-          "href": "https://dafont.com",
-          "description": "英文字体下载",
-          "icon": "https://dafont.com/favicon.ico",
-          "enabled": true,
-          "order": 2
-        },
-        {
-          "id": "fontshare",
-          "title": "Fontshare",
-          "href": "https://fontshare.com",
-          "description": "免费商用字体",
-          "icon": "https://fontshare.com/favicon.ico",
-          "enabled": true,
-          "order": 3
-        }
-      ],
-      "subCategories": [
-        {
-          "id": "chinese-fonts",
-          "title": "中文字体",
-          "items": [
-            {
-              "id": "noto-cjk",
-              "title": "Noto CJK",
-              "href": "https://github.com/notofonts/noto-cjk",
-              "description": "思源黑体宋体",
-              "icon": "https://github.githubassets.com/favicons/favicon.svg",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "wenku",
-              "title": "字体 Wenku",
-              "href": "https://font.51dongku.com",
-              "description": "免费商用中文字体",
-              "icon": "https://font.51dongku.com/favicon.ico",
-              "enabled": true,
-              "order": 2
-            }
-          ],
-          "enabled": true,
-          "order": 1
-        }
-      ],
-      "enabled": true,
-      "order": 12
-    },
-    {
-      "id": "storage",
-      "title": "图床存储",
-      "icon": "/assets/images/categories/storage.svg",
-      "description": "图片存储和托管服务",
-      "items": [
-        {
-          "id": "imgur",
-          "title": "Imgur",
-          "href": "https://imgur.com",
-          "description": "图片分享平台",
-          "icon": "https://imgur.com/favicon.ico",
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "smms",
-          "title": "SM.MS",
-          "href": "https://sm.ms",
-          "description": "免费图床",
-          "icon": "https://sm.ms/favicon.ico",
-          "enabled": true,
-          "order": 2
-        },
-        {
-          "id": "cloudinary",
-          "title": "Cloudinary",
-          "href": "https://cloudinary.com",
-          "description": "云图片管理",
-          "icon": "https://cloudinary.com/favicon.ico",
-          "enabled": true,
-          "order": 3
-        }
-      ],
-      "subCategories": [],
-      "enabled": true,
-      "order": 13
-    },
-    {
-      "id": "community",
-      "title": "社区资讯",
-      "icon": "/assets/images/categories/community.svg",
-      "description": "开发者社区和科技资讯",
-      "items": [
-        {
-          "id": "twitter",
-          "title": "Twitter",
-          "href": "https://twitter.com",
-          "description": "科技动态社交",
-          "icon": "https://twitter.com/favicon.ico",
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "reddit",
-          "title": "Reddit",
-          "href": "https://reddit.com",
-          "description": "社区论坛聚合",
-          "icon": "https://reddit.com/favicon.ico",
-          "enabled": true,
-          "order": 2
-        },
-        {
-          "id": "hacker-news",
-          "title": "Hacker News",
-          "href": "https://news.ycombinator.com",
-          "description": "科技新闻聚合",
-          "icon": "https://news.ycombinator.com/favicon.ico",
-          "enabled": true,
-          "order": 3
-        }
-      ],
-      "subCategories": [
-        {
-          "id": "dev-community",
-          "title": "开发者社区",
-          "items": [
-            {
-              "id": "dev.to",
-              "title": "DEV Community",
-              "href": "https://dev.to",
-              "description": "开发者博客社区",
-              "icon": "https://dev.to/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "hashnode",
-              "title": "Hashnode",
-              "href": "https://hashnode.com",
-              "description": "开发者博客平台",
-              "icon": "https://hashnode.com/favicon.ico",
-              "enabled": true,
-              "order": 2
-            }
-          ],
-          "enabled": true,
-          "order": 1
-        }
-      ],
-      "enabled": true,
-      "order": 14
-    },
-    {
-      "id": "tools",
-      "title": "实用工具",
-      "icon": "/assets/images/categories/tools.svg",
-      "description": "日常开发和生活工具",
-      "items": [
-        {
-          "id": "regex101",
-          "title": "Regex101",
-          "href": "https://regex101.com",
-          "description": "正则表达式测试",
-          "icon": "https://regex101.com/favicon.ico",
-          "enabled": true,
-          "order": 1
-        },
-        {
-          "id": "crontab",
-          "title": "Crontab",
-          "href": "https://crontab.guru",
-          "description": "定时任务生成器",
-          "icon": "https://crontab.guru/favicon.ico",
-          "enabled": true,
-          "order": 2
-        },
-        {
-          "id": "base64",
-          "title": "Base64编码",
-          "href": "https://www.base64encode.org",
-          "description": "Base64在线工具",
-          "icon": "https://www.base64encode.org/favicon.ico",
-          "enabled": true,
-          "order": 3
-        },
-        {
-          "id": "json-formatter",
-          "title": "JSON Formatter",
-          "href": "https://jsonformatter.org",
-          "description": "JSON格式化工具",
-          "icon": "https://jsonformatter.org/favicon.ico",
-          "enabled": true,
-          "order": 4
-        },
-        {
-          "id": "tinypng",
-          "title": "TinyPNG",
-          "href": "https://tinypng.com",
-          "description": "图片压缩工具",
-          "icon": "https://tinypng.com/favicon.ico",
-          "enabled": true,
-          "order": 5
-        }
-      ],
-      "subCategories": [
-        {
-          "id": "convert",
-          "title": "格式转换",
-          "items": [
-            {
-              "id": "convertio",
-              "title": "Convertio",
-              "href": "https://convertio.co",
-              "description": "文件格式转换",
-              "icon": "https://convertio.co/favicon.ico",
-              "enabled": true,
-              "order": 1
-            },
-            {
-              "id": "cloudconvert",
-              "title": "CloudConvert",
-              "href": "https://cloudconvert.com",
-              "description": "在线格式转换",
-              "icon": "https://cloudconvert.com/favicon.ico",
-              "enabled": true,
-              "order": 2
-            }
-          ],
-          "enabled": true,
-          "order": 1
-        }
-      ],
-      "enabled": true,
-      "order": 15
     }
   ]
 }

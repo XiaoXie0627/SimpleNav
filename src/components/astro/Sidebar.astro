@@ -87,8 +87,9 @@ const { categories, activeCategory } = Astro.props
                 {category.subCategories.map((sub) => (
                   <li>
                     <a
-                      href={`/category/${category.id}#${sub.id}`}
+                      href={`/category/${category.id}#sub-${sub.id}`}
                       class="sidebar__subcategory-item"
+                      data-subcategory-id={sub.id}
                     >
                       {sub.title}
                     </a>
@@ -252,7 +253,7 @@ const { categories, activeCategory } = Astro.props
   .sidebar__subcategories {
     list-style: none;
     margin: 0;
-    padding: 4px 0 8px 20px;
+    padding: 4px 0 8px 32px;
     display: none;
   }
 
@@ -263,21 +264,25 @@ const { categories, activeCategory } = Astro.props
   .sidebar__subcategory-item {
     display: flex;
     align-items: center;
-    height: 36px;
-    padding: 0 12px;
+    height: 34px;
+    padding: 0 16px 0 12px;
     border-radius: 8px;
     color: var(--on-surface-variant);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
+    background: var(--surface);
+    border: 1px solid var(--outline-variant);
+    margin-bottom: 4px;
     transition:
       background 0.2s ease,
       color 0.2s ease;
   }
 
   .sidebar__subcategory-item:hover {
-    background: var(--surface-container);
+    background: var(--surface-container-high);
     color: var(--on-surface);
+    border-color: var(--primary);
   }
 
   @media (max-width: 768px) {
