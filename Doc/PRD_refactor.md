@@ -2,15 +2,15 @@
 
 ## 文档信息
 
-| 项目         | 内容                                                                                                                                                                                                                                                                                                        |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **项目名称** | FastNav                                                                                                                                                                                                                                                                                                     |
-| **项目类型** | 现代化导航管理平台 / 书签管理系统                                                                                                                                                                                                                                                                           |
-| **版本号**   | 2.0.0                                                                                                                                                                                                                                                                                                       |
-| **文档状态** | 技术架构升级                                                                                                                                                                                                                                                                                                |
-| **创建日期** | 2026年3月27日                                                                                                                                                                                                                                                                                               |
-| **最后更新** | 2026年3月29日                                                                                                                                                                                                                                                                                               |
-| **变更说明** | 框架从 Next.js 迁移至 Astro；UI 设计规则采用 Google Material Design 3；新增卡片组件模块、网络搜索栏、分类页面路由等功能；优化侧边栏分类展示（一级分类直接展示可展开）；调整时间日期显示（固定居中靠上方，时间加粗）；增加源码跳转按钮；移除每日一言；一级和二级分类层级分明突出显示；点击二级分类可跳转定位 |
+| 项目         | 内容                                                                                                      |
+| ------------ | --------------------------------------------------------------------------------------------------------- |
+| **项目名称** | FastNav                                                                                                   |
+| **项目类型** | 现代化导航管理平台 / 书签管理系统                                                                         |
+| **版本号**   | 2.0.0                                                                                                     |
+| **文档状态** | 技术架构升级                                                                                              |
+| **创建日期** | 2026年3月27日                                                                                             |
+| **最后更新** | 2026年3月29日                                                                                             |
+| **变更说明** | UI优化：侧边栏一级二级分类层级分明；时间日期位置调整；滚动条滑块样式；搜索结果MD3风格；移动端卡片紧凑显示 |
 
 ---
 
@@ -211,9 +211,30 @@ FastNav 产品的功能模块可以分为以下几个主要部分：
 
 **响应式设计**
 
-- 移动端（< 640px）：隐藏侧边栏，使用汉堡菜单
+- 移动端（< 640px）：
+  - 隐藏侧边栏，使用汉堡菜单
+  - 导航卡片区域：单列布局，卡片高度缩小，行高更紧凑
+  - 卡片内边距减少，字号缩小
 - 平板端（640px - 1024px）：侧边栏可折叠
 - 桌面端（> 1024px）：侧边栏常驻
+
+**移动端导航卡片样式调整**：
+
+```css
+@media (max-width: 640px) {
+  .nav-card {
+    padding: 12px;
+    min-height: 48px;
+  }
+  .nav-card__icon {
+    width: 32px;
+    height: 32px;
+  }
+  .nav-card__title {
+    font-size: 13px;
+  }
+}
+```
 
 **技术实现**
 
@@ -1416,28 +1437,30 @@ const scrollbarOptions = {
 ```css
 /* 自定义滚动条轨道 */
 .os-scrollbar {
-  --os-size: 8px; /* 滚动条宽度 */
-  --os-padding-perpendicular: 2px;
-  --os-padding-axis: 2px;
+  --os-size: 12px; /* 滚动条宽度增加 */
+  --os-padding-perpendicular: 4px;
+  --os-padding-axis: 4px;
 }
 
-/* 自定义滚动条滑块 */
+/* 自定义滚动条滑块 - 滑块样式 */
 .os-scrollbar-handle {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  min-width: 12px;
+  min-height: 12px;
 }
 
 .os-scrollbar-handle:hover {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 /* 暗色模式 */
 [data-theme='dark'] .os-scrollbar-handle {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 [data-theme='dark'] .os-scrollbar-handle:hover {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.3);
 }
 ```
 
@@ -1568,13 +1591,31 @@ const scrollbarOptions = {
 
 **搜索结果下拉**：
 
-| 属性     | 值             |
-| -------- | -------------- |
-| 位置     | 输入框下方     |
-| 最大高度 | 300px          |
-| 圆角     | 8px            |
-| 阴影     | Elevation 3    |
-| 滚动     | 超出高度时滚动 |
+| 属性     | 值                                        |
+| -------- | ----------------------------------------- |
+| 位置     | 输入框下方                                |
+| 最大高度 | 300px                                     |
+| 圆角     | 16px（MD3风格）                           |
+| 阴影     | Elevation 3                               |
+| 滚动     | 超出高度时滚动                            |
+| 样式     | MD3风格，小正方形卡片区域，与背景区分明显 |
+
+**搜索结果项样式**：
+
+```css
+.search-result-item {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  padding: 12px;
+  background: var(--surface-container);
+  border-radius: 16px;
+}
+
+.search-result-item:hover {
+  background: var(--surface-container-high);
+}
+```
 
 #### 3.3.3 网络搜索栏
 
@@ -1756,11 +1797,11 @@ const scrollbarOptions = {
 ┌──────────────┐
 │  导航搜索栏   │
 ├──────────────┤
-│  一级分类1   │
-│    └ 二级分类 │
-│    └ 二级分类 │
-│  一级分类2   │
-│  一级分类3   │
+│  ○ 一级分类1 │
+│    ◇ 二级分类 │
+│    ◇ 二级分类 │
+│  ○ 一级分类2 │
+│  ○ 一级分类3 │
 │  ...         │
 └──────────────┘
 ```
@@ -1772,8 +1813,8 @@ const scrollbarOptions = {
 | 宽度           | 240px | 固定宽度           |
 | 最小高度       | 100vh | 全高               |
 | 内边距         | 16px  | 四周               |
-| 一级分类项高度 | 40px  | 每项               |
-| 二级分类项高度 | 32px  | 每项（展开时显示） |
+| 一级分类项高度 | 44px  | 每项，突出显示     |
+| 二级分类项高度 | 36px  | 每项（展开时显示） |
 
 **样式规格**：
 
@@ -1786,44 +1827,65 @@ const scrollbarOptions = {
   border-right: 1px solid var(--outline-variant);
 }
 
+/* 一级分类 - 突出显示 */
 .sidebar-category-item {
-  height: 40px;
+  height: 44px;
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 0 12px;
-  border-radius: 8px;
+  border-radius: 10px;
+  background: var(--surface-container);
+  font-weight: 600;
   cursor: pointer;
 }
 
-.sidebar-category-item:hover {
-  background: var(--surface-container);
+/* 二级分类 - 缩进区分 */
+.sidebar-subcategory-item {
+  height: 36px;
+  padding-left: 28px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--on-surface-variant);
 }
+```
+
+**说明**：
+
+- 一级分类和二级分类通过高度、背景色、字重区分
+- 不使用"|-"符号，通过视觉层级差异区分
+- 一级分类：更大高度、背景色突出、粗体
+- 二级分类：缩进、较细字体、较浅颜色
+  background: var(--surface-container);
+  }
 
 .sidebar-category-item.active {
-  background: var(--primary-container);
-  color: var(--on-primary-container);
+background: var(--primary-container);
+color: var(--on-primary-container);
 }
 
 .sidebar-subcategory {
-  padding-left: 24px;
-  height: 32px;
+padding-left: 24px;
+height: 32px;
 }
 
 .sidebar-subcategory-item {
-  height: 32px;
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  color: var(--on-surface-variant);
-  cursor: pointer;
+height: 32px;
+display: flex;
+align-items: center;
+padding: 0 12px;
+border-radius: 6px;
+font-size: 13px;
+color: var(--on-surface-variant);
+cursor: pointer;
 }
 
 .sidebar-subcategory-item:hover {
-  background: var(--surface-container);
+background: var(--surface-container);
 }
+
 ```
 
 ┌──────────────┐
@@ -1838,7 +1900,7 @@ const scrollbarOptions = {
 │ 设置 │
 └──────────────┘
 
-````
+```
 
 **尺寸规格**：
 
@@ -1878,7 +1940,7 @@ const scrollbarOptions = {
   background: var(--primary-container);
   color: var(--on-primary-container);
 }
-````
+```
 
 **响应式行为**：
 
@@ -3353,5 +3415,5 @@ interface ButtonProps {
 ---
 
 _文档版本：2.0.0_
-_最后更新：2026年3月28日_
-_变更说明：技术框架从 Next.js 升级为 Astro 5.x，采用 Islands Architecture 架构；UI 设计采用 Google Material Design 3 风格；新增卡片组件、网络搜索栏、每日一言、分类独立页面等功能；增加后续规划（自定义背景、鼠标样式、卡片样式等）；增加开发规范（代码提交规范）_
+_最后更新：2026年3月29日_
+_变更说明：技术框架从 Next.js 升级为 Astro 5.x，采用 Islands Architecture 架构；UI 设计采用 Google Material Design 3 风格；新增卡片组件、网络搜索栏、分类独立页面等功能；增加后续规划；侧边栏一级二级分类层级分明；时间日期位置调整；滚动条滑块样式优化；搜索结果MD3风格；移动端卡片紧凑显示_

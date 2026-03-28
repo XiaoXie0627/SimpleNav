@@ -172,6 +172,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 8px;
   }
 
   .header__time-value {
@@ -185,6 +186,7 @@
     font-size: 14px;
     font-weight: 400;
     color: var(--on-surface-variant);
+    margin-top: 2px;
   }
 
   .header__search {
@@ -274,14 +276,23 @@
     border: none;
     cursor: pointer;
     transition:
-      transform 0.2s ease,
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
       background 0.2s ease;
     text-decoration: none;
   }
 
   .header__action-btn:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
     background: var(--primary-container);
+  }
+
+  /* 主题切换按钮动画 */
+  #theme-toggle-btn {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  #theme-toggle-btn.theme-animate {
+    transform: rotate(360deg);
   }
 
   @media (max-width: 768px) {
@@ -330,7 +341,14 @@
   updateTime()
   setInterval(updateTime, 1000)
 
-  document.getElementById('theme-toggle-btn')?.addEventListener('click', toggleTheme)
+  const themeBtn = document.getElementById('theme-toggle-btn')
+  themeBtn?.addEventListener('click', () => {
+    themeBtn.classList.add('theme-animate')
+    toggleTheme()
+    setTimeout(() => {
+      themeBtn.classList.remove('theme-animate')
+    }, 500)
+  })
 
   const backToTopBtn = document.getElementById('back-to-top')
 

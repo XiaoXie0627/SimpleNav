@@ -264,7 +264,7 @@ const { categories, activeCategory } = Astro.props
     display: flex;
     align-items: center;
     height: 36px;
-    padding: 0 12px 0 8px;
+    padding: 0 12px;
     border-radius: 8px;
     color: var(--on-surface-variant);
     text-decoration: none;
@@ -278,13 +278,6 @@ const { categories, activeCategory } = Astro.props
   .sidebar__subcategory-item:hover {
     background: var(--surface-container);
     color: var(--on-surface);
-  }
-
-  .sidebar__subcategory-item::before {
-    content: '├';
-    margin-right: 8px;
-    color: var(--outline);
-    font-size: 12px;
   }
 
   @media (max-width: 768px) {
