@@ -176,17 +176,22 @@ const { categories, activeCategory } = Astro.props
     display: flex;
     align-items: center;
     gap: 12px;
-    height: 40px;
+    height: 44px;
     padding: 0 12px;
-    border-radius: 8px;
+    border-radius: 10px;
     color: var(--on-surface);
     text-decoration: none;
-    font-size: 14px;
-    transition: background 0.2s ease;
+    font-size: 15px;
+    font-weight: 600;
+    background: var(--surface-container);
+    transition:
+      background 0.2s ease,
+      transform 0.2s ease;
   }
 
   .sidebar__category-item:hover {
-    background: var(--surface-container);
+    background: var(--surface-container-high);
+    transform: translateX(4px);
   }
 
   .sidebar__category-item.active {
@@ -200,16 +205,16 @@ const { categories, activeCategory } = Astro.props
 
   .sidebar__category-icon {
     flex-shrink: 0;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .sidebar__category-icon img {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     border-radius: 4px;
   }
 
@@ -247,7 +252,7 @@ const { categories, activeCategory } = Astro.props
   .sidebar__subcategories {
     list-style: none;
     margin: 0;
-    padding: 0 0 0 28px;
+    padding: 4px 0 8px 20px;
     display: none;
   }
 
@@ -258,12 +263,13 @@ const { categories, activeCategory } = Astro.props
   .sidebar__subcategory-item {
     display: flex;
     align-items: center;
-    height: 32px;
-    padding: 0 12px;
-    border-radius: 6px;
+    height: 36px;
+    padding: 0 12px 0 8px;
+    border-radius: 8px;
     color: var(--on-surface-variant);
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 500;
     transition:
       background 0.2s ease,
       color 0.2s ease;
@@ -272,6 +278,13 @@ const { categories, activeCategory } = Astro.props
   .sidebar__subcategory-item:hover {
     background: var(--surface-container);
     color: var(--on-surface);
+  }
+
+  .sidebar__subcategory-item::before {
+    content: '├';
+    margin-right: 8px;
+    color: var(--outline);
+    font-size: 12px;
   }
 
   @media (max-width: 768px) {
