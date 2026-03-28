@@ -3,58 +3,55 @@
 ---
 
 <header class="header">
-  <button id="menu-toggle" class="header__menu-btn" aria-label="打开菜单">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-    >
-      <line x1="3" y1="12" x2="21" y2="12"></line>
-      <line x1="3" y1="6" x2="21" y2="6"></line>
-      <line x1="3" y1="18" x2="21" y2="18"></line>
-    </svg>
-  </button>
+  <div class="header__time">
+    <span class="header__time-value">--:--</span>
+    <span class="header__date-value">--月--日</span>
+  </div>
 
   <div class="header__center">
-    <div class="header__time" id="time-display">
-      <span class="header__time-value">--:--</span>
-      <span class="header__date-value">----年--月--日</span>
-    </div>
-
-    <div class="header__search">
-      <div class="search-bar">
-        <button class="search-bar__engine" id="search-engine-btn">
-          <img src="/assets/images/search/bing.svg" alt="Bing" width="20" height="20" />
-        </button>
-        <input
-          type="text"
-          id="network-search-input"
-          class="search-bar__input"
-          placeholder="搜索网络..."
-        />
-        <button class="search-bar__submit" id="search-submit-btn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button>
-      </div>
+    <div class="search-bar">
+      <button class="search-bar__engine" id="search-engine-btn">
+        <img src="/assets/images/search/bing.svg" alt="Bing" width="20" height="20" />
+      </button>
+      <input
+        type="text"
+        id="network-search-input"
+        class="search-bar__input"
+        placeholder="搜索网络..."
+      />
+      <button class="search-bar__submit" id="search-submit-btn">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
     </div>
   </div>
 
   <div class="header__actions">
+    <button id="menu-toggle" class="header__menu-btn" aria-label="打开菜单">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
     <button id="theme-toggle-btn" class="header__action-btn" title="切换主题">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -132,65 +129,45 @@
   .header {
     position: fixed;
     top: 0;
-    left: 240px;
+    left: 0;
     right: 0;
-    height: 72px;
+    height: 60px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    justify-content: space-between;
     padding: 0 24px;
     background: var(--surface);
     border-bottom: 1px solid var(--outline-variant);
-    z-index: 100;
-  }
-
-  .header__menu-btn {
-    display: none;
-    width: 40px;
-    height: 40px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background: transparent;
-    border: none;
-    color: var(--on-surface);
-    cursor: pointer;
-  }
-
-  .header__center {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    max-width: 600px;
-    margin: 0 auto;
+    z-index: 1000;
   }
 
   .header__time {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin-top: 8px;
+    align-items: flex-start;
+    min-width: 80px;
   }
 
   .header__time-value {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--on-surface);
     font-variant-numeric: tabular-nums;
+    line-height: 1.2;
   }
 
   .header__date-value {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     color: var(--on-surface-variant);
-    margin-top: 2px;
   }
 
-  .header__search {
-    width: 100%;
+  .header__center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 24px;
   }
 
   .search-bar {
@@ -261,7 +238,21 @@
 
   .header__actions {
     display: flex;
+    align-items: center;
     gap: 8px;
+  }
+
+  .header__menu-btn {
+    display: none;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    color: var(--on-surface);
+    cursor: pointer;
   }
 
   .header__action-btn {
@@ -286,7 +277,6 @@
     background: var(--primary-container);
   }
 
-  /* 主题切换按钮动画 */
   #theme-toggle-btn {
     transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -297,16 +287,19 @@
 
   @media (max-width: 768px) {
     .header {
-      left: 0;
-      padding: 0 16px;
+      padding: 0 12px;
+    }
+
+    .header__time {
+      display: none;
+    }
+
+    .header__center {
+      margin: 0 12px;
     }
 
     .header__menu-btn {
       display: flex;
-    }
-
-    .header__center {
-      display: none;
     }
   }
 </style>
@@ -329,12 +322,11 @@
     }
 
     if (dateEl) {
-      dateEl.textContent = now.toLocaleDateString('zh-CN', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        weekday: 'long',
-      })
+      dateEl.textContent =
+        now.toLocaleDateString('zh-CN', {
+          month: 'numeric',
+          day: 'numeric',
+        }) + '日'
     }
   }
 
