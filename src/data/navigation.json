@@ -41,6 +41,24 @@
           "icon": "https://www.notion.so/images/favicon.ico",
           "enabled": true,
           "order": 4
+        },
+        {
+          "id": "slack",
+          "title": "Slack",
+          "href": "https://slack.com",
+          "description": "团队沟通平台",
+          "icon": "https://a.slack-edge.com/80588/marketing/img/icons/icon_slack_hash_colored.png",
+          "enabled": true,
+          "order": 5
+        },
+        {
+          "id": "drive",
+          "title": "Google Drive",
+          "href": "https://drive.google.com",
+          "description": "云存储服务",
+          "icon": "https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png",
+          "enabled": true,
+          "order": 6
         }
       ],
       "subCategories": [],
@@ -906,6 +924,460 @@
       "subCategories": [],
       "enabled": true,
       "order": 4
+    },
+    {
+      "id": "productivity",
+      "title": "效率工具",
+      "icon": "/assets/images/categories/productivity.svg",
+      "description": "提升工作效率的应用",
+      "items": [
+        {
+          "id": "notion",
+          "title": "Notion",
+          "href": "https://notion.so",
+          "description": "知识管理工具",
+          "icon": "https://www.notion.so/images/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "trello",
+          "title": "Trello",
+          "href": "https://trello.com",
+          "description": "项目管理工具",
+          "icon": "https://trello.com/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "linear",
+          "title": "Linear",
+          "href": "https://linear.app",
+          "description": "issue跟踪管理",
+          "icon": "https://linear.app/favicon.ico",
+          "enabled": true,
+          "order": 3
+        },
+        {
+          "id": "raycast",
+          "title": "Raycast",
+          "href": "https://raycast.com",
+          "description": "Mac效率启动器",
+          "icon": "https://raycast.com/favicon.ico",
+          "enabled": true,
+          "order": 4
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 5
+    },
+    {
+      "id": "learning",
+      "title": "学习资源",
+      "icon": "/assets/images/categories/learning.svg",
+      "description": "在线学习平台和教程",
+      "items": [
+        {
+          "id": "coursera",
+          "title": "Coursera",
+          "href": "https://coursera.org",
+          "description": "在线课程平台",
+          "icon": "https://coursera.org/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "udemy",
+          "title": "Udemy",
+          "href": "https://udemy.com",
+          "description": "在线学习市场",
+          "icon": "https://udemy.com/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "youtube",
+          "title": "YouTube",
+          "href": "https://youtube.com",
+          "description": "视频学习平台",
+          "icon": "https://www.youtube.com/favicon.ico",
+          "enabled": true,
+          "order": 3
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 6
+    },
+    {
+      "id": "cloud",
+      "title": "云服务",
+      "icon": "/assets/images/categories/cloud.svg",
+      "description": "云计算和基础设施",
+      "items": [
+        {
+          "id": "aws",
+          "title": "AWS",
+          "href": "https://aws.amazon.com",
+          "description": "亚马逊云服务",
+          "icon": "https://aws.amazon.com/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "azure",
+          "title": "Azure",
+          "href": "https://azure.microsoft.com",
+          "description": "微软云平台",
+          "icon": "https://azure.microsoft.com/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "gcp",
+          "title": "Google Cloud",
+          "href": "https://cloud.google.com",
+          "description": "谷歌云平台",
+          "icon": "https://cloud.google.com/favicon.ico",
+          "enabled": true,
+          "order": 3
+        },
+        {
+          "id": "digitalocean",
+          "title": "DigitalOcean",
+          "href": "https://digitalocean.com",
+          "description": "云服务器提供商",
+          "icon": "https://digitalocean.com/favicon.ico",
+          "enabled": true,
+          "order": 4
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 7
+    },
+    {
+      "id": "media",
+      "title": "多媒体",
+      "icon": "/assets/images/categories/media.svg",
+      "description": "图片视频音频处理工具",
+      "items": [
+        {
+          "id": "canva",
+          "title": "Canva",
+          "href": "https://canva.com",
+          "description": "在线图形设计",
+          "icon": "https://canva.com/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "photopea",
+          "title": "Photopea",
+          "href": "https://photopea.com",
+          "description": "在线图片编辑器",
+          "icon": "https://photopea.com/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "removebg",
+          "title": "Remove.bg",
+          "href": "https://remove.bg",
+          "description": "AI自动去背景",
+          "icon": "https://remove.bg/favicon.ico",
+          "enabled": true,
+          "order": 3
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 8
+    },
+    {
+      "id": "data",
+      "title": "数据API",
+      "icon": "/assets/images/categories/api.svg",
+      "description": "数据和接口服务",
+      "items": [
+        {
+          "id": "github-api",
+          "title": "GitHub API",
+          "href": "https://docs.github.com/en/rest",
+          "description": "GitHub开发者API",
+          "icon": "https://github.githubassets.com/favicons/favicon.svg",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "rapidapi",
+          "title": "RapidAPI",
+          "href": "https://rapidapi.com",
+          "description": "API市场",
+          "icon": "https://rapidapi.com/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "public-apis",
+          "title": "Public APIs",
+          "href": "https://public-apis.io",
+          "description": "免费公共API集合",
+          "icon": "https://public-apis.io/favicon.ico",
+          "enabled": true,
+          "order": 3
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 9
+    },
+    {
+      "id": "hosting",
+      "title": "域名主机",
+      "icon": "/assets/images/categories/hosting.svg",
+      "description": "域名注册和托管服务",
+      "items": [
+        {
+          "id": "namecheap",
+          "title": "Namecheap",
+          "href": "https://namecheap.com",
+          "description": "域名注册商",
+          "icon": "https://namecheap.com/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "cloudflare-dns",
+          "title": "Cloudflare DNS",
+          "href": "https://cloudflare.com/dns",
+          "description": "DNS解析服务",
+          "icon": "https://cloudflare.com/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "dnspod",
+          "title": "DNSPod",
+          "href": "https://dnspod.cloud",
+          "description": "腾讯DNS服务",
+          "icon": "https://dnspod.cloud/favicon.ico",
+          "enabled": true,
+          "order": 3
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 10
+    },
+    {
+      "id": "colors",
+      "title": "配色工具",
+      "icon": "/assets/images/categories/colors.svg",
+      "description": "颜色相关设计工具",
+      "items": [
+        {
+          "id": "coolors",
+          "title": "Coolors",
+          "href": "https://coolors.co",
+          "description": "配色方案生成",
+          "icon": "https://coolors.co/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "colorhunt",
+          "title": "Color Hunt",
+          "href": "https://colorhunt.co",
+          "description": "配色灵感",
+          "icon": "https://colorhunt.co/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "adobe-color",
+          "title": "Adobe Color",
+          "href": "https://color.adobe.com",
+          "description": "Adobe配色工具",
+          "icon": "https://color.adobe.com/favicon.ico",
+          "enabled": true,
+          "order": 3
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 11
+    },
+    {
+      "id": "fonts",
+      "title": "字体资源",
+      "icon": "/assets/images/categories/fonts.svg",
+      "description": "字体下载和在线预览",
+      "items": [
+        {
+          "id": "google-fonts",
+          "title": "Google Fonts",
+          "href": "https://fonts.google.com",
+          "description": "免费字体库",
+          "icon": "https://fonts.google.com/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "dafont",
+          "title": "DaFont",
+          "href": "https://dafont.com",
+          "description": "英文字体下载",
+          "icon": "https://dafont.com/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "fontshare",
+          "title": "Fontshare",
+          "href": "https://fontshare.com",
+          "description": "免费商用字体",
+          "icon": "https://fontshare.com/favicon.ico",
+          "enabled": true,
+          "order": 3
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 12
+    },
+    {
+      "id": "storage",
+      "title": "图床存储",
+      "icon": "/assets/images/categories/storage.svg",
+      "description": "图片存储和托管服务",
+      "items": [
+        {
+          "id": "imgur",
+          "title": "Imgur",
+          "href": "https://imgur.com",
+          "description": "图片分享平台",
+          "icon": "https://imgur.com/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "smms",
+          "title": "SM.MS",
+          "href": "https://sm.ms",
+          "description": "免费图床",
+          "icon": "https://sm.ms/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "cloudinary",
+          "title": "Cloudinary",
+          "href": "https://cloudinary.com",
+          "description": "云图片管理",
+          "icon": "https://cloudinary.com/favicon.ico",
+          "enabled": true,
+          "order": 3
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 13
+    },
+    {
+      "id": "community",
+      "title": "社区资讯",
+      "icon": "/assets/images/categories/community.svg",
+      "description": "开发者社区和科技资讯",
+      "items": [
+        {
+          "id": "twitter",
+          "title": "Twitter",
+          "href": "https://twitter.com",
+          "description": "科技动态社交",
+          "icon": "https://twitter.com/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "reddit",
+          "title": "Reddit",
+          "href": "https://reddit.com",
+          "description": "社区论坛聚合",
+          "icon": "https://reddit.com/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "hacker-news",
+          "title": "Hacker News",
+          "href": "https://news.ycombinator.com",
+          "description": "科技新闻聚合",
+          "icon": "https://news.ycombinator.com/favicon.ico",
+          "enabled": true,
+          "order": 3
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 14
+    },
+    {
+      "id": "tools",
+      "title": "实用工具",
+      "icon": "/assets/images/categories/tools.svg",
+      "description": "日常开发和生活工具",
+      "items": [
+        {
+          "id": "regex101",
+          "title": "Regex101",
+          "href": "https://regex101.com",
+          "description": "正则表达式测试",
+          "icon": "https://regex101.com/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "crontab",
+          "title": "Crontab",
+          "href": "https://crontab.guru",
+          "description": "定时任务生成器",
+          "icon": "https://crontab.guru/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "base64",
+          "title": "Base64编码",
+          "href": "https://www.base64encode.org",
+          "description": "Base64在线工具",
+          "icon": "https://www.base64encode.org/favicon.ico",
+          "enabled": true,
+          "order": 3
+        },
+        {
+          "id": "json-formatter",
+          "title": "JSON Formatter",
+          "href": "https://jsonformatter.org",
+          "description": "JSON格式化工具",
+          "icon": "https://jsonformatter.org/favicon.ico",
+          "enabled": true,
+          "order": 4
+        },
+        {
+          "id": "tinypng",
+          "title": "TinyPNG",
+          "href": "https://tinypng.com",
+          "description": "图片压缩工具",
+          "icon": "https://tinypng.com/favicon.ico",
+          "enabled": true,
+          "order": 5
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 15
     }
   ]
 }

@@ -298,6 +298,46 @@ const { categories, activeCategory } = Astro.props
 
   initTheme()
 
+  // 侧边栏搜索功能
+  const searchInput = document.getElementById('nav-search-input') as HTMLInputElement
+  const navCards = document.querySelectorAll('.nav-card')
+  const categoryTitles = document.querySelectorAll('.category-title, .subcategory__title')
+
+  searchInput?.addEventListener('input', (e) => {
+    const query = (e.target as HTMLInputElement).value.toLowerCase().trim()
+
+    // 搜索导航卡片
+    navCards.forEach((card) => {
+      const title = card.querySelector('.nav-card__title')?.textContent?.toLowerCase() || ''
+      const description =
+        card.querySelector('.nav-card__description')?.textContent?.toLowerCase() || ''
+
+      if (!query || title.includes(query) || description.includes(query)) {
+        ;(card as HTMLElement).style.display = ''
+      } else {
+        ;(card as HTMLElement).style.display = 'none'
+      }
+    })
+
+    // 隐藏没有匹配内容的分类标题
+    categoryTitles.forEach((title) => {
+      const parent = title.parentElement
+      if (!parent) return
+
+      const siblings = parent.querySelectorAll('.nav-card')
+      const hasVisibleCards = Array.from(siblings).some(
+        (card) => (card as HTMLElement).style.display !== 'none'
+      )
+
+      if (!query) {
+        ;(title as HTMLElement).style.display = ''
+      } else {
+        ;(title as HTMLElement).style.display = hasVisibleCards ? '' : 'none'
+      }
+    })
+  })
+
+  // 分类展开功能
   document.querySelectorAll('.sidebar__expand-btn').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.preventDefault()
