@@ -3,96 +3,85 @@ import Layout from '../../layouts/Layout.astro'
 import Sidebar from '../../components/astro/Sidebar.astro'
 import Header from '../../components/astro/Header.astro'
 import Footer from '../../components/astro/Footer.astro'
-import NavigationCard from '../../components/astro/NavigationCard.astro'
-import NavSearch from '../../components/astro/NavSearch.astro'
 import type { NavigationData } from '../../types'
 
 export const prerender = false
 
-// 获取导航数据
-async function getNavigationData(): Promise<NavigationData> {
-  return { navigationItems: [] }
-}
+// 本地加载导航数据
+import navigationJson from '../../data/navigation.json'
+const navigationData: NavigationData = navigationJson
+const categories = navigationData.navigationItems.filter(item => item.enabled)
 
-const data = await getNavigationData()
 const { id } = Astro.params
 
 // 查找当前分类
-const currentCategory = data.navigationItems.find((item) => item.id === id)
-const activeCategory = id || data.navigationItems[0]?.id || ''
+const currentCategory = categories.find(item => item.id === id)
+const activeCategory = id || categories[0]?.id || ''
 ---
 
 <Layout title={currentCategory ? `${currentCategory.title} - FastNav` : 'FastNav'}>
-  <Sidebar
-    categories={data.navigationItems.filter((item) => item.enabled)}
-    activeCategory={activeCategory}
-  />
-
+  <Sidebar categories={categories} activeCategory={activeCategory} />
   <Header />
-
+  
   <main class="main-content">
     <div class="main-content__inner">
-      <NavSearch />
-
       <h1 class="category-title">{currentCategory?.title || '分类'}</h1>
-
+      
       <div class="nav-grid">
-        {
-          currentCategory?.items
-            .filter((item) => item.enabled)
-            .sort((a, b) => a.order - b.order)
-            .map((item) => (
-              <NavigationCard
-                item={{
-                  ...currentCategory,
-                  items: [item],
-                  subCategories: [],
-                }}
-              />
-            ))
-        }
-
-        {
-          currentCategory?.subCategories
-            .filter((sub) => sub.enabled !== false)
-            .sort((a, b) => a.order - b.order)
-            .map((sub) => (
-              <NavigationCard
-                item={{
-                  id: sub.id,
-                  title: sub.title,
-                  items: sub.items.filter((item) => item.enabled),
-                  subCategories: [],
-                  enabled: sub.enabled !== false,
-                  order: sub.order,
-                }}
-              />
-            ))
-        }
+        {currentCategory?.items
+          ?.filter(item => item.enabled)
+          .sort((a, b) => a.order - b.order)
+          .map(item => (
+            <a href={item.href} target="_blank" class="nav-card nav-card--lift">
+              <div class="nav-card__icon">
+                <img src={item.icon || '/assets/images/default-icon.svg'} alt={item.title} width="24" height="24" loading="lazy" />
+              </div>
+              <div class="nav-card__content">
+                <h3 class="nav-card__title">{item.title}</h3>
+                {item.description && (
+                  <p class="nav-card__description">{item.description}</p>
+                )}
+              </div>
+            </a>
+          ))}
       </div>
 
-      {
-        !currentCategory?.items.length && !currentCategory?.subCategories.length && (
-          <div class="empty-state">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="64"
-              height="64"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1"
-            >
-              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-            </svg>
-            <p>暂无导航项目</p>
-            <span>点击管理后台添加项目</span>
+      {currentCategory?.subCategories?.map(subCat => (
+        <div class="subcategory">
+          <h2 class="subcategory__title">{subCat.title}</h2>
+          <div class="nav-grid">
+            {subCat.items
+              .filter(item => item.enabled)
+              .sort((a, b) => a.order - b.order)
+              .map(item => (
+                <a href={item.href} target="_blank" class="nav-card nav-card--lift">
+                  <div class="nav-card__icon">
+                    <img src={item.icon || '/assets/images/default-icon.svg'} alt={item.title} width="24" height="24" loading="lazy" />
+                  </div>
+                  <div class="nav-card__content">
+                    <h3 class="nav-card__title">{item.title}</h3>
+                    {item.description && (
+                      <p class="nav-card__description">{item.description}</p>
+                    )}
+                  </div>
+                </a>
+              ))}
           </div>
-        )
-      }
+        </div>
+      ))}
+      
+      {(!currentCategory?.items?.length && !currentCategory?.subCategories?.length) && (
+        <div class="empty-state">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <p>暂无导航项目</p>
+          <span>点击管理后台添加项目</span>
+        </div>
+      )}
     </div>
   </main>
-
+  
   <Footer />
 </Layout>
 
@@ -117,10 +106,83 @@ const activeCategory = id || data.navigationItems[0]?.id || ''
     margin: 0 0 24px;
   }
 
+  .subcategory {
+    margin-top: 32px;
+  }
+
+  .subcategory__title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--on-surface);
+    margin: 0 0 16px;
+  }
+
   .nav-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 16px;
+  }
+
+  .nav-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--surface-container);
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .nav-card:hover {
+    background: var(--surface-container-high);
+  }
+
+  .nav-card--lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .nav-card__icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+  }
+
+  .nav-card__icon img {
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .nav-card__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .nav-card__title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--on-surface);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-card__description {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--on-surface-variant);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .empty-state {
@@ -162,6 +224,5 @@ const activeCategory = id || data.navigationItems[0]?.id || ''
 
 <script>
   import { initTheme } from '../../stores/theme'
-
   initTheme()
 </script>

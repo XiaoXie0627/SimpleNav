@@ -1,30 +1,222 @@
 ---
 import Layout from '../layouts/Layout.astro'
+import Sidebar from '../components/astro/Sidebar.astro'
+import Header from '../components/astro/Header.astro'
+import Footer from '../components/astro/Footer.astro'
+import NavigationCard from '../components/astro/NavigationCard.astro'
+import type { NavigationData } from '../types'
+
+// 本地加载导航数据
+import navigationJson from '../data/navigation.json'
+const navigationData: NavigationData = navigationJson
+const categories = navigationData.navigationItems.filter(item => item.enabled)
+const firstCategory = categories[0]
 ---
 
 <Layout title="FastNav - 现代导航管理平台">
-  <main class="min-h-screen flex items-center justify-center bg-[var(--surface)]">
-    <div class="text-center">
-      <h1 class="text-4xl font-bold text-[var(--on-surface)] mb-4">FastNav</h1>
-      <p class="text-lg text-[var(--on-surface-variant)] mb-8">基于 Astro 构建的现代化导航管理平台</p>
-      <div class="flex gap-4 justify-center">
-        <a href="/admin" class="px-6 py-3 bg-[var(--primary)] text-[var(--on-primary)] rounded-full font-medium hover:opacity-90 transition-opacity">
-          进入管理后台
-        </a>
-        <button id="theme-toggle" class="px-6 py-3 border border-[var(--outline)] rounded-full text-[var(--on-surface)] hover:bg-[var(--surface-container)] transition-colors">
-          切换主题
-        </button>
+  <Sidebar categories={categories} activeCategory={firstCategory?.id} />
+  <Header />
+  
+  <main class="main-content">
+    <div class="main-content__inner">
+      <h1 class="category-title">{firstCategory?.title || '全部分类'}</h1>
+      
+      <div class="nav-grid">
+        {firstCategory?.items
+          ?.filter(item => item.enabled)
+          .sort((a, b) => a.order - b.order)
+          .map(item => (
+            <a href={item.href} target="_blank" class="nav-card nav-card--lift">
+              <div class="nav-card__icon">
+                <img src={item.icon || '/assets/images/default-icon.svg'} alt={item.title} width="24" height="24" loading="lazy" />
+              </div>
+              <div class="nav-card__content">
+                <h3 class="nav-card__title">{item.title}</h3>
+                {item.description && (
+                  <p class="nav-card__description">{item.description}</p>
+                )}
+              </div>
+            </a>
+          ))}
       </div>
+
+      {firstCategory?.subCategories?.map(subCat => (
+        <div class="subcategory">
+          <h2 class="subcategory__title">{subCat.title}</h2>
+          <div class="nav-grid">
+            {subCat.items
+              .filter(item => item.enabled)
+              .sort((a, b) => a.order - b.order)
+              .map(item => (
+                <a href={item.href} target="_blank" class="nav-card nav-card--lift">
+                  <div class="nav-card__icon">
+                    <img src={item.icon || '/assets/images/default-icon.svg'} alt={item.title} width="24" height="24" loading="lazy" />
+                  </div>
+                  <div class="nav-card__content">
+                    <h3 class="nav-card__title">{item.title}</h3>
+                    {item.description && (
+                      <p class="nav-card__description">{item.description}</p>
+                    )}
+                  </div>
+                </a>
+              ))}
+          </div>
+        </div>
+      ))}
+      
+      {(!firstCategory?.items?.length && !firstCategory?.subCategories?.length) && (
+        <div class="empty-state">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <p>暂无导航项目</p>
+          <span>点击管理后台添加项目</span>
+        </div>
+      )}
     </div>
   </main>
+  
+  <Footer />
 </Layout>
 
+<style>
+  .main-content {
+    margin-left: 240px;
+    margin-top: 72px;
+    margin-bottom: 48px;
+    min-height: calc(100vh - 120px);
+    padding: 24px;
+  }
+
+  .main-content__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .category-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--on-surface);
+    margin: 0 0 24px;
+  }
+
+  .subcategory {
+    margin-top: 32px;
+  }
+
+  .subcategory__title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--on-surface);
+    margin: 0 0 16px;
+  }
+
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .nav-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 16px;
+    background: var(--surface-container);
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .nav-card:hover {
+    background: var(--surface-container-high);
+  }
+
+  .nav-card--lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  .nav-card__icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+  }
+
+  .nav-card__icon img {
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .nav-card__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .nav-card__title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--on-surface);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-card__description {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--on-surface-variant);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 24px;
+    text-align: center;
+    color: var(--on-surface-variant);
+  }
+
+  .empty-state svg {
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  .empty-state p {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+
+  .empty-state span {
+    font-size: 14px;
+  }
+
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+      padding: 16px;
+    }
+
+    .nav-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
 <script>
-  import { initTheme, toggleTheme } from '../stores/theme'
-  
-  // 初始化主题
+  import { initTheme } from '../stores/theme'
   initTheme()
-  
-  // 绑定主题切换按钮
-  document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme)
 </script>

@@ -1,0 +1,53 @@
+{
+  "basic": {
+    "title": "FastNav 导航",
+    "description": "收集国内外优秀设计网站，让设计资源触手可及",
+    "keywords": "设计导航,设计资源,UI设计,Figma,Sketch",
+    "defaultCategory": "common"
+  },
+  "appearance": {
+    "logo": "/assets/images/logo.svg",
+    "favicon": "/assets/images/favicon.svg",
+    "theme": "system",
+    "backgroundImage": "",
+    "backgroundOpacity": 1
+  },
+  "navigation": {
+    "linkTarget": "_blank",
+    "hoverEffect": "lift"
+  },
+  "search": {
+    "defaultEngine": "bing",
+    "engines": [
+      {
+        "id": "bing",
+        "name": "Bing",
+        "url": "https://www.bing.com/search?q=",
+        "icon": "/assets/images/search/bing.svg"
+      },
+      {
+        "id": "google",
+        "name": "Google",
+        "url": "https://www.google.com/search?q=",
+        "icon": "/assets/images/search/google.svg"
+      }
+    ],
+    "enableHistory": true,
+    "maxHistoryItems": 5
+  },
+  "dailyQuote": {
+    "enabled": true,
+    "quotes": [
+      "设计不是装饰，设计是解决问题。",
+      "好的设计是尽可能少的设计。",
+      "简洁是智慧的灵魂。",
+      "用户界面就像一个笑话，如果需要解释就不好了。",
+      "生活不止眼前的代码，还有诗和远方。"
+    ],
+    "displayMode": "random"
+  },
+  "contextMenu": {
+    "enabled": true,
+    "enableCopyLink": true
+  }
+}

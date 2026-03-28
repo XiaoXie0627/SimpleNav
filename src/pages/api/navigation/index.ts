@@ -1,31 +1,14 @@
 import type { APIRoute } from 'astro'
-import { getFileContent } from '../../../lib/github'
+import navigationData from '../../../data/navigation.json'
 
 export const prerender = false
 
 export const GET: APIRoute = async () => {
   try {
-    const content = await getFileContent('content/navigation.json')
-
-    if (!content) {
-      return new Response(
-        JSON.stringify({
-          success: true,
-          data: { navigationItems: [] },
-        }),
-        {
-          status: 200,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      )
-    }
-
-    const data = JSON.parse(content)
-
     return new Response(
       JSON.stringify({
         success: true,
-        data,
+        data: navigationData,
       }),
       {
         status: 200,

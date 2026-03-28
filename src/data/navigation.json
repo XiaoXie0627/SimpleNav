@@ -1,0 +1,174 @@
+{
+  "navigationItems": [
+    {
+      "id": "common",
+      "title": "常用推荐",
+      "icon": "/assets/images/categories/star.svg",
+      "description": "日常工作高频使用",
+      "items": [
+        {
+          "id": "github",
+          "title": "GitHub",
+          "href": "https://github.com",
+          "description": "代码托管平台",
+          "icon": "https://github.githubassets.com/favicons/favicon.svg",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "google",
+          "title": "Google",
+          "href": "https://google.com",
+          "description": "搜索引擎",
+          "icon": "https://www.google.com/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "chatgpt",
+          "title": "ChatGPT",
+          "href": "https://chat.openai.com",
+          "description": "AI对话助手",
+          "icon": "https://chat.openai.com/favicon.ico",
+          "enabled": true,
+          "order": 3
+        },
+        {
+          "id": "notion",
+          "title": "Notion",
+          "href": "https://notion.so",
+          "description": "知识管理工具",
+          "icon": "https://www.notion.so/images/favicon.ico",
+          "enabled": true,
+          "order": 4
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 1
+    },
+    {
+      "id": "design",
+      "title": "设计资源",
+      "icon": "/assets/images/categories/design.svg",
+      "description": "UI设计相关资源",
+      "items": [
+        {
+          "id": "figma",
+          "title": "Figma",
+          "href": "https://figma.com",
+          "description": "协作设计工具",
+          "icon": "https://static.figma.com/app/icon/1/favicon.png",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "dribbble",
+          "title": "Dribbble",
+          "href": "https://dribbble.com",
+          "description": "设计灵感社区",
+          "icon": "https://cdn.dribbble.com/assets/favicon-b38525134603b55c8b84a90306dc02ea.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "behance",
+          "title": "Behance",
+          "href": "https://behance.net",
+          "description": "Adobe设计平台",
+          "icon": "https://a5.behance.net/a975020c227136658e892ef23096f5844f7e0658/img/site/favicon-iblock-1.png",
+          "enabled": true,
+          "order": 3
+        }
+      ],
+      "subCategories": [
+        {
+          "id": "icons",
+          "title": "图标资源",
+          "items": [
+            {
+              "id": "lucide",
+              "title": "Lucide Icons",
+              "href": "https://lucide.dev",
+              "description": "开源图标库",
+              "icon": "https://lucide.dev/favicon-32x32.png",
+              "enabled": true,
+              "order": 1
+            }
+          ],
+          "enabled": true,
+          "order": 1
+        }
+      ],
+      "enabled": true,
+      "order": 2
+    },
+    {
+      "id": "development",
+      "title": "开发工具",
+      "icon": "/assets/images/categories/code.svg",
+      "description": "开发者常用工具",
+      "items": [
+        {
+          "id": "stackoverflow",
+          "title": "Stack Overflow",
+          "href": "https://stackoverflow.com",
+          "description": "技术问答社区",
+          "icon": "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "vercel",
+          "title": "Vercel",
+          "href": "https://vercel.com",
+          "description": "前端部署平台",
+          "icon": "https://vercel.com/favicon.ico",
+          "enabled": true,
+          "order": 2
+        },
+        {
+          "id": "codesandbox",
+          "title": "CodeSandbox",
+          "href": "https://codesandbox.io",
+          "description": "在线代码编辑器",
+          "icon": "https://codesandbox.io/favicon.ico",
+          "enabled": true,
+          "order": 3
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 3
+    },
+    {
+      "id": "ai-tools",
+      "title": "AI工具",
+      "icon": "/assets/images/categories/ai.svg",
+      "description": "人工智能相关工具",
+      "items": [
+        {
+          "id": "midjourney",
+          "title": "Midjourney",
+          "href": "https://midjourney.com",
+          "description": "AI绘画工具",
+          "icon": "https://www.midjourney.com/favicon.ico",
+          "enabled": true,
+          "order": 1
+        },
+        {
+          "id": "claude",
+          "title": "Claude",
+          "href": "https://claude.ai",
+          "description": "Anthropic AI助手",
+          "icon": "https://claude.ai/favicon.ico",
+          "enabled": true,
+          "order": 2
+        }
+      ],
+      "subCategories": [],
+      "enabled": true,
+      "order": 4
+    }
+  ]
+}
