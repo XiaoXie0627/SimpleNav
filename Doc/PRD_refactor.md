@@ -2,15 +2,15 @@
 
 ## 文档信息
 
-| 项目 | 内容 |
-|------|------|
-| **项目名称** | FastNav |
-| **项目类型** | 现代化导航管理平台 / 书签管理系统 |
-| **版本号** | 2.0.0 |
-| **文档状态** | 技术架构升级 |
-| **创建日期** | 2026年3月27日 |
-| **最后更新** | 2026年3月28日 |
-| **变更说明** | 框架从 Next.js 迁移至 Astro；UI 设计规则采用 Google Material Design 3；新增卡片组件模块、网络搜索栏、每日一言、分类页面路由等功能 |
+| 项目         | 内容                                                                                                                                                                                                                                                                                                 |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **项目名称** | FastNav                                                                                                                                                                                                                                                                                              |
+| **项目类型** | 现代化导航管理平台 / 书签管理系统                                                                                                                                                                                                                                                                    |
+| **版本号**   | 2.0.0                                                                                                                                                                                                                                                                                                |
+| **文档状态** | 技术架构升级                                                                                                                                                                                                                                                                                         |
+| **创建日期** | 2026年3月27日                                                                                                                                                                                                                                                                                        |
+| **最后更新** | 2026年3月29日                                                                                                                                                                                                                                                                                        |
+| **变更说明** | 框架从 Next.js 迁移至 Astro；UI 设计规则采用 Google Material Design 3；新增卡片组件模块、网络搜索栏、分类页面路由等功能；优化侧边栏分类展示（一级分类直接展示可展开）；调整时间日期显示（固定居中靠上方，时间加粗）；增加源码跳转按钮；移除底部Power字样标注；移除每日一言（静态页面不支持动态修改） |
 
 ---
 
@@ -42,21 +42,21 @@ FastNav 的产品定位如下：
 
 FastNav 产品的功能模块可以分为以下几个主要部分：
 
-| 模块 | 功能描述 | 优先级 | 架构说明 |
-|------|----------|--------|----------|
-| **用户认证模块** | GitHub OAuth 登录、用户会话管理 | P0 | Astro Middleware + Auth.js |
-| **导航展示模块** | 分类展示、项目卡片、搜索功能、侧边栏导航 | P0 | 静态页面 + React Islands |
-| **分类页面模块** | 分类独立页面、路由跳转、分类导航 | P0 | Astro 静态路由 |
-| **网络搜索栏** | Chrome风格搜索框、Bing/Google切换 | P0 | React Island |
-| **每日一言** | 每日文本轮播、换行符分隔 | P1 | React Island |
-| **时间显示** | 实时时钟+日期显示 | P1 | React Island |
-| **右键菜单** | 自定义右键菜单、新窗口/新标签打开 | P1 | React Island |
-| **导航管理模块** | 分类管理、子分类管理、项目管理、拖拽排序 | P0 | React Islands + API 端点 |
-| **卡片组件模块** | 倒数日、文本卡片、时钟卡片、链接卡片 | P1 | React Islands + Nano Stores |
-| **资源管理模块** | 资源分类管理、资源项目管理 | P1 | React Islands + API 端点 |
-| **站点配置模块** | 站点基本信息、主题配置、导航链接设置 | P1 | Astro Actions 表单 |
-| **数据管理模块** | JSON编辑器、数据导入导出、数据恢复 | P2 | Monaco Editor 集成 |
-| **扩展功能** | 浏览器插件（V2.0） | P2 | - |
+| 模块             | 功能描述                                       | 优先级 | 架构说明                    |
+| ---------------- | ---------------------------------------------- | ------ | --------------------------- |
+| **用户认证模块** | GitHub OAuth 登录、用户会话管理                | P0     | Astro Middleware + Auth.js  |
+| **导航展示模块** | 分类展示、项目卡片、搜索功能、侧边栏导航       | P0     | 静态页面 + React Islands    |
+| **分类页面模块** | 分类独立页面、路由跳转、分类导航               | P0     | Astro 静态路由              |
+| **网络搜索栏**   | Chrome风格搜索框、Bing/Google切换              | P0     | React Island                |
+| **每日一言**     | 每日文本轮播（静态页面不支持动态修改，已移除） | -      | -                           |
+| **时间显示**     | 实时时钟+日期显示                              | P1     | React Island                |
+| **右键菜单**     | 自定义右键菜单、新窗口/新标签打开              | P1     | React Island                |
+| **导航管理模块** | 分类管理、子分类管理、项目管理、拖拽排序       | P0     | React Islands + API 端点    |
+| **卡片组件模块** | 倒数日、文本卡片、时钟卡片、链接卡片           | P1     | React Islands + Nano Stores |
+| **资源管理模块** | 资源分类管理、资源项目管理                     | P1     | React Islands + API 端点    |
+| **站点配置模块** | 站点基本信息、主题配置、导航链接设置           | P1     | Astro Actions 表单          |
+| **数据管理模块** | JSON编辑器、数据导入导出、数据恢复             | P2     | Monaco Editor 集成          |
+| **扩展功能**     | 浏览器插件（V2.0）                             | P2     | -                           |
 
 ---
 
@@ -128,75 +128,82 @@ FastNav 产品的功能模块可以分为以下几个主要部分：
 
 5. **搜索功能**
 
-4. **侧边栏导航**
+6. **侧边栏导航**
    - 桌面端常驻侧边栏
    - 移动端可折叠/展开
    - 快速跳转功能
-   - 导航搜索栏：位于"分类"列表上方，搜索本地导航项目
-   - 分类列表：显示所有一级分类，支持点击跳转
+   - 导航搜索栏：位于分类列表上方，搜索本地导航项目
+   - 分类列表：直接展示一级分类名称，点击一级分类可展开显示二级分类，无需显示"分类"标题
 
-5. **主题切换**
-   - 深色/浅色/系统主题
+7. **功能按钮组（右上角）**
+   - 明暗切换：深色/浅色/系统主题，位置在页面右上角
+   - 资源管理：跳转到资源管理入口
+   - 设置跳转：跳转到设置页面
+   - 源码跳转：跳转到GitHub源码仓库
    - 主题持久化存储（localStorage）
    - 实时切换无需刷新
 
-6. **页面过渡动画**
+8. **页面过渡动画**
    - 使用 Swup 实现流畅的页面过渡
    - 淡入淡出、流畅的页面过渡效果
    - 无刷新切换页面
 
-7. **自定义滚动条**
+9. **自定义滚动条**
    - 使用 OverlayScrollbars
    - 跨浏览器兼容
    - 美观且不影响布局
 
-8. **悬浮显示**
-   - 鼠标悬浮颜色淡深，用户可观
-   - 鼠标悬浮显示网站描述
-9. **快捷键支持**
-   - /跳转网络搜索框
-   - Ctrl+f 跳转到导航搜索框
-   - 支持全键盘操作，在页面中通过ikjl控制上下左右移动选中
-   - 选中后支持enter键在新标签页打开 
-10. **一键到顶**
-   - 支持每个页面的右下角固定 "🔝"箭头 支持点击快速返回滑动条顶部
+10. **悬浮显示**
+    - 鼠标悬浮颜色淡深，用户可观
+    - 鼠标悬浮显示网站描述
+11. **快捷键支持**
+    - /跳转网络搜索框
+    - Ctrl+f 跳转到导航搜索框
+    - 支持全键盘操作，在页面中通过ikjl控制上下左右移动选中
+    - 选中后支持enter键在新标签页打开
+12. **一键到顶**
+
+- 支持每个页面的右下角固定 "🔝"箭头 支持点击快速返回滑动条顶部
 
 **界面布局**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  Logo        │        时间日期显示 + 网络搜索框        │  明暗切换  │  GitHub跳转  │  设置跳转  │
-│              │        （每页面不变元素）                │            │              │            │
+│  Logo   │                    10:30                    │  🌓  │  📁  │  ⚙️  │  🔗  │
+│         │               2026年3月28日                 │      │      │      │      │
+│         ├─────────────────────────────────────────────┤      │      │      │      │
 ├──────────┬──────────────────────────────────────────────────┤
 │          │                                                  │
 │  侧边栏  │                                                  │
 │  导航    │  ┌──────────────────────────────────────────┐       │
 │          │  │  网站链接显示区                         │       │
-│  - 导航页站内搜索 │  │  ┌────────┐  ┌────────┐           │       │
-│  - 一级分类 ∨     │  │  │ 卡片1   │  │ 卡片1   │           │       │
-│  - 一级分类 ∨     │  │  └────────┘  └────────┘           │       │
-│  - 二级分类展示   │  │  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐ │       │
-│  - 二级分类展示   │  │  │网站1  │  │网站1  │  │网站2  │  │网站1  │ │       │
+│  一级分类1│  │  ┌────────┐  ┌────────┐           │       │
+│    二级分类│  │  │ 卡片1   │  │ 卡片1   │           │       │
+│    二级分类│  │  └────────┘  └────────┘           │       │
+│  一级分类2│  │  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐ │       │
+│  一级分类3│  │  │网站1  │  │网站1  │  │网站2  │  │网站1  │ │       │
 │          │  │  └──────┘  └──────┘  └──────┘  └──────┘ │       │
 │          │  └──────────────────────────────────────────┘       │
 │          │                                                  │
-├──────────┴──────────────────────────────────────────────────┤
-│  每日一言（通栏）                                            │
-└─────────────────────────────────────────────────────────────┘
+└──────────┴──────────────────────────────────────────────────┘
 ```
 
 ##### 布局说明：
+
 1.  **顶部通栏**：
     - 左侧：固定 Logo
-    - 中间：时间日期显示 + 网络搜索框
-      - 「每个页面的固定不变元素」
-    - 右侧：功能按钮组（明暗切换、GitHub跳转、设置跳转）
+    - 中间偏上：时间日期显示（固定居中靠上方）
+    - 右上角：功能按钮组（依次为：明暗切换🌓、文件夹📁、设置⚙️、源码🔗）
+      - 明暗切换：切换主题模式
+      - 文件夹：资源管理入口
+      - 设置：跳转到设置页面
+      - 源码：跳转到GitHub源码仓库
 2.  **侧边栏导航区**：
-    - 固定左侧，包含站内搜索入口、一级分类展示项
+    - 固定左侧，包含站内搜索入口
+    - 直接展示一级分类名称（无"分类"标题）
+    - 点击一级分类可展开/收起二级分类
 3.  **主内容区**：
     - 网站链接和卡片展示区
-4.  **底部通栏**：
-    - 「每日一言」模块，居中下方通栏展示
 
 **响应式设计**
 
@@ -280,9 +287,9 @@ interface SearchEngine {
 }
 
 interface SearchHistory {
-  query: string              // 搜索词
-  engine: string             // 搜索引擎ID
-  timestamp: number          // 时间戳
+  query: string // 搜索词
+  engine: string // 搜索引擎ID
+  timestamp: number // 时间戳
 }
 ```
 
@@ -293,61 +300,40 @@ interface SearchHistory {
 - 快捷键：Tab 切换、Enter 提交、↑↓导航
 - 存储：localStorage（搜索历史）
 
-#### 2.2.5 每日一言
+#### 2.2.5 每日一言 [已移除]
 
 **功能描述**
 
-每日一言模块在页面底部展示一条每日轮播的文本内容。
+每日一言功能由于采用纯静态页面设计，无法动态修改文字内容，已从页面中移除。
 
-**核心功能**
+**说明**
 
-1. **文本配置**
-   - 在 site.json 中配置文本列表
-   - 以换行符分隔多条文本
-
-2. **展示规则**
-   - 支持三种展示模式：
-     - `random`：每日随机选择（默认）
-     - `sequential`：按顺序轮播
-     - `fixed`：固定显示第一条
-   - 位置：页面底部通栏展示
-
-3. **数据存储**
-
-```typescript
-interface DailyQuote {
-  enabled: boolean
-  quotes: string[]
-  displayMode: 'random' | 'sequential' | 'fixed'  // 展示模式
-}
-```
-
-**技术实现**
-
-- 组件：React Island (`client:load`)
-- 随机算法：基于日期的伪随机（保证每日一致）
-- 顺序模式：基于天数取模
-- 数据源：site.json
+- 静态页面在构建时生成，无法在运行时动态修改每日一言内容
+- 如需展示文字内容，可通过管理后台在构建前配置
+- 相关配置数据仍保留在站点配置中，以备后续需要
 
 #### 2.2.6 时间显示
 
 **功能描述**
 
-时间显示模块在页面顶部实时展示当前时间和日期。
+时间显示模块在页面顶部固定位置居中靠上方实时展示当前时间和日期。
 
 **核心功能**
 
 1. **时间显示**
    - 格式：`HH:mm`（如 `00:06`）
    - 每秒更新
+   - 字体加粗显示
 
 2. **日期显示**
    - 格式：`M月D日 星期X 农历XX`
    - 显示公历日期、星期、农历日期
+   - 正常字重显示
 
 **技术实现**
 
 - 组件：React Island (`client:load`)
+- 位置：固定在页面顶部居中靠上方
 - 实时更新：setInterval 每秒更新
 - 农历计算：dayjs 插件
 
@@ -407,24 +393,24 @@ interface DailyQuote {
 
 **快捷键列表**
 
-| 快捷键 | 功能 | 作用范围 |
-|--------|------|----------|
-| `Ctrl + K` | 打开全局搜索 | 全局 |
-| `Ctrl + F` | 跳转到导航搜索框 | 全局 |
-| `/` | 跳转到网络搜索框 | 全局（非输入状态）|
-| `Ctrl + /` | 打开快捷键帮助 | 全局 |
-| `Escape` | 关闭弹窗/搜索结果 | 全局 |
-| `↑/↓` | 导航搜索结果 | 搜索框激活时 |
-| `Enter` | 确认选中/打开链接 | 搜索框激活时 |
-| `Tab` | 切换搜索引擎 | 搜索框激活时 |
-| `i` | 上移选中项 | 全局（非输入状态）|
-| `k` | 下移选中项 | 全局（非输入状态）|
-| `j` | 左移选中项 | 全局（非输入状态）|
-| `l` | 右移选中项 | 全局（非输入状态）|
-| `1-9` | 快速跳转一级分类 | 全局（非输入状态）|
-| `Ctrl + N` | 新建项目 | 管理后台 |
-| `Ctrl + S` | 保存当前编辑 | 管理后台 |
-| `Ctrl + Z` | 撤销上一步操作 | 管理后台 |
+| 快捷键     | 功能              | 作用范围           |
+| ---------- | ----------------- | ------------------ |
+| `Ctrl + K` | 打开全局搜索      | 全局               |
+| `Ctrl + F` | 跳转到导航搜索框  | 全局               |
+| `/`        | 跳转到网络搜索框  | 全局（非输入状态） |
+| `Ctrl + /` | 打开快捷键帮助    | 全局               |
+| `Escape`   | 关闭弹窗/搜索结果 | 全局               |
+| `↑/↓`      | 导航搜索结果      | 搜索框激活时       |
+| `Enter`    | 确认选中/打开链接 | 搜索框激活时       |
+| `Tab`      | 切换搜索引擎      | 搜索框激活时       |
+| `i`        | 上移选中项        | 全局（非输入状态） |
+| `k`        | 下移选中项        | 全局（非输入状态） |
+| `j`        | 左移选中项        | 全局（非输入状态） |
+| `l`        | 右移选中项        | 全局（非输入状态） |
+| `1-9`      | 快速跳转一级分类  | 全局（非输入状态） |
+| `Ctrl + N` | 新建项目          | 管理后台           |
+| `Ctrl + S` | 保存当前编辑      | 管理后台           |
+| `Ctrl + Z` | 撤销上一步操作    | 管理后台           |
 
 **快捷键帮助弹窗**
 
@@ -433,6 +419,7 @@ interface DailyQuote {
 **ikjl 导航系统**
 
 使用 `i/k/j/l` 键模拟方向键导航：
+
 - `i` - 上移（↑）
 - `k` - 下移（↓）
 - `j` - 左移（←）
@@ -443,6 +430,7 @@ interface DailyQuote {
 **数字键快速跳转**
 
 按数字键 1-9 可快速跳转到对应位置的一级分类：
+
 - `1` 跳转到第 1 个分类
 - `2` 跳转到第 2 个分类
 - 以此类推...
@@ -490,23 +478,23 @@ interface DailyQuote {
 
 **操作安全机制**
 
-| 操作类型 | 安全机制 | 实现方式 |
-|----------|----------|----------|
-| 删除操作 | 二次确认弹窗 | 显示被删除项名称，确认后执行 |
-| 批量删除 | 二次确认弹窗 | 显示删除数量，确认后执行 |
-| 拖拽排序 | 支持撤销 | 保存前序状态，Ctrl+Z撤销 |
-| 启用/禁用 | 即时生效 | 无需确认，可再次切换 |
-| 编辑保存 | 自动保存 | 表单失焦或点击保存时保存 |
+| 操作类型  | 安全机制     | 实现方式                     |
+| --------- | ------------ | ---------------------------- |
+| 删除操作  | 二次确认弹窗 | 显示被删除项名称，确认后执行 |
+| 批量删除  | 二次确认弹窗 | 显示删除数量，确认后执行     |
+| 拖拽排序  | 支持撤销     | 保存前序状态，Ctrl+Z撤销     |
+| 启用/禁用 | 即时生效     | 无需确认，可再次切换         |
+| 编辑保存  | 自动保存     | 表单失焦或点击保存时保存     |
 
 **删除确认弹窗设计**：
 
 ```tsx
 interface DeleteConfirmProps {
-  title: string              // 弹窗标题
-  itemName: string           // 被删除项名称
-  itemCount?: number         // 批量删除时的数量
-  onConfirm: () => void      // 确认回调
-  onCancel: () => void       // 取消回调
+  title: string // 弹窗标题
+  itemName: string // 被删除项名称
+  itemCount?: number // 批量删除时的数量
+  onConfirm: () => void // 确认回调
+  onCancel: () => void // 取消回调
 }
 ```
 
@@ -543,32 +531,32 @@ interface NavigationData {
 }
 
 interface NavigationItem {
-  id: string                    // 唯一标识符
-  title: string                 // 分类标题
-  icon?: string                 // 分类图标
-  description?: string          // 分类描述
-  items: NavigationSubItem[]    // 直接项目列表
-  subCategories: NavigationSubCategory[]  // 子分类列表
-  enabled: boolean              // 是否启用
-  order: number                 // 排序序号
+  id: string // 唯一标识符
+  title: string // 分类标题
+  icon?: string // 分类图标
+  description?: string // 分类描述
+  items: NavigationSubItem[] // 直接项目列表
+  subCategories: NavigationSubCategory[] // 子分类列表
+  enabled: boolean // 是否启用
+  order: number // 排序序号
 }
 
 interface NavigationSubCategory {
-  id: string                    // 唯一标识符
-  title: string                 // 子分类标题
-  items: NavigationSubItem[]    // 项目列表
-  enabled?: boolean             // 是否启用
-  order: number                 // 排序序号
+  id: string // 唯一标识符
+  title: string // 子分类标题
+  items: NavigationSubItem[] // 项目列表
+  enabled?: boolean // 是否启用
+  order: number // 排序序号
 }
 
 interface NavigationSubItem {
-  id: string                    // 唯一标识符
-  title: string                 // 项目标题
-  href: string                  // 链接地址
-  description?: string          // 项目描述
-  icon?: string                 // 图标路径
-  enabled: boolean              // 是否启用
-  order: number                 // 排序序号
+  id: string // 唯一标识符
+  title: string // 项目标题
+  href: string // 链接地址
+  description?: string // 项目描述
+  icon?: string // 图标路径
+  enabled: boolean // 是否启用
+  order: number // 排序序号
 }
 
 type IconType = 'local' | 'remote' | 'lucide' | 'default'
@@ -577,38 +565,38 @@ function resolveIconPath(icon?: string): { type: IconType; path: string } {
   if (!icon) return { type: 'default', path: '/assets/images/default-icon.svg' }
   if (icon.startsWith('/assets/')) return { type: 'local', path: icon }
   if (icon.startsWith('http')) return { type: 'remote', path: icon }
-  return { type: 'lucide', path: icon }  // Lucide图标名称
+  return { type: 'lucide', path: icon } // Lucide图标名称
 }
 ```
 
 **API 接口**
 
-| 接口 | 方法 | 描述 | 认证 | 渲染模式 |
-|------|------|------|------|----------|
-| `/api/navigation` | GET | 获取导航数据 | 公开 | SSR |
-| `/api/navigation` | POST | 保存导航数据 | 需要 | SSR |
-| `/api/navigation/[id]` | GET | 获取单个分类 | 公开 | SSR |
-| `/api/navigation/[id]` | PUT | 更新分类 | 需要 | SSR |
-| `/api/navigation/[id]` | DELETE | 删除分类 | 需要 | SSR |
-| `/api/navigation/[id]/categories` | GET | 获取子分类列表 | 公开 | SSR |
-| `/api/navigation/[id]/categories` | POST | 添加子分类 | 需要 | SSR |
-| `/api/navigation/[id]/categories/[catId]` | GET | 获取单个子分类 | 公开 | SSR |
-| `/api/navigation/[id]/categories/[catId]` | PUT | 更新子分类 | 需要 | SSR |
-| `/api/navigation/[id]/categories/[catId]` | DELETE | 删除子分类 | 需要 | SSR |
-| `/api/navigation/[id]/items` | GET | 获取项目列表 | 公开 | SSR |
-| `/api/navigation/[id]/items` | POST | 添加项目 | 需要 | SSR |
-| `/api/navigation/[id]/items/[itemId]` | GET | 获取单个项目 | 公开 | SSR |
-| `/api/navigation/[id]/items/[itemId]` | PUT | 更新项目 | 需要 | SSR |
-| `/api/navigation/[id]/items/[itemId]` | DELETE | 删除项目 | 需要 | SSR |
-| `/api/navigation/reorder` | POST | 拖拽排序 | 需要 | SSR |
-| `/api/navigation/batch` | POST | 批量操作（批量删除、启用/禁用）| 需要 | SSR |
-| `/api/navigation/search` | GET | 搜索导航项目 | 公开 | SSR |
-| `/api/navigation/export` | GET | 导出导航数据 | 需要 | SSR |
-| `/api/navigation/import` | POST | 导入导航数据 | 需要 | SSR |
-| `/api/navigation/restore` | POST | 恢复默认数据 | 需要 | SSR |
-| `/api/navigation/check-default` | GET | 检查默认文件状态 | 需要 | SSR |
-| `/api/upload/icon` | POST | 上传图标文件 | 需要 | SSR |
-| `/api/health` | GET | 健康检查 | 公开 | SSR |
+| 接口                                      | 方法   | 描述                            | 认证 | 渲染模式 |
+| ----------------------------------------- | ------ | ------------------------------- | ---- | -------- |
+| `/api/navigation`                         | GET    | 获取导航数据                    | 公开 | SSR      |
+| `/api/navigation`                         | POST   | 保存导航数据                    | 需要 | SSR      |
+| `/api/navigation/[id]`                    | GET    | 获取单个分类                    | 公开 | SSR      |
+| `/api/navigation/[id]`                    | PUT    | 更新分类                        | 需要 | SSR      |
+| `/api/navigation/[id]`                    | DELETE | 删除分类                        | 需要 | SSR      |
+| `/api/navigation/[id]/categories`         | GET    | 获取子分类列表                  | 公开 | SSR      |
+| `/api/navigation/[id]/categories`         | POST   | 添加子分类                      | 需要 | SSR      |
+| `/api/navigation/[id]/categories/[catId]` | GET    | 获取单个子分类                  | 公开 | SSR      |
+| `/api/navigation/[id]/categories/[catId]` | PUT    | 更新子分类                      | 需要 | SSR      |
+| `/api/navigation/[id]/categories/[catId]` | DELETE | 删除子分类                      | 需要 | SSR      |
+| `/api/navigation/[id]/items`              | GET    | 获取项目列表                    | 公开 | SSR      |
+| `/api/navigation/[id]/items`              | POST   | 添加项目                        | 需要 | SSR      |
+| `/api/navigation/[id]/items/[itemId]`     | GET    | 获取单个项目                    | 公开 | SSR      |
+| `/api/navigation/[id]/items/[itemId]`     | PUT    | 更新项目                        | 需要 | SSR      |
+| `/api/navigation/[id]/items/[itemId]`     | DELETE | 删除项目                        | 需要 | SSR      |
+| `/api/navigation/reorder`                 | POST   | 拖拽排序                        | 需要 | SSR      |
+| `/api/navigation/batch`                   | POST   | 批量操作（批量删除、启用/禁用） | 需要 | SSR      |
+| `/api/navigation/search`                  | GET    | 搜索导航项目                    | 公开 | SSR      |
+| `/api/navigation/export`                  | GET    | 导出导航数据                    | 需要 | SSR      |
+| `/api/navigation/import`                  | POST   | 导入导航数据                    | 需要 | SSR      |
+| `/api/navigation/restore`                 | POST   | 恢复默认数据                    | 需要 | SSR      |
+| `/api/navigation/check-default`           | GET    | 检查默认文件状态                | 需要 | SSR      |
+| `/api/upload/icon`                        | POST   | 上传图标文件                    | 需要 | SSR      |
+| `/api/health`                             | GET    | 健康检查                        | 公开 | SSR      |
 
 **技术实现**
 
@@ -639,35 +627,35 @@ function resolveIconPath(icon?: string): { type: IconType; path: string } {
 
 ```typescript
 interface ResourceSection {
-  id: string                         // 唯一标识符
-  title: string                      // 分类标题
-  items: ResourceItem[]              // 资源项目列表
+  id: string // 唯一标识符
+  title: string // 分类标题
+  items: ResourceItem[] // 资源项目列表
 }
 
 interface ResourceItem {
-  title: string                      // 资源标题
-  description: string               // 资源描述
-  icon: string                       // 资源图标
-  url: string                        // 资源链接
+  title: string // 资源标题
+  description: string // 资源描述
+  icon: string // 资源图标
+  url: string // 资源链接
 }
 ```
 
 **API 接口**
 
-| 接口 | 方法 | 描述 | 认证 | 渲染模式 |
-|------|------|------|------|----------|
-| `/api/resource` | GET | 获取资源数据 | 公开 | SSR |
-| `/api/resource` | POST | 添加资源 | 需要 | SSR |
-| `/api/resource/[id]` | GET | 获取单个资源 | 公开 | SSR |
-| `/api/resource/[id]` | PUT | 更新资源 | 需要 | SSR |
-| `/api/resource/[id]` | DELETE | 删除资源 | 需要 | SSR |
-| `/api/resource/sections` | GET | 获取资源分类列表 | 公开 | SSR |
-| `/api/resource/sections` | POST | 添加资源分类 | 需要 | SSR |
-| `/api/resource/sections/[sectionId]` | GET | 获取单个分类 | 公开 | SSR |
-| `/api/resource/sections/[sectionId]` | PUT | 更新分类 | 需要 | SSR |
-| `/api/resource/sections/[sectionId]` | DELETE | 删除分类 | 需要 | SSR |
-| `/api/resource/batch` | POST | 批量操作 | 需要 | SSR |
-| `/api/resource/check-references` | GET | 检查引用 | 需要 | SSR |
+| 接口                                 | 方法   | 描述             | 认证 | 渲染模式 |
+| ------------------------------------ | ------ | ---------------- | ---- | -------- |
+| `/api/resource`                      | GET    | 获取资源数据     | 公开 | SSR      |
+| `/api/resource`                      | POST   | 添加资源         | 需要 | SSR      |
+| `/api/resource/[id]`                 | GET    | 获取单个资源     | 公开 | SSR      |
+| `/api/resource/[id]`                 | PUT    | 更新资源         | 需要 | SSR      |
+| `/api/resource/[id]`                 | DELETE | 删除资源         | 需要 | SSR      |
+| `/api/resource/sections`             | GET    | 获取资源分类列表 | 公开 | SSR      |
+| `/api/resource/sections`             | POST   | 添加资源分类     | 需要 | SSR      |
+| `/api/resource/sections/[sectionId]` | GET    | 获取单个分类     | 公开 | SSR      |
+| `/api/resource/sections/[sectionId]` | PUT    | 更新分类         | 需要 | SSR      |
+| `/api/resource/sections/[sectionId]` | DELETE | 删除分类         | 需要 | SSR      |
+| `/api/resource/batch`                | POST   | 批量操作         | 需要 | SSR      |
+| `/api/resource/check-references`     | GET    | 检查引用         | 需要 | SSR      |
 
 **技术实现**
 
@@ -706,68 +694,65 @@ interface ResourceItem {
    - 添加自定义搜索源
    - 搜索历史记录开关
 
-5. **每日一言配置**
-   - 开启/关闭
-   - 文本内容（以换行符分隔多条）
-   - 展示模式（随机/顺序/固定）
-
-6. **右键菜单配置**
+5. **右键菜单配置**
    - 开启/关闭自定义右键菜单
    - 复制链接功能开关
+
+**说明**：每日一言配置已移除（静态页面不支持动态修改）
 
 **数据模型**
 
 ```typescript
 interface SiteConfig {
   basic: {
-    title: string                     // 网站标题
-    description: string              // 网站描述
-    keywords: string                 // 网站关键词
-    defaultCategory: string          // 默认分类
+    title: string // 网站标题
+    description: string // 网站描述
+    keywords: string // 网站关键词
+    defaultCategory: string // 默认分类
   }
   appearance: {
-    logo: string                      // Logo 路径
-    favicon: string                   // Favicon 路径
-    theme: 'light' | 'dark' | 'system'  // 主题模式
-    backgroundImage?: string          // 背景图片路径
-    backgroundOpacity?: number        // 背景透明度 (0-1)
+    logo: string // Logo 路径
+    favicon: string // Favicon 路径
+    theme: 'light' | 'dark' | 'system' // 主题模式
+    backgroundImage?: string // 背景图片路径
+    backgroundOpacity?: number // 背景透明度 (0-1)
   }
   navigation: {
-    linkTarget: '_blank' | '_self'   // 链接打开方式
-    hoverEffect: 'default' | 'glass' | 'lift' | 'tilt'  // 悬停效果
+    linkTarget: '_blank' | '_self' // 链接打开方式
+    hoverEffect: 'default' | 'glass' | 'lift' | 'tilt' // 悬停效果
   }
   search: {
-    defaultEngine: string            // 默认搜索引擎 ID
-    engines: SearchEngine[]          // 搜索引擎列表
-    enableHistory: boolean           // 是否启用搜索历史
-    maxHistoryItems: number          // 最大历史记录数
+    defaultEngine: string // 默认搜索引擎 ID
+    engines: SearchEngine[] // 搜索引擎列表
+    enableHistory: boolean // 是否启用搜索历史
+    maxHistoryItems: number // 最大历史记录数
   }
   dailyQuote: {
-    enabled: boolean                 // 是否开启
-    quotes: string[]                 // 文本列表（换行符分隔）
-    displayMode: 'random' | 'sequential' | 'fixed'  // 展示模式
+    enabled: boolean // 是否开启
+    quotes: string[] // 文本列表（换行符分隔）
+    displayMode: 'random' | 'sequential' | 'fixed' // 展示模式
   }
   contextMenu: {
-    enabled: boolean                 // 是否开启右键菜单
-    enableCopyLink: boolean          // 是否启用复制链接
+    enabled: boolean // 是否开启右键菜单
+    enableCopyLink: boolean // 是否启用复制链接
   }
 }
 
 interface SearchEngine {
-  id: string                         // 搜索引擎 ID
-  name: string                       // 搜索引擎名称
-  url: string                        // 搜索 URL 模板
-  icon: string                       // 图标路径
+  id: string // 搜索引擎 ID
+  name: string // 搜索引擎名称
+  url: string // 搜索 URL 模板
+  icon: string // 图标路径
 }
 ```
 
 **API 接口**
 
-| 接口 | 方法 | 描述 | 认证 | 渲染模式 |
-|------|------|------|------|----------|
-| `/api/site-config` | GET | 获取站点配置 | 公开 | SSR |
-| `/api/site-config` | POST | 保存站点配置 | 需要 | SSR |
-| `/api/site-config/reset` | POST | 重置为默认配置 | 需要 | SSR |
+| 接口                     | 方法 | 描述           | 认证 | 渲染模式 |
+| ------------------------ | ---- | -------------- | ---- | -------- |
+| `/api/site-config`       | GET  | 获取站点配置   | 公开 | SSR      |
+| `/api/site-config`       | POST | 保存站点配置   | 需要 | SSR      |
+| `/api/site-config/reset` | POST | 重置为默认配置 | 需要 | SSR      |
 
 **技术实现**
 
@@ -802,22 +787,22 @@ interface SearchEngine {
 
 **API 接口**
 
-| 接口 | 方法 | 描述 | 认证 |
-|------|------|------|------|
-| `/api/data/export` | GET | 导出全部数据 | 需要 |
-| `/api/data/export/[type]` | GET | 导出指定类型数据 | 需要 |
-| `/api/data/import` | POST | 导入数据 | 需要 |
-| `/api/data/sync` | POST | 手动同步到 GitHub | 需要 |
+| 接口                      | 方法 | 描述              | 认证 |
+| ------------------------- | ---- | ----------------- | ---- |
+| `/api/data/export`        | GET  | 导出全部数据      | 需要 |
+| `/api/data/export/[type]` | GET  | 导出指定类型数据  | 需要 |
+| `/api/data/import`        | POST | 导入数据          | 需要 |
+| `/api/data/sync`          | POST | 手动同步到 GitHub | 需要 |
 
 **导出数据类型**
 
-| 类型 | 文件名 | 内容 |
-|------|--------|------|
-| all | fastnav-backup-all.json | 全部数据 |
+| 类型       | 文件名                         | 内容     |
+| ---------- | ------------------------------ | -------- |
+| all        | fastnav-backup-all.json        | 全部数据 |
 | navigation | fastnav-backup-navigation.json | 导航数据 |
-| site | fastnav-backup-site.json | 站点配置 |
-| resource | fastnav-backup-resource.json | 资源数据 |
-| widget | fastnav-backup-widget.json | 卡片数据 |
+| site       | fastnav-backup-site.json       | 站点配置 |
+| resource   | fastnav-backup-resource.json   | 资源数据 |
+| widget     | fastnav-backup-widget.json     | 卡片数据 |
 
 **技术实现**
 
@@ -860,11 +845,11 @@ interface SearchEngine {
 
 **实现阶段规划**
 
-| 阶段 | 卡片类型 | 优先级 | 说明 |
-|------|----------|--------|------|
-| 第一阶段 | 链接卡片 | P0 | 与导航项目功能重叠，可复用组件 |
-| 第二阶段 | 时钟卡片、文本卡片 | P1 | 简单组件，快速实现 |
-| 第三阶段 | 倒数日卡片 | P2 | 复杂逻辑，延后实现 |
+| 阶段     | 卡片类型           | 优先级 | 说明                           |
+| -------- | ------------------ | ------ | ------------------------------ |
+| 第一阶段 | 链接卡片           | P0     | 与导航项目功能重叠，可复用组件 |
+| 第二阶段 | 时钟卡片、文本卡片 | P1     | 简单组件，快速实现             |
+| 第三阶段 | 倒数日卡片         | P2     | 复杂逻辑，延后实现             |
 
 **卡片布局设计**
 
@@ -887,45 +872,45 @@ interface SearchEngine {
 ```typescript
 // 卡片组件基类
 interface BaseCard {
-  id: string                         // 唯一标识符
-  type: 'countdown' | 'text' | 'clock' | 'link'  // 卡片类型
-  title?: string                     // 卡片标题
-  enabled: boolean                   // 是否启用
-  position?: number                  // 排序位置
+  id: string // 唯一标识符
+  type: 'countdown' | 'text' | 'clock' | 'link' // 卡片类型
+  title?: string // 卡片标题
+  enabled: boolean // 是否启用
+  position?: number // 排序位置
 }
 
 // 倒数日卡片
 interface CountdownCard extends BaseCard {
   type: 'countdown'
-  targetDate: string                 // 目标日期 (ISO 8601)
-  mode: 'countdown' | 'anniversary'  // 倒计时/纪念日模式
-  backgroundColor?: string           // 背景色
-  textColor?: string                 // 文字颜色
+  targetDate: string // 目标日期 (ISO 8601)
+  mode: 'countdown' | 'anniversary' // 倒计时/纪念日模式
+  backgroundColor?: string // 背景色
+  textColor?: string // 文字颜色
 }
 
 // 文本卡片
 interface TextCard extends BaseCard {
   type: 'text'
-  content: string                    // 文本内容
-  fontSize?: 'small' | 'medium' | 'large'  // 字体大小
-  textColor?: string                 // 文字颜色
-  backgroundColor?: string           // 背景色
-  backgroundOpacity?: number         // 背景透明度 (0-1)
+  content: string // 文本内容
+  fontSize?: 'small' | 'medium' | 'large' // 字体大小
+  textColor?: string // 文字颜色
+  backgroundColor?: string // 背景色
+  backgroundOpacity?: number // 背景透明度 (0-1)
 }
 
 // 时钟卡片
 interface ClockCard extends BaseCard {
   type: 'clock'
-  format: 'digital' | 'analog'       // 时钟样式
-  showDate?: boolean                 // 是否显示日期
-  timezone?: string                  // 时区
+  format: 'digital' | 'analog' // 时钟样式
+  showDate?: boolean // 是否显示日期
+  timezone?: string // 时区
 }
 
 // 链接卡片
 interface LinkCard extends BaseCard {
   type: 'link'
-  href: string                       // 跳转链接
-  icon?: string                      // 图标
+  href: string // 跳转链接
+  icon?: string // 图标
 }
 
 // 卡片联合类型
@@ -933,11 +918,11 @@ type WidgetCard = CountdownCard | TextCard | ClockCard | LinkCard
 
 // 卡片容器
 interface WidgetContainer {
-  id: string                         // 容器唯一标识
-  title?: string                     // 容器标题（如"小组件"）
-  cards: WidgetCard[]                // 卡片列表
-  enabled?: boolean                  // 是否启用
-  columns?: number                   // 显示列数 (1-4)
+  id: string // 容器唯一标识
+  title?: string // 容器标题（如"小组件"）
+  cards: WidgetCard[] // 卡片列表
+  enabled?: boolean // 是否启用
+  columns?: number // 显示列数 (1-4)
 }
 ```
 
@@ -955,15 +940,15 @@ WidgetCard/
 
 **API 接口**
 
-| 接口 | 方法 | 描述 | 认证 |
-|------|------|------|------|
-| `/api/widget` | GET | 获取卡片数据 | 公开 |
-| `/api/widget` | POST | 添加卡片 | 需要 |
-| `/api/widget/[id]` | GET | 获取单个卡片 | 公开 |
-| `/api/widget/[id]` | PUT | 更新卡片 | 需要 |
-| `/api/widget/[id]` | DELETE | 删除卡片 | 需要 |
-| `/api/widget/reorder` | POST | 卡片排序 | 需要 |
-| `/api/widget/batch` | POST | 批量操作 | 需要 |
+| 接口                  | 方法   | 描述         | 认证 |
+| --------------------- | ------ | ------------ | ---- |
+| `/api/widget`         | GET    | 获取卡片数据 | 公开 |
+| `/api/widget`         | POST   | 添加卡片     | 需要 |
+| `/api/widget/[id]`    | GET    | 获取单个卡片 | 公开 |
+| `/api/widget/[id]`    | PUT    | 更新卡片     | 需要 |
+| `/api/widget/[id]`    | DELETE | 删除卡片     | 需要 |
+| `/api/widget/reorder` | POST   | 卡片排序     | 需要 |
+| `/api/widget/batch`   | POST   | 批量操作     | 需要 |
 
 **技术实现**
 
@@ -1001,10 +986,10 @@ WidgetCard/
 
 **路由说明**
 
-| 路由 | 描述 |
-|------|------|
-| `/` | 重定向到默认分类页面（通过分类ID）|
-| `/category/:id` | 分类详情页，`:id` 为分类ID |
+| 路由            | 描述                               |
+| --------------- | ---------------------------------- |
+| `/`             | 重定向到默认分类页面（通过分类ID） |
+| `/category/:id` | 分类详情页，`:id` 为分类ID         |
 
 **首页重定向逻辑**
 
@@ -1026,8 +1011,7 @@ WidgetCard/
   - 导航搜索栏（位于"分类"列表上方，搜索本地项目）
   - 分类导航列表
 - 分类标题和项目卡片区域
-- 每日一言（页面底部通栏展示）
-- 主题切换、GitHub 链接、设置跳转
+- 主题切换、资源管理、设置跳转、源码跳转
 
 #### 3.1.3 管理后台首页
 
@@ -1098,6 +1082,7 @@ WidgetCard/
 - 保存/重置按钮
 
 #### 3.1.7 卡片设置页面
+
 - 弹出默认样式选择
 - 选择后支持修改
 
@@ -1109,75 +1094,75 @@ WidgetCard/
 
 **Primary 系列**
 
-| 变量 | 浅色模式 | 深色模式 | 用途 |
-|------|----------|----------|------|
-| Primary | #6750A4 | #D0BCFF | 主要按钮、链接 |
-| On-Primary | #FFFFFF | #381E72 | Primary 上的文字 |
-| Primary-Container | #EADDFF | #4F378B | 主要容器背景 |
-| On-Primary-Container | #21005D | #EADDFF | 容器内文字 |
+| 变量                 | 浅色模式 | 深色模式 | 用途             |
+| -------------------- | -------- | -------- | ---------------- |
+| Primary              | #6750A4  | #D0BCFF  | 主要按钮、链接   |
+| On-Primary           | #FFFFFF  | #381E72  | Primary 上的文字 |
+| Primary-Container    | #EADDFF  | #4F378B  | 主要容器背景     |
+| On-Primary-Container | #21005D  | #EADDFF  | 容器内文字       |
 
 **Secondary 系列**
 
-| 变量 | 浅色模式 | 深色模式 | 用途 |
-|------|----------|----------|------|
-| Secondary | #625B71 | #CCC2DC | 次要按钮 |
-| On-Secondary | #FFFFFF | #332D41 | Secondary 上的文字 |
-| Secondary-Container | #E8DEF8 | #4A4458 | 次要容器背景 |
-| On-Secondary-Container | #1D192B | #E8DEF8 | 容器内文字 |
+| 变量                   | 浅色模式 | 深色模式 | 用途               |
+| ---------------------- | -------- | -------- | ------------------ |
+| Secondary              | #625B71  | #CCC2DC  | 次要按钮           |
+| On-Secondary           | #FFFFFF  | #332D41  | Secondary 上的文字 |
+| Secondary-Container    | #E8DEF8  | #4A4458  | 次要容器背景       |
+| On-Secondary-Container | #1D192B  | #E8DEF8  | 容器内文字         |
 
 **Surface 层级系统**
 
-| 变量 | 浅色模式 | 深色模式 | 用途 |
-|------|----------|----------|------|
-| Surface | #FFFBFE | #1C1B1F | 主背景 |
-| Surface-Container | #F3EDF7 | #211F26 | 卡片背景 |
-| Surface-Container-High | #ECE6F0 | #2B2930 | 浮层背景 |
-| Surface-Variant | #E7E0EC | #49454F | 次要背景 |
+| 变量                   | 浅色模式 | 深色模式 | 用途     |
+| ---------------------- | -------- | -------- | -------- |
+| Surface                | #FFFBFE  | #1C1B1F  | 主背景   |
+| Surface-Container      | #F3EDF7  | #211F26  | 卡片背景 |
+| Surface-Container-High | #ECE6F0  | #2B2930  | 浮层背景 |
+| Surface-Variant        | #E7E0EC  | #49454F  | 次要背景 |
 
 **文本和边框**
 
-| 变量 | 浅色模式 | 深色模式 | 用途 |
-|------|----------|----------|------|
-| On-Surface | #1C1B1F | #E6E1E5 | 主文字 |
-| On-Surface-Variant | #49454F | #CAC4D0 | 次要文字 |
-| Outline | #79747E | #938F99 | 边框 |
-| Outline-Variant | #CAC4D0 | #49454F | 次要边框 |
+| 变量               | 浅色模式 | 深色模式 | 用途     |
+| ------------------ | -------- | -------- | -------- |
+| On-Surface         | #1C1B1F  | #E6E1E5  | 主文字   |
+| On-Surface-Variant | #49454F  | #CAC4D0  | 次要文字 |
+| Outline            | #79747E  | #938F99  | 边框     |
+| Outline-Variant    | #CAC4D0  | #49454F  | 次要边框 |
 
 #### 3.2.2 圆角系统
 
-| 元素 | 圆角值 | 说明 |
-|------|--------|------|
-| 按钮/Chip | 9999px | 胶囊形 |
-| 卡片 | 16px | 标准卡片 |
-| 输入框 | 4px | 紧凑设计 |
-| 图标按钮 | 50% | 圆形按钮 |
-| FAB | 16px | 悬浮按钮 |
-| 搜索栏 | 9999px | 胶囊形搜索框 |
+| 元素      | 圆角值 | 说明         |
+| --------- | ------ | ------------ |
+| 按钮/Chip | 9999px | 胶囊形       |
+| 卡片      | 16px   | 标准卡片     |
+| 输入框    | 4px    | 紧凑设计     |
+| 图标按钮  | 50%    | 圆形按钮     |
+| FAB       | 16px   | 悬浮按钮     |
+| 搜索栏    | 9999px | 胶囊形搜索框 |
 
 #### 3.2.3 阴影系统 - Elevation
 
-| 级别 | 样式 | 用途 |
-|------|------|------|
-| Elevation 0 | 无阴影 | 平铺背景 |
-| Elevation 1 | 0 1px 2px + 0 1px 3px | 卡片默认 |
-| Elevation 2 | 0 1px 2px + 0 2px 6px | 卡片 hover |
-| Elevation 3 | 0 4px 8px + 0 1px 3px | 悬浮按钮 |
-| Elevation 4 | 0 6px 10px + 0 2px 3px | 弹窗/菜单 |
+| 级别        | 样式                   | 用途       |
+| ----------- | ---------------------- | ---------- |
+| Elevation 0 | 无阴影                 | 平铺背景   |
+| Elevation 1 | 0 1px 2px + 0 1px 3px  | 卡片默认   |
+| Elevation 2 | 0 1px 2px + 0 2px 6px  | 卡片 hover |
+| Elevation 3 | 0 4px 8px + 0 1px 3px  | 悬浮按钮   |
+| Elevation 4 | 0 6px 10px + 0 2px 3px | 弹窗/菜单  |
 
 #### 3.2.4 字体系统
 
 **排版层级**
 
-| 级别 | 字号 | 字重 | 行高 | 字间距 | 用途 |
-|------|------|------|------|--------|------|
-| Display Small | 36px | 400 | 44px | 0 | 大标题 |
-| Headline Medium | 28px | 400 | 36px | 0 | 页面标题 |
-| Title Large | 22px | 500 | 28px | 0 | 卡片标题 |
-| Title Small | 14px | 500 | 20px | 0.1px | 小标题 |
-| Body Large | 16px | 400 | 24px | 0.5px | 正文 |
-| Body Medium | 14px | 400 | 20px | 0.25px | 描述 |
-| Label Large | 14px | 500 | 20px | 0.1px | 按钮 |
-| Label Medium | 12px | 500 | 16px | 0.5px | 标签 |
+| 级别            | 字号 | 字重 | 行高 | 字间距 | 用途     |
+| --------------- | ---- | ---- | ---- | ------ | -------- |
+| Display Small   | 36px | 400  | 44px | 0      | 大标题   |
+| Headline Medium | 28px | 400  | 36px | 0      | 页面标题 |
+| Title Large     | 22px | 500  | 28px | 0      | 卡片标题 |
+| Title Small     | 14px | 500  | 20px | 0.1px  | 小标题   |
+| Body Large      | 16px | 400  | 24px | 0.5px  | 正文     |
+| Body Medium     | 14px | 400  | 20px | 0.25px | 描述     |
+| Label Large     | 14px | 500  | 20px | 0.1px  | 按钮     |
+| Label Medium    | 12px | 500  | 16px | 0.5px  | 标签     |
 
 **字体选择**
 
@@ -1188,22 +1173,22 @@ WidgetCard/
 
 **5 种按钮变体**
 
-| 类型 | 背景 | 文字 | 边框 | 用途 |
-|------|------|------|------|------|
-| Filled | Primary | On-Primary | 无 | 主要操作 |
-| Tonal | Secondary-Container | On-Secondary-Container | 无 | 次要操作 |
-| Outlined | 透明 | Primary | 1px Outline | 中等强调 |
-| Text | 无 | Primary | 无 | 文字链接 |
-| Elevated | Surface-Container-Low | Primary | 无 | 浮层按钮 |
+| 类型     | 背景                  | 文字                   | 边框        | 用途     |
+| -------- | --------------------- | ---------------------- | ----------- | -------- |
+| Filled   | Primary               | On-Primary             | 无          | 主要操作 |
+| Tonal    | Secondary-Container   | On-Secondary-Container | 无          | 次要操作 |
+| Outlined | 透明                  | Primary                | 1px Outline | 中等强调 |
+| Text     | 无                    | Primary                | 无          | 文字链接 |
+| Elevated | Surface-Container-Low | Primary                | 无          | 浮层按钮 |
 
 **Icon Button 变体**
 
-| 类型 | 背景 | 图标颜色 | 用途 |
-|------|------|----------|------|
-| Standard | transparent | On-Surface-Variant | 通用 |
-| Filled | Primary | On-Primary | 重要操作 |
-| Tonal | Secondary-Container | On-Secondary-Container | 次要操作 |
-| Outlined | transparent | On-Surface-Variant | 需要边框 |
+| 类型     | 背景                | 图标颜色               | 用途     |
+| -------- | ------------------- | ---------------------- | -------- |
+| Standard | transparent         | On-Surface-Variant     | 通用     |
+| Filled   | Primary             | On-Primary             | 重要操作 |
+| Tonal    | Secondary-Container | On-Secondary-Container | 次要操作 |
+| Outlined | transparent         | On-Surface-Variant     | 需要边框 |
 
 #### 3.2.6 组件库
 
@@ -1216,20 +1201,20 @@ WidgetCard/
 
 **缓动曲线**
 
-| 类型 | 曲线 | 用途 |
-|------|------|------|
-| Standard | cubic-bezier(0.2, 0, 0, 1) | 默认 |
-| Emphasized | cubic-bezier(0.2, 0, 0, 1) | 强调 |
+| 类型                  | 曲线                            | 用途 |
+| --------------------- | ------------------------------- | ---- |
+| Standard              | cubic-bezier(0.2, 0, 0, 1)      | 默认 |
+| Emphasized            | cubic-bezier(0.2, 0, 0, 1)      | 强调 |
 | Emphasized-Decelerate | cubic-bezier(0.05, 0.7, 0.1, 1) | 滑入 |
 | Emphasized-Accelerate | cubic-bezier(0.3, 0, 0.8, 0.15) | 滑出 |
 
 **时长**
 
-| 类型 | 时长 | 用途 |
-|------|------|------|
-| Short | 200ms | 交互反馈 |
+| 类型   | 时长  | 用途     |
+| ------ | ----- | -------- |
+| Short  | 200ms | 交互反馈 |
 | Medium | 400ms | 组件动画 |
-| Long | 600ms | 页面过渡 |
+| Long   | 600ms | 页面过渡 |
 
 **交互效果**
 
@@ -1239,24 +1224,26 @@ WidgetCard/
 
 #### 3.2.8 响应式断点
 
-| 断点 | 宽度 | 描述 | 布局调整 |
-|------|------|------|----------|
-| sm | 640px | 手机横屏 | 单列布局 |
-| md | 768px | 平板 | 双列布局 |
-| lg | 1024px | 桌面 | 侧边栏+内容区 |
-| xl | 1280px | 大桌面 | 三列布局 |
-| 2xl | 1536px | 超大桌面 | 最大宽度约束 |
+| 断点 | 宽度   | 描述     | 布局调整      |
+| ---- | ------ | -------- | ------------- |
+| sm   | 640px  | 手机横屏 | 单列布局      |
+| md   | 768px  | 平板     | 双列布局      |
+| lg   | 1024px | 桌面     | 侧边栏+内容区 |
+| xl   | 1280px | 大桌面   | 三列布局      |
+| 2xl  | 1536px | 超大桌面 | 最大宽度约束  |
 
 #### 3.2.9 骨架屏设计
 
 **使用场景**：数据加载中显示骨架屏，提升用户体验
 
 **导航卡片骨架屏**：
+
 ```css
 .skeleton {
-  background: linear-gradient(90deg, 
-    var(--skeleton-base) 25%, 
-    var(--skeleton-highlight) 50%, 
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base) 25%,
+    var(--skeleton-highlight) 50%,
     var(--skeleton-base) 75%
   );
   background-size: 200% 100%;
@@ -1265,38 +1252,43 @@ WidgetCard/
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 ```
 
 **骨架屏组件**：
 
-| 组件 | 骨架屏形状 | 尺寸 |
-|------|------------|------|
-| 导航卡片 | 圆角矩形 + 图标圆形 + 文字条 | 200x80px |
-| 侧边栏项 | 圆形 + 文字条 | 100%宽度 |
-| 搜索栏 | 圆角矩形 | 100%宽度，48px高 |
-| 时间显示 | 文字条 | 200x40px |
+| 组件     | 骨架屏形状                   | 尺寸             |
+| -------- | ---------------------------- | ---------------- |
+| 导航卡片 | 圆角矩形 + 图标圆形 + 文字条 | 200x80px         |
+| 侧边栏项 | 圆形 + 文字条                | 100%宽度         |
+| 搜索栏   | 圆角矩形                     | 100%宽度，48px高 |
+| 时间显示 | 文字条                       | 200x40px         |
 
 #### 3.2.10 空状态设计
 
 **使用场景**：无数据时显示友好提示
 
-| 场景 | 空状态内容 | 操作引导 |
-|------|------------|----------|
-| 无导航分类 | 图标 + "暂无分类" | "点击添加第一个分类" |
-| 无导航项目 | 图标 + "暂无项目" | "点击添加项目" |
-| 搜索无结果 | 图标 + "未找到相关内容" | "尝试其他关键词" |
-| 无卡片组件 | 图标 + "暂无卡片" | "点击添加卡片" |
-| 无资源 | 图标 + "暂无资源" | "点击添加资源" |
+| 场景       | 空状态内容              | 操作引导             |
+| ---------- | ----------------------- | -------------------- |
+| 无导航分类 | 图标 + "暂无分类"       | "点击添加第一个分类" |
+| 无导航项目 | 图标 + "暂无项目"       | "点击添加项目"       |
+| 搜索无结果 | 图标 + "未找到相关内容" | "尝试其他关键词"     |
+| 无卡片组件 | 图标 + "暂无卡片"       | "点击添加卡片"       |
+| 无资源     | 图标 + "暂无资源"       | "点击添加资源"       |
 
 **空状态组件结构**：
+
 ```tsx
 interface EmptyStateProps {
-  icon: ReactNode           // 图标
-  title: string            // 标题
-  description?: string     // 描述
+  icon: ReactNode // 图标
+  title: string // 标题
+  description?: string // 描述
   action?: {
     label: string
     onClick: () => void
@@ -1308,59 +1300,64 @@ interface EmptyStateProps {
 
 **MD3暗色模式标准配色**：
 
-| 语义 | 浅色模式 | 暗色模式 |
-|------|----------|----------|
-| 主背景 | #FFFBFE | #1C1B1F |
-| 次背景 | #F3EDF7 | #2B2930 |
-| 卡片背景 | #FFFFFF | #2B2930 |
-| 主色调 | #6750A4 | #D0BCFF |
-| 主文字 | #1C1B1F | #E6E1E5 |
-| 次文字 | #49454F | #CAC4D0 |
-| 边框 | #79747E | #938F99 |
-| 错误色 | #B3261E | #F2B8B5 |
+| 语义     | 浅色模式 | 暗色模式 |
+| -------- | -------- | -------- |
+| 主背景   | #FFFBFE  | #1C1B1F  |
+| 次背景   | #F3EDF7  | #2B2930  |
+| 卡片背景 | #FFFFFF  | #2B2930  |
+| 主色调   | #6750A4  | #D0BCFF  |
+| 主文字   | #1C1B1F  | #E6E1E5  |
+| 次文字   | #49454F  | #CAC4D0  |
+| 边框     | #79747E  | #938F99  |
+| 错误色   | #B3261E  | #F2B8B5  |
 
 **CSS变量定义**：
+
 ```css
 :root {
   /* 浅色模式 */
-  --color-background: #FFFBFE;
-  --color-surface: #F3EDF7;
-  --color-on-surface: #1C1B1F;
-  --color-primary: #6750A4;
+  --color-background: #fffbfe;
+  --color-surface: #f3edf7;
+  --color-on-surface: #1c1b1f;
+  --color-primary: #6750a4;
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   /* 暗色模式 */
-  --color-background: #1C1B1F;
-  --color-surface: #2B2930;
-  --color-on-surface: #E6E1E5;
-  --color-primary: #D0BCFF;
+  --color-background: #1c1b1f;
+  --color-surface: #2b2930;
+  --color-on-surface: #e6e1e5;
+  --color-primary: #d0bcff;
 }
 ```
 
 **主题切换动画**：
+
 ```css
 * {
-  transition: background-color 0.3s ease, color 0.2s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.2s ease;
 }
 ```
 
 #### 3.2.12 无障碍访问(a11y)
 
-| 要求 | 实现方式 |
-|------|----------|
+| 要求       | 实现方式                                       |
+| ---------- | ---------------------------------------------- |
 | 语义化HTML | 使用 `<nav>`, `<main>`, `<article>` 等语义标签 |
-| ARIA标签 | 按钮添加 `aria-label`，图标添加 `aria-hidden` |
-| 键盘导航 | 支持 Tab/Shift+Tab 导航，Enter 激活 |
-| 焦点管理 | 弹窗打开时焦点锁定，关闭后焦点还原 |
-| 颜色对比 | 文字与背景对比度 ≥ 4.5:1 |
-| 屏幕阅读器 | 图片添加 `alt`，表单添加 `label` |
+| ARIA标签   | 按钮添加 `aria-label`，图标添加 `aria-hidden`  |
+| 键盘导航   | 支持 Tab/Shift+Tab 导航，Enter 激活            |
+| 焦点管理   | 弹窗打开时焦点锁定，关闭后焦点还原             |
+| 颜色对比   | 文字与背景对比度 ≥ 4.5:1                       |
+| 屏幕阅读器 | 图片添加 `alt`，表单添加 `label`               |
 
 #### 3.2.13 自定义滚动条(OverlayScrollbars)
 
 **库选择**：OverlayScrollbars
 
 **安装**：
+
 ```bash
 pnpm add overlayscrollbars overlayscrollbars-react
 ```
@@ -1370,15 +1367,15 @@ pnpm add overlayscrollbars overlayscrollbars-react
 ```typescript
 const scrollbarOptions = {
   scrollbars: {
-    autoHide: 'scroll',        // 滚动时显示，停止后隐藏
-    autoHideDelay: 800,        // 隐藏延迟（毫秒）
-    dragScroll: true,          // 支持拖拽滚动
-    clickScroll: false,        // 禁用点击滚动
+    autoHide: 'scroll', // 滚动时显示，停止后隐藏
+    autoHideDelay: 800, // 隐藏延迟（毫秒）
+    dragScroll: true, // 支持拖拽滚动
+    clickScroll: false, // 禁用点击滚动
   },
   overflow: {
-    x: 'hidden',               // 隐藏横向滚动条
-    y: 'scroll',               // 显示纵向滚动条
-  }
+    x: 'hidden', // 隐藏横向滚动条
+    y: 'scroll', // 显示纵向滚动条
+  },
 }
 ```
 
@@ -1387,7 +1384,7 @@ const scrollbarOptions = {
 ```css
 /* 自定义滚动条轨道 */
 .os-scrollbar {
-  --os-size: 8px;              /* 滚动条宽度 */
+  --os-size: 8px; /* 滚动条宽度 */
   --os-padding-perpendicular: 2px;
   --os-padding-axis: 2px;
 }
@@ -1403,23 +1400,23 @@ const scrollbarOptions = {
 }
 
 /* 暗色模式 */
-[data-theme="dark"] .os-scrollbar-handle {
+[data-theme='dark'] .os-scrollbar-handle {
   background: rgba(255, 255, 255, 0.2);
 }
 
-[data-theme="dark"] .os-scrollbar-handle:hover {
+[data-theme='dark'] .os-scrollbar-handle:hover {
   background: rgba(255, 255, 255, 0.4);
 }
 ```
 
 **使用场景**：
 
-| 组件 | 滚动条行为 |
-|------|------------|
-| 侧边栏 | 垂直滚动，自动隐藏 |
+| 组件         | 滚动条行为         |
+| ------------ | ------------------ |
+| 侧边栏       | 垂直滚动，自动隐藏 |
 | 导航卡片区域 | 垂直滚动，自动隐藏 |
 | 管理后台列表 | 垂直滚动，常驻显示 |
-| 弹窗内容 | 垂直滚动，自动隐藏 |
+| 弹窗内容     | 垂直滚动，自动隐藏 |
 
 **技术实现**：
 
@@ -1432,6 +1429,7 @@ const scrollbarOptions = {
 #### 3.3.1 导航项目卡片
 
 **布局结构**：
+
 ```
 ┌─────────────────────────────────┐
 │  [图标]   标题                   │
@@ -1441,13 +1439,13 @@ const scrollbarOptions = {
 
 **尺寸规格**：
 
-| 属性 | 值 | 说明 |
-|------|-----|------|
-| 宽度 | 100% | 自适应容器 |
-| 最小高度 | 64px | 包含图标和标题 |
-| 内边距 | 16px | 四周 |
-| 图标尺寸 | 24x24px | 标准图标 |
-| 图标圆角 | 8px | 图标容器 |
+| 属性     | 值      | 说明           |
+| -------- | ------- | -------------- |
+| 宽度     | 100%    | 自适应容器     |
+| 最小高度 | 64px    | 包含图标和标题 |
+| 内边距   | 16px    | 四周           |
+| 图标尺寸 | 24x24px | 标准图标       |
+| 图标圆角 | 8px     | 图标容器       |
 
 **样式规格**：
 
@@ -1461,7 +1459,7 @@ const scrollbarOptions = {
   border-radius: 16px;
   background: var(--surface-container);
   cursor: pointer;
-  
+
   /* 过渡动画 */
   transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
 }
@@ -1478,7 +1476,7 @@ const scrollbarOptions = {
 
 .navigation-card.hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .navigation-card.hover-tilt:hover {
@@ -1488,14 +1486,15 @@ const scrollbarOptions = {
 
 **文字样式**：
 
-| 元素 | 字号 | 字重 | 颜色 |
-|------|------|------|------|
-| 标题 | 14px | 500 | On-Surface |
-| 描述 | 12px | 400 | On-Surface-Variant |
+| 元素 | 字号 | 字重 | 颜色               |
+| ---- | ---- | ---- | ------------------ |
+| 标题 | 14px | 500  | On-Surface         |
+| 描述 | 12px | 400  | On-Surface-Variant |
 
 #### 3.3.2 导航搜索栏
 
 **布局结构**：
+
 ```
 ┌─────────────────────────────────┐
 │  [🔍]  搜索导航项目...          │
@@ -1504,13 +1503,13 @@ const scrollbarOptions = {
 
 **尺寸规格**：
 
-| 属性 | 值 | 说明 |
-|------|-----|------|
-| 宽度 | 100% | 侧边栏宽度 |
-| 高度 | 40px | 标准输入框高度 |
-| 内边距 | 12px | 左右 |
-| 图标尺寸 | 16x16px | 搜索图标 |
-| 圆角 | 8px | 小圆角 |
+| 属性     | 值      | 说明           |
+| -------- | ------- | -------------- |
+| 宽度     | 100%    | 侧边栏宽度     |
+| 高度     | 40px    | 标准输入框高度 |
+| 内边距   | 12px    | 左右           |
+| 图标尺寸 | 16x16px | 搜索图标       |
+| 圆角     | 8px     | 小圆角         |
 
 **样式规格**：
 
@@ -1537,17 +1536,18 @@ const scrollbarOptions = {
 
 **搜索结果下拉**：
 
-| 属性 | 值 |
-|------|-----|
-| 位置 | 输入框下方 |
-| 最大高度 | 300px |
-| 圆角 | 8px |
-| 阴影 | Elevation 3 |
-| 滚动 | 超出高度时滚动 |
+| 属性     | 值             |
+| -------- | -------------- |
+| 位置     | 输入框下方     |
+| 最大高度 | 300px          |
+| 圆角     | 8px            |
+| 阴影     | Elevation 3    |
+| 滚动     | 超出高度时滚动 |
 
 #### 3.3.3 网络搜索栏
 
 **布局结构**：
+
 ```
 ┌──────────────────────────────────────────────┐
 │  [Bing ▼]  搜索内容...              [🔍]    │
@@ -1556,12 +1556,12 @@ const scrollbarOptions = {
 
 **尺寸规格**：
 
-| 属性 | 值 | 说明 |
-|------|-----|------|
-| 宽度 | 600px (max) | 最大宽度 |
-| 高度 | 48px | 标准搜索栏高度 |
-| 内边距 | 16px | 左右 |
-| 圆角 | 9999px | 胶囊形 |
+| 属性   | 值          | 说明           |
+| ------ | ----------- | -------------- |
+| 宽度   | 600px (max) | 最大宽度       |
+| 高度   | 48px        | 标准搜索栏高度 |
+| 内边距 | 16px        | 左右           |
+| 圆角   | 9999px      | 胶囊形         |
 
 **样式规格**：
 
@@ -1575,92 +1575,43 @@ const scrollbarOptions = {
   padding: 0 16px;
   border-radius: 9999px;
   background: var(--surface-container);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .network-search-bar:focus-within {
-  box-shadow: 0 0 0 2px var(--primary), 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow:
+    0 0 0 2px var(--primary),
+    0 4px 8px rgba(0, 0, 0, 0.15);
 }
 ```
 
 **搜索引擎切换器**：
 
-| 属性 | 值 |
-|------|-----|
-| 位置 | 搜索栏左侧 |
-| 尺寸 | 24x24px 图标 |
+| 属性     | 值           |
+| -------- | ------------ |
+| 位置     | 搜索栏左侧   |
+| 尺寸     | 24x24px 图标 |
 | 切换方式 | Tab 键或点击 |
 
 **搜索历史下拉**：
 
-| 属性 | 值 |
-|------|-----|
-| 位置 | 搜索栏下方 |
-| 最大显示 | 5条 |
-| 圆角 | 12px |
-| 每项高度 | 40px |
+| 属性     | 值         |
+| -------- | ---------- |
+| 位置     | 搜索栏下方 |
+| 最大显示 | 5条        |
+| 圆角     | 12px       |
+| 每项高度 | 40px       |
 
-#### 3.3.4 每日一言组件
+#### 3.3.4 每日一言组件 [已移除]
 
-**布局结构**：
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    "这里是每日一言的内容"                    │
-└─────────────────────────────────────────────────────────────┘
-```
+**说明**
 
-**尺寸规格**：
-
-| 属性 | 值 | 说明 |
-|------|-----|------|
-| 位置 | 页面底部 | 通栏展示 |
-| 高度 | 48px | 标准高度 |
-| 内边距 | 16px 24px | 上下 左右 |
-| 文字居中 | 是 | 水平垂直居中 |
-
-**样式规格**：
-
-```css
-.daily-quote {
-  width: 100%;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 24px;
-  background: var(--surface-variant);
-  color: var(--on-surface-variant);
-  font-size: 14px;
-  font-style: italic;
-  text-align: center;
-}
-
-/* 淡入动画 */
-.daily-quote-enter {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.daily-quote-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.3s ease;
-}
-```
-
-**文字样式**：
-
-| 属性 | 值 |
-|------|-----|
-| 字号 | 14px |
-| 字重 | 400 |
-| 字体样式 | italic |
-| 颜色 | On-Surface-Variant |
-| 最大宽度 | 80% |
+由于采用纯静态页面设计，每日一言功能已从页面中移除。静态页面在构建时生成，无法动态修改文字内容。
 
 #### 3.3.5 时间显示组件
 
 **布局结构**：
+
 ```
 ┌─────────────────────────┐
 │       10:30             │
@@ -1670,67 +1621,74 @@ const scrollbarOptions = {
 
 **尺寸规格**：
 
-| 属性 | 值 | 说明 |
-|------|-----|------|
-| 位置 | 页面顶部 | 居中 |
-| 宽度 | 200px | 固定宽度 |
-| 高度 | 60px | 包含时间日期 |
+| 属性 | 值           | 说明         |
+| ---- | ------------ | ------------ |
+| 位置 | 页面顶部固定 | 居中靠上方   |
+| 宽度 | 自适应       | 根据内容调整 |
+| 高度 | 60px         | 包含时间日期 |
 
 **样式规格**：
 
 ```css
 .time-display {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  z-index: 10;
 }
 
 .time-display-time {
-  font-size: 32px;
-  font-weight: 500;
+  font-size: 28px;
+  font-weight: 700;
   color: var(--on-surface);
   font-family: 'Inter', monospace;
 }
 
 .time-display-date {
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 400;
   color: var(--on-surface-variant);
 }
 ```
 
 **文字样式**：
 
-| 元素 | 字号 | 字重 | 颜色 |
-|------|------|------|------|
-| 时间 | 32px | 500 | On-Surface |
-| 日期 | 12px | 400 | On-Surface-Variant |
+| 元素 | 字号 | 字重        | 颜色               |
+| ---- | ---- | ----------- | ------------------ |
+| 时间 | 28px | 700（加粗） | On-Surface         |
+| 日期 | 14px | 400（正常） | On-Surface-Variant |
 
 #### 3.3.6 侧边栏组件
 
 **布局结构**：
+
 ```
 ┌──────────────┐
 │  导航搜索栏   │
 ├──────────────┤
-│  分类 1      │
-│  分类 2      │
-│  分类 3      │
+│  一级分类1   │
+│    └ 二级分类 │
+│    └ 二级分类 │
+│  一级分类2   │
+│  一级分类3   │
 │  ...         │
-├──────────────┤
-│  主题切换    │
-│  设置        │
 └──────────────┘
 ```
 
 **尺寸规格**：
 
-| 属性 | 值 | 说明 |
-|------|-----|------|
-| 宽度 | 240px | 固定宽度 |
-| 最小高度 | 100vh | 全高 |
-| 内边距 | 16px | 四周 |
-| 分类项高度 | 40px | 每项 |
+| 属性           | 值    | 说明               |
+| -------------- | ----- | ------------------ |
+| 宽度           | 240px | 固定宽度           |
+| 最小高度       | 100vh | 全高               |
+| 内边距         | 16px  | 四周               |
+| 一级分类项高度 | 40px  | 每项               |
+| 二级分类项高度 | 32px  | 每项（展开时显示） |
 
 **样式规格**：
 
@@ -1761,31 +1719,106 @@ const scrollbarOptions = {
   background: var(--primary-container);
   color: var(--on-primary-container);
 }
+
+.sidebar-subcategory {
+  padding-left: 24px;
+  height: 32px;
+}
+
+.sidebar-subcategory-item {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+}
+
+.sidebar-subcategory-item:hover {
+  background: var(--surface-container);
+}
 ```
+
+┌──────────────┐
+│ 导航搜索栏 │
+├──────────────┤
+│ 分类 1 │
+│ 分类 2 │
+│ 分类 3 │
+│ ... │
+├──────────────┤
+│ 主题切换 │
+│ 设置 │
+└──────────────┘
+
+````
+
+**尺寸规格**：
+
+| 属性       | 值    | 说明     |
+| ---------- | ----- | -------- |
+| 宽度       | 240px | 固定宽度 |
+| 最小高度   | 100vh | 全高     |
+| 内边距     | 16px  | 四周     |
+| 分类项高度 | 40px  | 每项     |
+
+**样式规格**：
+
+```css
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  padding: 16px;
+  background: var(--surface);
+  border-right: 1px solid var(--outline-variant);
+}
+
+.sidebar-category-item {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sidebar-category-item:hover {
+  background: var(--surface-container);
+}
+
+.sidebar-category-item.active {
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+}
+````
 
 **响应式行为**：
 
-| 断点 | 行为 |
-|------|------|
-| < md | 隐藏侧边栏，显示汉堡菜单 |
-| >= md | 常驻显示 |
+| 断点  | 行为                     |
+| ----- | ------------------------ |
+| < md  | 隐藏侧边栏，显示汉堡菜单 |
+| >= md | 常驻显示                 |
 
 #### 3.3.7 页面过渡动画(Swup)
 
 **库选择**：Swup + @swup/插件
 
 **安装**：
+
 ```bash
 pnpm add swup @swup/fade-plugin @swup/slide-plugin @swup/scroll-plugin
 ```
 
 **过渡类型**：
 
-| 过渡类型 | 效果 | 使用场景 |
-|----------|------|----------|
-| Fade | 淡入淡出 | 默认过渡效果 |
-| Slide | 滑动切换 | 分类页面切换 |
-| Scroll | 平滑滚动 | 锚点跳转 |
+| 过渡类型 | 效果     | 使用场景     |
+| -------- | -------- | ------------ |
+| Fade     | 淡入淡出 | 默认过渡效果 |
+| Slide    | 滑动切换 | 分类页面切换 |
+| Scroll   | 平滑滚动 | 锚点跳转     |
 
 **配置选项**：
 
@@ -1796,19 +1829,19 @@ import SwupSlidePlugin from '@swup/slide-plugin'
 import SwupScrollPlugin from '@swup/scroll-plugin'
 
 const swup = new Swup({
-  containers: ['#swup'],           // 过渡容器
-  animationSelector: '[class*="swup"]',  // 动画选择器
-  cache: true,                     // 启用缓存
-  preload: true,                   // 预加载
+  containers: ['#swup'], // 过渡容器
+  animationSelector: '[class*="swup"]', // 动画选择器
+  cache: true, // 启用缓存
+  preload: true, // 预加载
   plugins: [
     new SwupFadePlugin({
-      duration: 300,               // 动画时长
+      duration: 300, // 动画时长
     }),
     new SwupSlidePlugin({
-      direction: 'to-right',       // 滑动方向
+      direction: 'to-right', // 滑动方向
     }),
-    new SwupScrollPlugin()
-  ]
+    new SwupScrollPlugin(),
+  ],
 })
 ```
 
@@ -1847,12 +1880,12 @@ const swup = new Swup({
 
 **过渡动画规则**：
 
-| 页面类型 | 过渡方向 | 时长 |
-|----------|----------|------|
-| 首页 → 分类页 | Fade | 300ms |
-| 分类页 → 分类页 | Slide Right/Left | 400ms |
-| 公开页 → 管理后台 | Fade | 300ms |
-| 管理后台内部 | None | 0ms |
+| 页面类型          | 过渡方向         | 时长  |
+| ----------------- | ---------------- | ----- |
+| 首页 → 分类页     | Fade             | 300ms |
+| 分类页 → 分类页   | Slide Right/Left | 400ms |
+| 公开页 → 管理后台 | Fade             | 300ms |
+| 管理后台内部      | None             | 0ms   |
 
 **加载状态**：
 
@@ -1876,10 +1909,21 @@ const swup = new Swup({
 }
 
 @keyframes loading {
-  0% { transform: scaleX(0); transform-origin: left; }
-  50% { transform: scaleX(1); transform-origin: left; }
-  50.01% { transform-origin: right; }
-  100% { transform: scaleX(0); transform-origin: right; }
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  50.01% {
+    transform-origin: right;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
 }
 ```
 
@@ -1895,26 +1939,26 @@ const swup = new Swup({
 
 ### 4.1 技术栈
 
-| 技术类别 | 技术名称 | 版本 | 用途 | 说明 |
-|----------|----------|------|------|------|
-| **框架** | **Astro** | 5.x | 核心框架 | Islands Architecture |
-| **UI 库** | React | 18.x | Islands 交互组件 | 按需 hydration |
-| **语言** | TypeScript | 5.x | 类型安全的 JavaScript | strict 模式 |
-| **样式** | Tailwind CSS | 4.x | 原子化 CSS 框架 | PostCSS 集成 |
-| **认证** | **Auth.js** | Latest | 身份认证解决方案 | GitHub OAuth |
-| **组件** | Radix UI | Latest | 无障碍 UI 组件库 | shadcn/ui 基础 |
-| **图标** | Lucide React | Latest | 现代图标库 | - |
-| **数据获取** | **Astro 原生** | - | SSG/SSR 数据获取 | 🔄 移除 SWR |
-| **状态管理** | **Nano Stores** | Latest | UI 状态管理 | 🔄 Astro 原生 |
-| **表单** | **Astro Actions + Zod** | Latest | 表单处理与验证 | 类型安全 |
-| **拖拽** | **dnd-kit** | Latest | 拖拽排序功能 | 🔄 从 @hello-pangea/dnd 升级 |
-| **编辑器** | Monaco Editor | Latest | JSON 编辑器 | - |
-| **搜索** | **Fuse.js** | Latest | 模糊搜索解决方案 | + 优化配置 |
-| **图片** | Astro Image | Latest | 图片优化处理 | Sharp 服务端 |
-| **动画** | Swup | Latest | 页面过渡动画 |
-| **滚动条** | OverlayScrollbars | Latest | 自定义滚动条 |
-| **UI 设计** | shadcn/ui | Latest | UI 组件库 | React 组件库 |
-| **部署** | Vercel/Cloudflare | Latest | 边缘计算平台 | 混合渲染 |
+| 技术类别     | 技术名称                | 版本   | 用途                  | 说明                         |
+| ------------ | ----------------------- | ------ | --------------------- | ---------------------------- |
+| **框架**     | **Astro**               | 5.x    | 核心框架              | Islands Architecture         |
+| **UI 库**    | React                   | 18.x   | Islands 交互组件      | 按需 hydration               |
+| **语言**     | TypeScript              | 5.x    | 类型安全的 JavaScript | strict 模式                  |
+| **样式**     | Tailwind CSS            | 4.x    | 原子化 CSS 框架       | PostCSS 集成                 |
+| **认证**     | **Auth.js**             | Latest | 身份认证解决方案      | GitHub OAuth                 |
+| **组件**     | Radix UI                | Latest | 无障碍 UI 组件库      | shadcn/ui 基础               |
+| **图标**     | Lucide React            | Latest | 现代图标库            | -                            |
+| **数据获取** | **Astro 原生**          | -      | SSG/SSR 数据获取      | 🔄 移除 SWR                  |
+| **状态管理** | **Nano Stores**         | Latest | UI 状态管理           | 🔄 Astro 原生                |
+| **表单**     | **Astro Actions + Zod** | Latest | 表单处理与验证        | 类型安全                     |
+| **拖拽**     | **dnd-kit**             | Latest | 拖拽排序功能          | 🔄 从 @hello-pangea/dnd 升级 |
+| **编辑器**   | Monaco Editor           | Latest | JSON 编辑器           | -                            |
+| **搜索**     | **Fuse.js**             | Latest | 模糊搜索解决方案      | + 优化配置                   |
+| **图片**     | Astro Image             | Latest | 图片优化处理          | Sharp 服务端                 |
+| **动画**     | Swup                    | Latest | 页面过渡动画          |
+| **滚动条**   | OverlayScrollbars       | Latest | 自定义滚动条          |
+| **UI 设计**  | shadcn/ui               | Latest | UI 组件库             | React 组件库                 |
+| **部署**     | Vercel/Cloudflare       | Latest | 边缘计算平台          | 混合渲染                     |
 
 ---
 
@@ -1936,36 +1980,35 @@ FastNav 采用 **Astro Islands Architecture**（群岛架构）：
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-| 页面类型 | 渲染模式 | JavaScript |
-|----------|----------|------------|
+| 页面类型     | 渲染模式           | JavaScript           |
+| ------------ | ------------------ | -------------------- |
 | 首页（公开） | ISR (增量静态再生) | 仅搜索组件 (Fuse.js) |
-| 分类页面 | ISR | 仅搜索组件 |
-| 管理后台 | SSR (动态) | 完整 React |
-| 登录页 | SSG + 客户端 | 仅认证组件 |
+| 分类页面     | ISR                | 仅搜索组件           |
+| 管理后台     | SSR (动态)         | 完整 React           |
+| 登录页       | SSG + 客户端       | 仅认证组件           |
 
 **组件加载策略**
 
-| 策略 | 说明 | 使用场景 | 示例组件 |
-|------|------|----------|----------|
-| `client:load` | 页面加载时立即 hydration | 核心交互组件，需要立即可用 | SearchBar、ThemeToggle |
-| `client:idle` | 浏览器空闲时 hydration | 非关键交互组件，可以延迟 | DailyQuote、TimeDisplay |
-| `client:visible` | 组件进入视口时 hydration | 滚动后才可见的组件 | WidgetContainer、ContextMenu |
-| `client:media` | 匹配媒体查询时 hydration | 特定设备才需要的组件 | 移动端菜单 |
-| `client:only="react"` | 仅客户端渲染，无SSR | 依赖浏览器API的组件 | DragList、MonacoEditor |
+| 策略                  | 说明                     | 使用场景                   | 示例组件                     |
+| --------------------- | ------------------------ | -------------------------- | ---------------------------- |
+| `client:load`         | 页面加载时立即 hydration | 核心交互组件，需要立即可用 | SearchBar、ThemeToggle       |
+| `client:idle`         | 浏览器空闲时 hydration   | 非关键交互组件，可以延迟   | TimeDisplay                  |
+| `client:visible`      | 组件进入视口时 hydration | 滚动后才可见的组件         | WidgetContainer、ContextMenu |
+| `client:media`        | 匹配媒体查询时 hydration | 特定设备才需要的组件       | 移动端菜单                   |
+| `client:only="react"` | 仅客户端渲染，无SSR      | 依赖浏览器API的组件        | DragList、MonacoEditor       |
 
 **各模块组件加载策略**
 
-| 模块 | 组件 | 加载策略 | 说明 |
-|------|------|----------|------|
-| 导航展示 | SearchBar | `client:load` | 搜索功能需要立即可用 |
-| 导航展示 | ThemeToggle | `client:load` | 主题切换影响视觉体验 |
-| 导航展示 | DailyQuote | `client:idle` | 每日一言可延迟加载 |
-| 导航展示 | TimeDisplay | `client:idle` | 时间显示可延迟加载 |
-| 导航展示 | ContextMenu | `client:visible` | 右键菜单在滚动后加载 |
-| 卡片组件 | WidgetContainer | `client:visible` | 卡片容器在滚动后加载 |
-| 卡片组件 | ClockWidget | `client:visible` | 时钟卡片每秒刷新，按需加载 |
-| 管理后台 | DragList | `client:only` | 拖拽列表依赖DOM操作 |
-| 管理后台 | JsonEditor | `client:only` | Monaco编辑器仅客户端可用 |
+| 模块     | 组件            | 加载策略         | 说明                       |
+| -------- | --------------- | ---------------- | -------------------------- |
+| 导航展示 | SearchBar       | `client:load`    | 搜索功能需要立即可用       |
+| 导航展示 | ThemeToggle     | `client:load`    | 主题切换影响视觉体验       |
+| 导航展示 | TimeDisplay     | `client:idle`    | 时间显示可延迟加载         |
+| 导航展示 | ContextMenu     | `client:visible` | 右键菜单在滚动后加载       |
+| 卡片组件 | WidgetContainer | `client:visible` | 卡片容器在滚动后加载       |
+| 卡片组件 | ClockWidget     | `client:visible` | 时钟卡片每秒刷新，按需加载 |
+| 管理后台 | DragList        | `client:only`    | 拖拽列表依赖DOM操作        |
+| 管理后台 | JsonEditor      | `client:only`    | Monaco编辑器仅客户端可用   |
 
 ---
 
@@ -1985,7 +2028,6 @@ FastNav/
 │   │   │   │   ├── SearchBar.tsx
 │   │   │   │   ├── ThemeToggle.tsx
 │   │   │   │   ├── TimeDisplay.tsx
-│   │   │   │   ├── DailyQuote.tsx
 │   │   │   │   └── ContextMenu.tsx
 │   │   │   ├── widgets/        # 卡片组件
 │   │   │   │   ├── CountdownWidget.tsx
@@ -2152,7 +2194,7 @@ import type { APIRoute } from 'astro'
 export const GET: APIRoute = async ({ request }) => {
   const data = await getFileContent('FastNav/content/navigation.json')
   return new Response(JSON.stringify(data), {
-    headers: { 'Content-Type': 'application/json' }
+    headers: { 'Content-Type': 'application/json' },
   })
 }
 
@@ -2167,15 +2209,15 @@ export const POST: APIRoute = async ({ request }) => {
 }
 ```
 
-| 接口 | 方法 | 描述 | 认证 | 渲染模式 |
-|------|------|------|------|----------|
-| `/api/navigation` | GET | 获取导航数据 | 公开 | SSR |
-| `/api/navigation` | POST | 保存导航数据 | 需要 | SSR |
-| `/api/navigation` | PUT | 更新导航数据 | 需要 | SSR |
-| `/api/site` | GET | 获取站点配置 | 公开 | SSR |
-| `/api/site` | POST | 保存站点配置 | 需要 | SSR |
-| `/api/resource` | GET | 获取资源数据 | 公开 | SSR |
-| `/api/resource` | POST | 添加资源 | 需要 | SSR |
+| 接口              | 方法 | 描述         | 认证 | 渲染模式 |
+| ----------------- | ---- | ------------ | ---- | -------- |
+| `/api/navigation` | GET  | 获取导航数据 | 公开 | SSR      |
+| `/api/navigation` | POST | 保存导航数据 | 需要 | SSR      |
+| `/api/navigation` | PUT  | 更新导航数据 | 需要 | SSR      |
+| `/api/site`       | GET  | 获取站点配置 | 公开 | SSR      |
+| `/api/site`       | POST | 保存站点配置 | 需要 | SSR      |
+| `/api/resource`   | GET  | 获取资源数据 | 公开 | SSR      |
+| `/api/resource`   | POST | 添加资源     | 需要 | SSR      |
 
 ---
 
@@ -2225,21 +2267,21 @@ export default defineConfig({
     GitHub({
       clientId: import.meta.env.GITHUB_CLIENT_ID,
       clientSecret: import.meta.env.GITHUB_SECRET,
-      authorization: { params: { scope: 'repo' } }
-    })
+      authorization: { params: { scope: 'repo' } },
+    }),
   ],
   middleware: {
-    protect: ['/admin']
-  }
+    protect: ['/admin'],
+  },
 })
 ```
 
-| 功能 | 方案 | 说明 |
-|------|------|------|
-| OAuth 登录 | Auth.js + GitHub Provider | 请求 repo 权限 |
-| 会话管理 | Auth.js 内置 | JWT 存储 |
-| 路由保护 | Middleware | 保护 /admin 路径 |
-| 边缘支持 | Vercel Edge / Cloudflare | 适配器支持 |
+| 功能       | 方案                      | 说明             |
+| ---------- | ------------------------- | ---------------- |
+| OAuth 登录 | Auth.js + GitHub Provider | 请求 repo 权限   |
+| 会话管理   | Auth.js 内置              | JWT 存储         |
+| 路由保护   | Middleware                | 保护 /admin 路径 |
+| 边缘支持   | Vercel Edge / Cloudflare  | 适配器支持       |
 
 ---
 
@@ -2265,24 +2307,25 @@ export default defineConfig({
 
 **数据更新策略**
 
-| 场景 | 方案 | 说明 |
-|------|------|------|
-| 用户访问页面 | ISR缓存（300秒） | 5分钟内使用缓存，超时后后台重新生成 |
-| 管理后台修改数据 | API调用 | 实时更新GitHub仓库，同时清除ISR缓存 |
-| 客户端需要最新数据 | SWR轮询（60秒） | 每60秒检查数据更新，窗口聚焦时重新验证 |
-| 数据版本回滚 | Git操作 | 通过GitHub API恢复历史版本 |
+| 场景               | 方案             | 说明                                   |
+| ------------------ | ---------------- | -------------------------------------- |
+| 用户访问页面       | ISR缓存（300秒） | 5分钟内使用缓存，超时后后台重新生成    |
+| 管理后台修改数据   | API调用          | 实时更新GitHub仓库，同时清除ISR缓存    |
+| 客户端需要最新数据 | SWR轮询（60秒）  | 每60秒检查数据更新，窗口聚焦时重新验证 |
+| 数据版本回滚       | Git操作          | 通过GitHub API恢复历史版本             |
 
 **GitHub API速率限制优化**
 
-| 优化策略 | 说明 |
-|----------|------|
-| ISR时间调整 | 从60秒改为300秒，减少80%的API调用 |
+| 优化策略    | 说明                                |
+| ----------- | ----------------------------------- |
+| ISR时间调整 | 从60秒改为300秒，减少80%的API调用   |
 | SWR时间调整 | 从30秒改为60秒，减少50%的客户端轮询 |
-| 请求去重 | 相同请求在1秒内只发送一次 |
-| 缓存共享 | 多个用户共享ISR缓存，而非各自请求 |
-| 速率监控 | 记录API调用次数，接近限制时告警 |
+| 请求去重    | 相同请求在1秒内只发送一次           |
+| 缓存共享    | 多个用户共享ISR缓存，而非各自请求   |
+| 速率监控    | 记录API调用次数，接近限制时告警     |
 
 **GitHub API限制说明**：
+
 - 认证用户：5000次/小时
 - 未认证用户：60次/小时
 - 建议保留20%余量，实际使用上限4000次/小时
@@ -2337,15 +2380,151 @@ your-data-repo/
           "href": "https://analytics.google.com/",
           "description": "Google分析服务",
           "icon": "/assets/images/logos/analytics.webp",
-          "enabled": true
+          "enabled": true,
+          "order": 0
         }
       ],
-      "subCategories": [],
-      "enabled": true
+      "subCategories": [
+        {
+          "id": "1_sub1",
+          "title": "搜索引擎",
+          "items": [
+            {
+              "id": "1_sub1_1",
+              "title": "Google",
+              "href": "https://www.google.com",
+              "description": "Google搜索",
+              "enabled": true,
+              "order": 0
+            },
+            {
+              "id": "1_sub1_2",
+              "title": "Bing",
+              "href": "https://www.bing.com",
+              "description": "Bing搜索",
+              "enabled": true,
+              "order": 1
+            }
+          ],
+          "enabled": true,
+          "order": 0
+        }
+      ],
+      "enabled": true,
+      "order": 0
+    },
+    {
+      "id": "2",
+      "title": "设计资源",
+      "icon": "Palette",
+      "items": [],
+      "subCategories": [
+        {
+          "id": "2_sub1",
+          "title": "UI设计",
+          "items": [
+            {
+              "id": "2_sub1_1",
+              "title": "Figma",
+              "href": "https://www.figma.com",
+              "description": "协作设计工具",
+              "enabled": true,
+              "order": 0
+            },
+            {
+              "id": "2_sub1_2",
+              "title": "Sketch",
+              "href": "https://www.sketch.com",
+              "description": "Mac设计工具",
+              "enabled": true,
+              "order": 1
+            }
+          ],
+          "enabled": true,
+          "order": 0
+        },
+        {
+          "id": "2_sub2",
+          "title": "图标素材",
+          "items": [
+            {
+              "id": "2_sub2_1",
+              "title": "Lucide Icons",
+              "href": "https://lucide.dev",
+              "description": "开源图标库",
+              "enabled": true,
+              "order": 0
+            }
+          ],
+          "enabled": true,
+          "order": 1
+        }
+      ],
+      "enabled": true,
+      "order": 1
+    },
+    {
+      "id": "3",
+      "title": "开发工具",
+      "icon": "Code",
+      "items": [
+        {
+          "id": "3_1",
+          "title": "GitHub",
+          "href": "https://github.com",
+          "description": "代码托管平台",
+          "enabled": true,
+          "order": 0
+        }
+      ],
+      "subCategories": [
+        {
+          "id": "3_sub1",
+          "title": "前端框架",
+          "items": [
+            {
+              "id": "3_sub1_1",
+              "title": "React",
+              "href": "https://react.dev",
+              "description": "React官方文档",
+              "enabled": true,
+              "order": 0
+            },
+            {
+              "id": "3_sub1_2",
+              "title": "Vue",
+              "href": "https://vuejs.org",
+              "description": "Vue官方文档",
+              "enabled": true,
+              "order": 1
+            },
+            {
+              "id": "3_sub1_3",
+              "title": "Astro",
+              "href": "https://astro.build",
+              "description": "Astro官方文档",
+              "enabled": true,
+              "order": 2
+            }
+          ],
+          "enabled": true,
+          "order": 0
+        }
+      ],
+      "enabled": true,
+      "order": 2
     }
   ]
 }
 ```
+
+**测试数据说明**：
+
+- 包含3个一级分类（常用推荐、设计资源、开发工具）
+- 每个一级分类下有0-2个二级分类
+- 一级分类下可直接包含项目（items）
+- 二级分类下也包含项目（items）
+- 测试数据覆盖了各种场景：有项目无子分类、有子分类无项目、同时有项目和子分类
 
 #### site.json
 
@@ -2382,20 +2561,13 @@ your-data-repo/
       }
     ]
   },
-  "dailyQuote": {
-    "enabled": true,
-    "quotes": [
-      "今日事，今日毕",
-      "每天进步一点点",
-      "坚持就是胜利",
-      "热爱可抵岁月漫长"
-    ]
-  },
   "contextMenu": {
     "enabled": true
   }
 }
 ```
+
+**说明**：每日一言配置已移除（静态页面不支持动态修改）
 
 #### widget.json
 
@@ -2476,9 +2648,9 @@ export default defineConfig({
       origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:4321'],
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       credentials: true,
-      allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token']
-    }
-  }
+      allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
+    },
+  },
 })
 ```
 
@@ -2486,9 +2658,9 @@ export default defineConfig({
 
 ```typescript
 const rateLimitConfig = {
-  windowMs: 60 * 1000,  // 1分钟窗口
-  maxRequests: 60,       // 最大请求数
-  message: 'Too many requests, please try again later.'
+  windowMs: 60 * 1000, // 1分钟窗口
+  maxRequests: 60, // 最大请求数
+  message: 'Too many requests, please try again later.',
 }
 ```
 
@@ -2507,6 +2679,7 @@ const rateLimitConfig = {
 ### 8.1 全局错误边界
 
 **Astro错误页面**：
+
 - `src/pages/404.astro` - 404页面未找到
 - `src/pages/500.astro` - 500服务器错误
 
@@ -2554,10 +2727,10 @@ class ErrorBoundary extends Component<Props, State> {
 interface ApiErrorResponse {
   success: false
   error: {
-    code: string           // 错误代码
-    message: string        // 用户友好的错误消息
-    details?: string       // 开发者调试信息
-    timestamp: string      // 错误发生时间
+    code: string // 错误代码
+    message: string // 用户友好的错误消息
+    details?: string // 开发者调试信息
+    timestamp: string // 错误发生时间
   }
 }
 
@@ -2569,42 +2742,39 @@ interface ApiSuccessResponse<T> {
 
 **错误代码定义**：
 
-| 错误代码 | HTTP状态码 | 描述 |
-|----------|------------|------|
-| `AUTH_REQUIRED` | 401 | 需要认证 |
-| `AUTH_INVALID` | 401 | 认证无效 |
-| `AUTH_EXPIRED` | 401 | 会话已过期 |
-| `FORBIDDEN` | 403 | 无权限访问 |
-| `NOT_FOUND` | 404 | 资源不存在 |
-| `VALIDATION_ERROR` | 400 | 数据验证失败 |
-| `RATE_LIMITED` | 429 | 请求过于频繁 |
-| `INTERNAL_ERROR` | 500 | 服务器内部错误 |
-| `GITHUB_API_ERROR` | 502 | GitHub API调用失败 |
+| 错误代码           | HTTP状态码 | 描述               |
+| ------------------ | ---------- | ------------------ |
+| `AUTH_REQUIRED`    | 401        | 需要认证           |
+| `AUTH_INVALID`     | 401        | 认证无效           |
+| `AUTH_EXPIRED`     | 401        | 会话已过期         |
+| `FORBIDDEN`        | 403        | 无权限访问         |
+| `NOT_FOUND`        | 404        | 资源不存在         |
+| `VALIDATION_ERROR` | 400        | 数据验证失败       |
+| `RATE_LIMITED`     | 429        | 请求过于频繁       |
+| `INTERNAL_ERROR`   | 500        | 服务器内部错误     |
+| `GITHUB_API_ERROR` | 502        | GitHub API调用失败 |
 
 ### 8.3 网络请求重试策略
 
 ```typescript
 interface RetryConfig {
-  maxRetries: number       // 最大重试次数
-  baseDelay: number        // 基础延迟（毫秒）
-  maxDelay: number         // 最大延迟（毫秒）
-  backoffFactor: number    // 退避因子
+  maxRetries: number // 最大重试次数
+  baseDelay: number // 基础延迟（毫秒）
+  maxDelay: number // 最大延迟（毫秒）
+  backoffFactor: number // 退避因子
 }
 
 const defaultRetryConfig: RetryConfig = {
   maxRetries: 3,
   baseDelay: 1000,
   maxDelay: 5000,
-  backoffFactor: 2
+  backoffFactor: 2,
 }
 
-async function withRetry<T>(
-  fn: () => Promise<T>,
-  config: Partial<RetryConfig> = {}
-): Promise<T> {
+async function withRetry<T>(fn: () => Promise<T>, config: Partial<RetryConfig> = {}): Promise<T> {
   const { maxRetries, baseDelay, maxDelay, backoffFactor } = {
     ...defaultRetryConfig,
-    ...config
+    ...config,
   }
 
   let lastError: Error | undefined
@@ -2614,13 +2784,10 @@ async function withRetry<T>(
       return await fn()
     } catch (error) {
       lastError = error as Error
-      
+
       if (attempt < maxRetries) {
-        const delay = Math.min(
-          baseDelay * Math.pow(backoffFactor, attempt),
-          maxDelay
-        )
-        await new Promise(resolve => setTimeout(resolve, delay))
+        const delay = Math.min(baseDelay * Math.pow(backoffFactor, attempt), maxDelay)
+        await new Promise((resolve) => setTimeout(resolve, delay))
       }
     }
   }
@@ -2639,14 +2806,14 @@ import toast from 'react-hot-toast'
 function showApiError(error: ApiErrorResponse['error']) {
   toast.error(error.message, {
     duration: 4000,
-    position: 'top-right'
+    position: 'top-right',
   })
 }
 
 function showSuccess(message: string) {
   toast.success(message, {
     duration: 3000,
-    position: 'top-right'
+    position: 'top-right',
   })
 }
 ```
@@ -2657,16 +2824,16 @@ function showSuccess(message: string) {
 
 ### 9.1 前端优化
 
-| 优化项 | 方案 | 收益 |
-|--------|------|------|
-| **静态页面** | 首页 ISR (增量静态再生) | JS 量减少 80%+ |
-| **Islands 策略** | 按需 hydration | 首屏 JS 减少 |
-| **数据获取** | Astro 原生 SSR + SWR缓存 | 实时性与性能平衡 |
-| **搜索优化** | Fuse.js 预索引 + 字段权重 | 搜索性能提升 |
-| **图片优化** | Astro Image (Sharp) | 自动 WebP |
-| **预获取** | `prefetch: true` | 导航速度提升 |
-| **代码分割** | 自动按路由分割 | 加载更快 |
-| **状态管理** | Nano Stores | 极小体积，跨 Islands 共享 |
+| 优化项           | 方案                      | 收益                      |
+| ---------------- | ------------------------- | ------------------------- |
+| **静态页面**     | 首页 ISR (增量静态再生)   | JS 量减少 80%+            |
+| **Islands 策略** | 按需 hydration            | 首屏 JS 减少              |
+| **数据获取**     | Astro 原生 SSR + SWR缓存  | 实时性与性能平衡          |
+| **搜索优化**     | Fuse.js 预索引 + 字段权重 | 搜索性能提升              |
+| **图片优化**     | Astro Image (Sharp)       | 自动 WebP                 |
+| **预获取**       | `prefetch: true`          | 导航速度提升              |
+| **代码分割**     | 自动按路由分割            | 加载更快                  |
+| **状态管理**     | Nano Stores               | 极小体积，跨 Islands 共享 |
 
 ### 9.2 后端优化
 
@@ -2687,11 +2854,11 @@ function showSuccess(message: string) {
 
 ### 10.1 开发环境
 
-| 环境 | 要求 |
-|------|------|
-| Node.js | >= 20.0.0 |
-| pnpm | >= 8.0.0（推荐）|
-| Git | 最新版本 |
+| 环境    | 要求             |
+| ------- | ---------------- |
+| Node.js | >= 20.0.0        |
+| pnpm    | >= 8.0.0（推荐） |
+| Git     | 最新版本         |
 
 ### 10.2 项目初始化
 
@@ -2713,11 +2880,11 @@ pnpm add -D tailwindcss postcss autoprefixer
 
 **脚手架选项说明**：
 
-| 选项 | 说明 |
-|------|------|
-| `--template basics` | 使用基础模板 |
-| `--install` | 自动安装依赖 |
-| `--git` | 初始化 Git 仓库 |
+| 选项                  | 说明                |
+| --------------------- | ------------------- |
+| `--template basics`   | 使用基础模板        |
+| `--install`           | 自动安装依赖        |
+| `--git`               | 初始化 Git 仓库     |
 | `--typescript strict` | 启用严格 TypeScript |
 
 ---
@@ -2726,36 +2893,36 @@ pnpm add -D tailwindcss postcss autoprefixer
 
 ### 11.1 功能验收
 
-| 功能 | 验收条件 |
-|------|----------|
-| 用户登录 | GitHub OAuth 登录成功 |
-| 导航展示 | 所有分类和项目正确展示（ISR）|
-| 搜索功能 | 搜索结果准确、实时（Fuse.js）|
-| 主题切换 | 主题切换正常、数据持久化 |
-| 分类管理 | CRUD 操作正常（API 端点）|
-| 项目管理 | CRUD 操作正常 |
-| 拖拽排序 | 排序结果正确保存（乐观更新）|
-| 站点配置 | 配置正确应用 |
-| 错误处理 | 错误边界和Toast通知正常 |
+| 功能     | 验收条件                      |
+| -------- | ----------------------------- |
+| 用户登录 | GitHub OAuth 登录成功         |
+| 导航展示 | 所有分类和项目正确展示（ISR） |
+| 搜索功能 | 搜索结果准确、实时（Fuse.js） |
+| 主题切换 | 主题切换正常、数据持久化      |
+| 分类管理 | CRUD 操作正常（API 端点）     |
+| 项目管理 | CRUD 操作正常                 |
+| 拖拽排序 | 排序结果正确保存（乐观更新）  |
+| 站点配置 | 配置正确应用                  |
+| 错误处理 | 错误边界和Toast通知正常       |
 
 ### 11.2 性能验收
 
-| 指标 | 目标值 | 说明 |
-|------|--------|------|
-| 首次加载时间 | < 1s | 静态页面优势 |
-| 首屏 JS 体积 | < 30KB | Islands 按需加载 |
-| API 响应时间 | < 300ms | 边缘计算加速 |
-| Lighthouse 评分 | > 95 | Astro 静态生成 |
-| 搜索响应时间 | < 100ms | 客户端优化 |
+| 指标            | 目标值  | 说明             |
+| --------------- | ------- | ---------------- |
+| 首次加载时间    | < 1s    | 静态页面优势     |
+| 首屏 JS 体积    | < 30KB  | Islands 按需加载 |
+| API 响应时间    | < 300ms | 边缘计算加速     |
+| Lighthouse 评分 | > 95    | Astro 静态生成   |
+| 搜索响应时间    | < 100ms | 客户端优化       |
 
 ### 11.3 兼容性验收
 
-| 浏览器 | 支持版本 |
-|--------|----------|
-| Chrome | 最新 2 版本 |
+| 浏览器  | 支持版本    |
+| ------- | ----------- |
+| Chrome  | 最新 2 版本 |
 | Firefox | 最新 2 版本 |
-| Safari | 最新 2 版本 |
-| Edge | 最新 2 版本 |
+| Safari  | 最新 2 版本 |
+| Edge    | 最新 2 版本 |
 
 ---
 
@@ -2763,14 +2930,14 @@ pnpm add -D tailwindcss postcss autoprefixer
 
 FastNav 基于 Astro 5.x 构建，具有以下技术特点：
 
-| 特性 | 说明 |
-|------|------|
+| 特性             | 说明                                           |
+| ---------------- | ---------------------------------------------- |
 | **Islands 架构** | 静态页面为主，交互组件按需加载，首屏 JS < 30KB |
-| **ISR 渲染** | 首页 ISR 增量静态再生，管理后台 SSR 动态渲染 |
-| **边缘部署** | 原生支持 Vercel/Cloudflare 边缘计算 |
-| **构建速度** | Vite 编译器，快速热更新 |
-| **类型安全** | TypeScript strict 模式 + Zod 验证 |
-| **状态管理** | Nano Stores + SWR 组合方案 |
+| **ISR 渲染**     | 首页 ISR 增量静态再生，管理后台 SSR 动态渲染   |
+| **边缘部署**     | 原生支持 Vercel/Cloudflare 边缘计算            |
+| **构建速度**     | Vite 编译器，快速热更新                        |
+| **类型安全**     | TypeScript strict 模式 + Zod 验证              |
+| **状态管理**     | Nano Stores + SWR 组合方案                     |
 
 ---
 
@@ -2780,13 +2947,13 @@ FastNav 基于 Astro 5.x 构建，具有以下技术特点：
 
 ### 13.1 个性化定制功能
 
-| 功能 | 描述 | 优先级 | 说明 |
-|------|------|--------|------|
-| **自定义背景图片** | 用户可上传并设置页面背景图片 | P3 | 需考虑图片加载性能 |
-| **自定义鼠标样式** | 支持自定义鼠标光标样式 | P3 | CSS cursor 自定义 |
-| **鼠标点击特效** | 点击时的粒子/波纹特效 | P3 | 可能影响性能 |
-| **自定义卡片背景** | 导航卡片支持自定义背景颜色 | P2 | 可在站点配置中添加 |
-| **自定义 CSS** | 支持用户自定义 CSS 样式 | P3 | 需考虑安全性 |
+| 功能               | 描述                         | 优先级 | 说明               |
+| ------------------ | ---------------------------- | ------ | ------------------ |
+| **自定义背景图片** | 用户可上传并设置页面背景图片 | P3     | 需考虑图片加载性能 |
+| **自定义鼠标样式** | 支持自定义鼠标光标样式       | P3     | CSS cursor 自定义  |
+| **鼠标点击特效**   | 点击时的粒子/波纹特效        | P3     | 可能影响性能       |
+| **自定义卡片背景** | 导航卡片支持自定义背景颜色   | P2     | 可在站点配置中添加 |
+| **自定义 CSS**     | 支持用户自定义 CSS 样式      | P3     | 需考虑安全性       |
 
 ### 13.2 自定义卡片背景设计
 
@@ -2794,12 +2961,12 @@ FastNav 基于 Astro 5.x 构建，具有以下技术特点：
 
 ```typescript
 interface CardStyle {
-  backgroundColor?: string        // 背景色
-  backgroundImage?: string        // 背景图片
-  backgroundOpacity?: number      // 背景透明度
-  textColor?: string             // 文字颜色
-  borderRadius?: number          // 圆角大小
-  hoverEffect?: 'default' | 'glass' | 'lift' | 'tilt'  // 悬停效果
+  backgroundColor?: string // 背景色
+  backgroundImage?: string // 背景图片
+  backgroundOpacity?: number // 背景透明度
+  textColor?: string // 文字颜色
+  borderRadius?: number // 圆角大小
+  hoverEffect?: 'default' | 'glass' | 'lift' | 'tilt' // 悬停效果
 }
 ```
 
@@ -2825,12 +2992,12 @@ interface CardStyle {
 
 **预设样式模板**
 
-| 模板名称 | 描述 |
-|----------|------|
-| 简约白 | 白色背景，简洁风格 |
-| 暗夜黑 | 深色背景，护眼模式 |
-| 渐变彩 | 彩色渐变背景 |
-| 毛玻璃 | 毛玻璃效果风格 |
+| 模板名称 | 描述               |
+| -------- | ------------------ |
+| 简约白   | 白色背景，简洁风格 |
+| 暗夜黑   | 深色背景，护眼模式 |
+| 渐变彩   | 彩色渐变背景       |
+| 毛玻璃   | 毛玻璃效果风格     |
 
 ---
 
@@ -2841,6 +3008,7 @@ interface CardStyle {
 每次小阶段TODO完成后必须执行 git commit 和 git push。
 
 **提交信息格式：**
+
 ```
 <type>(<scope>): <description>
 
@@ -2851,17 +3019,18 @@ interface CardStyle {
 
 **Type 类型：**
 
-| 类型 | 说明 |
-|------|------|
-| feat | 新功能 |
-| fix | Bug 修复 |
-| docs | 文档更新 |
-| style | 样式调整 |
-| refactor | 代码重构 |
-| test | 测试相关 |
-| chore | 构建/工具 |
+| 类型     | 说明      |
+| -------- | --------- |
+| feat     | 新功能    |
+| fix      | Bug 修复  |
+| docs     | 文档更新  |
+| style    | 样式调整  |
+| refactor | 代码重构  |
+| test     | 测试相关  |
+| chore    | 构建/工具 |
 
 **提交示例：**
+
 ```bash
 # 添加网络搜索栏功能
 git commit -m "feat: add search engine component with bing/google switch"
@@ -2877,19 +3046,21 @@ git commit -m "style: implement material design 3 color system"
 
 **工具版本统一**
 
-| 工具 | 版本 | 配置文件 |
-|------|------|----------|
-| Node.js | >= 22.0.0 | `.nvmrc` |
-| pnpm | >= 9.0.0 | `package.json` |
-| TypeScript | 5.x | `tsconfig.json` |
-| Astro | 5.x | `package.json` |
+| 工具       | 版本      | 配置文件        |
+| ---------- | --------- | --------------- |
+| Node.js    | >= 22.0.0 | `.nvmrc`        |
+| pnpm       | >= 9.0.0  | `package.json`  |
+| TypeScript | 5.x       | `tsconfig.json` |
+| Astro      | 5.x       | `package.json`  |
 
 **`.nvmrc` 文件内容**：
+
 ```
 v22.14.0
 ```
 
 **`package.json` 版本锁定**：
+
 ```json
 {
   "engines": {
@@ -2903,17 +3074,16 @@ v22.14.0
 **ESLint 配置**
 
 安装依赖：
+
 ```bash
 pnpm add -D eslint @astrojs/eslint-config eslint-plugin-astro
 ```
 
 **`.eslintrc.json` 配置**：
+
 ```json
 {
-  "extends": [
-    "@astrojs/eslint-config",
-    "plugin:astro/recommended"
-  ],
+  "extends": ["@astrojs/eslint-config", "plugin:astro/recommended"],
   "rules": {
     "no-console": "warn",
     "no-unused-vars": "error",
@@ -2931,11 +3101,13 @@ pnpm add -D eslint @astrojs/eslint-config eslint-plugin-astro
 **Prettier 配置**
 
 安装依赖：
+
 ```bash
 pnpm add -D prettier prettier-plugin-astro
 ```
 
 **`.prettierrc` 配置**：
+
 ```json
 {
   "semi": false,
@@ -2958,32 +3130,31 @@ pnpm add -D prettier prettier-plugin-astro
 **Husky + lint-staged 配置**
 
 安装依赖：
+
 ```bash
 pnpm add -D husky lint-staged
 npx husky init
 ```
 
 **`.husky/pre-commit` 文件**：
+
 ```bash
 pnpm lint-staged
 ```
 
 **`package.json` 添加 lint-staged 配置**：
+
 ```json
 {
   "lint-staged": {
-    "*.{js,ts,tsx,astro}": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.{css,md,json}": [
-      "prettier --write"
-    ]
+    "*.{js,ts,tsx,astro}": ["eslint --fix", "prettier --write"],
+    "*.{css,md,json}": ["prettier --write"]
   }
 }
 ```
 
 **package.json scripts 配置**：
+
 ```json
 {
   "scripts": {
@@ -3004,38 +3175,38 @@ pnpm lint-staged
 
 **组件文件**
 
-| 文件类型 | 命名规范 | 示例 |
-|----------|----------|------|
-| Astro 组件 | PascalCase | `NavigationCard.astro` |
-| React 组件 | PascalCase | `SearchBar.tsx` |
-| 组件测试 | 组件名.test.tsx | `SearchBar.test.tsx` |
-| 组件样式 | 组件名.css | `SearchBar.css` |
+| 文件类型   | 命名规范        | 示例                   |
+| ---------- | --------------- | ---------------------- |
+| Astro 组件 | PascalCase      | `NavigationCard.astro` |
+| React 组件 | PascalCase      | `SearchBar.tsx`        |
+| 组件测试   | 组件名.test.tsx | `SearchBar.test.tsx`   |
+| 组件样式   | 组件名.css      | `SearchBar.css`        |
 
 **页面文件**
 
-| 文件类型 | 命名规范 | 示例 |
-|----------|----------|------|
-| 静态页面 | kebab-case | `sign-in.astro` |
-| 动态路由 | `[param].astro` | `[id].astro` |
-| API 路由 | kebab-case | `check-references.ts` |
+| 文件类型 | 命名规范        | 示例                  |
+| -------- | --------------- | --------------------- |
+| 静态页面 | kebab-case      | `sign-in.astro`       |
+| 动态路由 | `[param].astro` | `[id].astro`          |
+| API 路由 | kebab-case      | `check-references.ts` |
 
 **工具文件**
 
-| 文件类型 | 命名规范 | 示例 |
-|----------|----------|------|
-| 工具函数 | camelCase | `formatDate.ts` |
-| 常量文件 | camelCase | `apiRoutes.ts` |
-| 类型定义 | PascalCase | `Navigation.ts` |
-| Hooks | use + PascalCase | `useSearch.ts` |
-| Stores | camelCase | `navigation.ts` |
+| 文件类型 | 命名规范         | 示例            |
+| -------- | ---------------- | --------------- |
+| 工具函数 | camelCase        | `formatDate.ts` |
+| 常量文件 | camelCase        | `apiRoutes.ts`  |
+| 类型定义 | PascalCase       | `Navigation.ts` |
+| Hooks    | use + PascalCase | `useSearch.ts`  |
+| Stores   | camelCase        | `navigation.ts` |
 
 **样式文件**
 
-| 文件类型 | 命名规范 | 示例 |
-|----------|----------|------|
-| 全局样式 | 描述性名称 | `global.css` |
-| 主题文件 | theme-模式.css | `theme-light.css` |
-| MD3 样式 | 描述性名称 | `material-design.css` |
+| 文件类型 | 命名规范       | 示例                  |
+| -------- | -------------- | --------------------- |
+| 全局样式 | 描述性名称     | `global.css`          |
+| 主题文件 | theme-模式.css | `theme-light.css`     |
+| MD3 样式 | 描述性名称     | `material-design.css` |
 
 ### 14.4 组件 Props 命名规范
 
@@ -3068,18 +3239,18 @@ interface ButtonProps {
 
 ### 15.1 术语表
 
-| 术语 | 定义 |
-|------|------|
-| PRD | 产品需求文档 |
-| OAuth | 开放授权协议 |
-| SSG | 静态网站生成 |
-| SSR | 服务器端渲染 |
-| ISR | 增量静态再生 |
-| SWR | 客户端数据缓存（stale-while-revalidate）|
-| Islands | Astro Islands 架构 |
-| API Route | Astro API 端点 |
-| Nano Stores | Astro 原生轻量状态管理 |
-| Zod | TypeScript 数据验证库 |
+| 术语        | 定义                                     |
+| ----------- | ---------------------------------------- |
+| PRD         | 产品需求文档                             |
+| OAuth       | 开放授权协议                             |
+| SSG         | 静态网站生成                             |
+| SSR         | 服务器端渲染                             |
+| ISR         | 增量静态再生                             |
+| SWR         | 客户端数据缓存（stale-while-revalidate） |
+| Islands     | Astro Islands 架构                       |
+| API Route   | Astro API 端点                           |
+| Nano Stores | Astro 原生轻量状态管理                   |
+| Zod         | TypeScript 数据验证库                    |
 
 ### 15.2 参考资料
 
@@ -3092,6 +3263,6 @@ interface ButtonProps {
 
 ---
 
-*文档版本：2.0.0*
-*最后更新：2026年3月28日*
-*变更说明：技术框架从 Next.js 升级为 Astro 5.x，采用 Islands Architecture 架构；UI 设计采用 Google Material Design 3 风格；新增卡片组件、网络搜索栏、每日一言、分类独立页面等功能；增加后续规划（自定义背景、鼠标样式、卡片样式等）；增加开发规范（代码提交规范）*
+_文档版本：2.0.0_
+_最后更新：2026年3月29日_
+_变更说明：技术框架从 Next.js 升级为 Astro 5.x，采用 Islands Architecture 架构；UI 设计采用 Google Material Design 3 风格；新增卡片组件、网络搜索栏、分类独立页面等功能；增加后续规划（自定义背景、鼠标样式、卡片样式等）；增加开发规范（代码提交规范）；优化侧边栏分类展示（一级分类直接展示可展开）；调整时间日期显示（固定居中靠上方，时间加粗）；增加源码跳转按钮；移除底部Power字样标注；移除每日一言功能（静态页面不支持动态修改）_

@@ -2,7 +2,6 @@
 import Layout from '../../layouts/Layout.astro'
 import Sidebar from '../../components/astro/Sidebar.astro'
 import Header from '../../components/astro/Header.astro'
-import Footer from '../../components/astro/Footer.astro'
 import type { NavigationData } from '../../types'
 
 export const prerender = false
@@ -10,87 +9,106 @@ export const prerender = false
 // 本地加载导航数据
 import navigationJson from '../../data/navigation.json'
 const navigationData: NavigationData = navigationJson
-const categories = navigationData.navigationItems.filter(item => item.enabled)
+const categories = navigationData.navigationItems.filter((item) => item.enabled)
 
 const { id } = Astro.params
 
 // 查找当前分类
-const currentCategory = categories.find(item => item.id === id)
+const currentCategory = categories.find((item) => item.id === id)
 const activeCategory = id || categories[0]?.id || ''
 ---
 
 <Layout title={currentCategory ? `${currentCategory.title} - FastNav` : 'FastNav'}>
   <Sidebar categories={categories} activeCategory={activeCategory} />
   <Header />
-  
+
   <main class="main-content">
     <div class="main-content__inner">
       <h1 class="category-title">{currentCategory?.title || '分类'}</h1>
-      
+
       <div class="nav-grid">
-        {currentCategory?.items
-          ?.filter(item => item.enabled)
-          .sort((a, b) => a.order - b.order)
-          .map(item => (
-            <a href={item.href} target="_blank" class="nav-card nav-card--lift">
-              <div class="nav-card__icon">
-                <img src={item.icon || '/assets/images/default-icon.svg'} alt={item.title} width="24" height="24" loading="lazy" />
-              </div>
-              <div class="nav-card__content">
-                <h3 class="nav-card__title">{item.title}</h3>
-                {item.description && (
-                  <p class="nav-card__description">{item.description}</p>
-                )}
-              </div>
-            </a>
-          ))}
+        {
+          currentCategory?.items
+            ?.filter((item) => item.enabled)
+            .sort((a, b) => a.order - b.order)
+            .map((item) => (
+              <a href={item.href} target="_blank" class="nav-card nav-card--lift">
+                <div class="nav-card__icon">
+                  <img
+                    src={item.icon || '/assets/images/default-icon.svg'}
+                    alt={item.title}
+                    width="24"
+                    height="24"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="nav-card__content">
+                  <h3 class="nav-card__title">{item.title}</h3>
+                  {item.description && <p class="nav-card__description">{item.description}</p>}
+                </div>
+              </a>
+            ))
+        }
       </div>
 
-      {currentCategory?.subCategories?.map(subCat => (
-        <div class="subcategory">
-          <h2 class="subcategory__title">{subCat.title}</h2>
-          <div class="nav-grid">
-            {subCat.items
-              .filter(item => item.enabled)
-              .sort((a, b) => a.order - b.order)
-              .map(item => (
-                <a href={item.href} target="_blank" class="nav-card nav-card--lift">
-                  <div class="nav-card__icon">
-                    <img src={item.icon || '/assets/images/default-icon.svg'} alt={item.title} width="24" height="24" loading="lazy" />
-                  </div>
-                  <div class="nav-card__content">
-                    <h3 class="nav-card__title">{item.title}</h3>
-                    {item.description && (
-                      <p class="nav-card__description">{item.description}</p>
-                    )}
-                  </div>
-                </a>
-              ))}
+      {
+        currentCategory?.subCategories?.map((subCat) => (
+          <div class="subcategory">
+            <h2 class="subcategory__title">{subCat.title}</h2>
+            <div class="nav-grid">
+              {subCat.items
+                .filter((item) => item.enabled)
+                .sort((a, b) => a.order - b.order)
+                .map((item) => (
+                  <a href={item.href} target="_blank" class="nav-card nav-card--lift">
+                    <div class="nav-card__icon">
+                      <img
+                        src={item.icon || '/assets/images/default-icon.svg'}
+                        alt={item.title}
+                        width="24"
+                        height="24"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="nav-card__content">
+                      <h3 class="nav-card__title">{item.title}</h3>
+                      {item.description && <p class="nav-card__description">{item.description}</p>}
+                    </div>
+                  </a>
+                ))}
+            </div>
           </div>
-        </div>
-      ))}
-      
-      {(!currentCategory?.items?.length && !currentCategory?.subCategories?.length) && (
-        <div class="empty-state">
-          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-          </svg>
-          <p>暂无导航项目</p>
-          <span>点击管理后台添加项目</span>
-        </div>
-      )}
+        ))
+      }
+
+      {
+        !currentCategory?.items?.length && !currentCategory?.subCategories?.length && (
+          <div class="empty-state">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="64"
+              height="64"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1"
+            >
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+            </svg>
+            <p>暂无导航项目</p>
+            <span>点击管理后台添加项目</span>
+          </div>
+        )
+      }
     </div>
   </main>
-  
-  <Footer />
 </Layout>
 
 <style>
   .main-content {
     margin-left: 240px;
     margin-top: 72px;
-    margin-bottom: 48px;
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 72px);
     padding: 24px;
   }
 
