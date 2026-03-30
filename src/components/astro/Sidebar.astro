@@ -206,10 +206,10 @@ const { categories, activeCategory } = Astro.props
 
   .sidebar__search-result-item {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    padding: 12px 14px;
-    border-radius: 12px;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 16px;
     background: var(--surface-container);
     text-decoration: none;
   }
@@ -220,12 +220,12 @@ const { categories, activeCategory } = Astro.props
   }
 
   .sidebar__search-result-content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    flex: 1;
+    min-width: 0;
   }
 
   .sidebar__search-result-title {
+    margin: 0;
     font-size: 14px;
     font-weight: 500;
     color: var(--on-surface);
@@ -235,12 +235,12 @@ const { categories, activeCategory } = Astro.props
   }
 
   .sidebar__search-result-category {
+    margin-top: 4px;
     font-size: 12px;
     color: var(--on-surface-variant);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    text-align: right;
   }
 
   .sidebar__nav {
@@ -463,8 +463,8 @@ const { categories, activeCategory } = Astro.props
         (item) => `
       <a href="${item.href}" target="_blank" class="sidebar__search-result-item">
         <div class="sidebar__search-result-content">
-          <span class="sidebar__search-result-title">${item.title}</span>
-          <span class="sidebar__search-result-category">${item.category}</span>
+          <h3 class="sidebar__search-result-title">${item.title}</h3>
+          <p class="sidebar__search-result-category">${item.category}</p>
         </div>
       </a>
     `
