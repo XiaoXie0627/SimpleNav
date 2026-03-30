@@ -235,15 +235,17 @@ const activeCategory = id || categories[0]?.id || ''
     }
 
     .nav-grid {
-      grid-template-columns: 1fr;
-      gap: 8px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
     }
 
     .nav-card {
-      padding: 3px;
-      min-height: 24px;
-      gap: 4px;
+      padding: 6px;
+      min-height: 28px;
+      gap: 8px;
       border-radius: 6px;
+      flex-direction: column;
+      text-align: center;
     }
 
     .nav-card__icon {
@@ -253,12 +255,12 @@ const activeCategory = id || categories[0]?.id || ''
     }
 
     .nav-card__title {
-      font-size: 10px;
+      font-size: 12px;
     }
 
     .nav-card__description {
       font-size: 9px;
-      margin-top: 0;
+      margin-top: 2px;
     }
   }
 </style>
