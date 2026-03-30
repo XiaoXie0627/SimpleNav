@@ -465,7 +465,7 @@ const { categories, activeCategory } = Astro.props
     }
 
     currentResults = items
-    selectedIndex = -1
+    selectedIndex = 0
 
     resultsContainer.innerHTML = items
       .map(
@@ -479,6 +479,9 @@ const { categories, activeCategory } = Astro.props
       )
       .join('')
     resultsContainer.classList.add('active')
+    requestAnimationFrame(() => {
+      updateSelection()
+    })
   }
 
   // 隐藏搜索结果
