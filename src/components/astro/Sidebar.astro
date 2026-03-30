@@ -199,22 +199,21 @@ const { categories, activeCategory } = Astro.props
 
   .sidebar__search-results.active {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 8px;
-    padding: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 6px;
+    padding: 8px;
   }
 
   .sidebar__search-result-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    padding: 10px 6px;
-    border-radius: 12px;
+    padding: 6px 10px;
+    gap: 8px;
+    border-radius: 8px;
     background: var(--surface-container-high);
     color: var(--on-surface);
     text-decoration: none;
-    text-align: center;
     border: 2px solid transparent;
     transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
   }
@@ -224,32 +223,36 @@ const { categories, activeCategory } = Astro.props
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     border: 2px solid var(--primary);
-    border-radius: 14px;
+    border-radius: 10px;
     background: var(--primary-container);
     color: var(--on-primary-container);
   }
 
   .sidebar__search-result-icon {
-    width: 28px;
-    height: 28px;
-    margin-bottom: 4px;
-    border-radius: 6px;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 4px;
     object-fit: cover;
   }
 
+  .sidebar__search-result-content {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
   .sidebar__search-result-title {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%;
   }
 
   .sidebar__search-result-category {
-    font-size: 9px;
+    font-size: 10px;
     color: var(--on-surface-variant);
-    margin-top: 2px;
   }
 
   .sidebar__nav {
@@ -472,8 +475,10 @@ const { categories, activeCategory } = Astro.props
         (item) => `
       <a href="${item.href}" target="_blank" class="sidebar__search-result-item">
         <img src="${item.icon || '/assets/images/default-icon.svg'}" alt="${item.title}" class="sidebar__search-result-icon" loading="lazy" />
-        <span class="sidebar__search-result-title">${item.title}</span>
-        <span class="sidebar__search-result-category">${item.category}</span>
+        <div class="sidebar__search-result-content">
+          <span class="sidebar__search-result-title">${item.title}</span>
+          <span class="sidebar__search-result-category">${item.category}</span>
+        </div>
       </a>
     `
       )
