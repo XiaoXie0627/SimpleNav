@@ -36,7 +36,19 @@
             height="18"
             id="engine-icon"
           />
-          <span class="search-bar__engine-arrow">▼</span>
+          <span class="search-bar__engine-arrow">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </span>
         </button>
         <div class="search-bar__engine-menu" id="engine-menu">
           <div class="engine-menu-item active" data-engine="bing">
@@ -318,9 +330,11 @@
   }
 
   .search-bar__engine-arrow {
-    font-size: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--on-surface-variant);
-    margin-left: 1px;
+    margin-right: 4px;
   }
 
   .search-bar__engine-menu {
