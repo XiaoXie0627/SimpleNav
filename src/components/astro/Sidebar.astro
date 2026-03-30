@@ -481,7 +481,9 @@ const { categories, activeCategory } = Astro.props
       .map(
         (item) => `
       <a href="${item.href}" target="_blank" class="sidebar__search-result-item">
-        <img src="${item.icon || '/assets/images/default-icon.svg'}" alt="${item.title}" class="sidebar__search-result-icon" loading="lazy" />
+        <div class="sidebar__search-result-icon">
+          <img src="${item.icon || '/assets/images/default-icon.svg'}" alt="${item.title}" loading="lazy" />
+        </div>
         <div class="sidebar__search-result-content">
           <span class="sidebar__search-result-title">${item.title}</span>
           <span class="sidebar__search-result-category">${item.category}</span>
