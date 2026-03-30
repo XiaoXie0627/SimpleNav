@@ -215,7 +215,8 @@ const { categories, activeCategory } = Astro.props
     color: var(--on-surface);
     text-decoration: none;
     text-align: center;
-    transition: background 0.2s cubic-bezier(0.2, 0, 0, 1);
+    border: 2px solid transparent;
+    transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
   }
 
   .sidebar__search-result-item:hover,
@@ -224,8 +225,8 @@ const { categories, activeCategory } = Astro.props
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     border: 2px solid var(--primary);
     border-radius: 14px;
-    background: var(--surface-container-high);
-    color: var(--on-surface);
+    background: var(--primary-container);
+    color: var(--on-primary-container);
   }
 
   .sidebar__search-result-icon {
