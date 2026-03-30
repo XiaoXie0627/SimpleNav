@@ -220,10 +220,12 @@ const { categories, activeCategory } = Astro.props
 
   .sidebar__search-result-item:hover,
   .sidebar__search-result-item.selected {
-    background: var(--surface-container-highest);
-    color: var(--on-surface);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
     border: 2px solid var(--primary);
-    transform: scale(1.05);
+    border-radius: 14px;
+    background: var(--surface-container-high);
+    color: var(--on-surface);
   }
 
   .sidebar__search-result-icon {
@@ -532,18 +534,8 @@ const { categories, activeCategory } = Astro.props
 
   // 快捷键 Ctrl+F 和 搜索结果键盘导航（绑定到document确保始终响应）
   document.addEventListener('keydown', (e) => {
-    console.log(
-      'Keydown event:',
-      e.key,
-      'isResultsActive:',
-      resultsContainer.classList.contains('active'),
-      'itemsCount:',
-      currentResults.length
-    )
-
     const isResultsActive = resultsContainer.classList.contains('active')
     const itemsCount = currentResults.length
-    console.log('Conditions:', isResultsActive, itemsCount > 0)
 
     if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
       e.preventDefault()
@@ -552,25 +544,21 @@ const { categories, activeCategory } = Astro.props
 
     if (e.key === 'ArrowDown' && isResultsActive && itemsCount > 0) {
       e.preventDefault()
-      console.log('ArrowDown triggered, current index:', selectedIndex)
       if (selectedIndex < 0) {
         selectedIndex = 0
       } else {
         selectedIndex = Math.min(selectedIndex + 1, itemsCount - 1)
       }
-      console.log('New selectedIndex:', selectedIndex)
       updateSelection()
     }
 
     if (e.key === 'ArrowUp' && isResultsActive && itemsCount > 0) {
       e.preventDefault()
-      console.log('ArrowUp triggered, current index:', selectedIndex)
       if (selectedIndex < 0) {
         selectedIndex = itemsCount - 1
       } else {
         selectedIndex = Math.max(selectedIndex - 1, 0)
       }
-      console.log('New selectedIndex:', selectedIndex)
       updateSelection()
     }
 
