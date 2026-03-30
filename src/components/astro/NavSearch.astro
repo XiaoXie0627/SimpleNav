@@ -100,13 +100,17 @@
   }
 
   .nav-search__result-item:hover {
-    background: var(--primary-container);
-    color: var(--on-primary-container);
+    background: var(--surface-container-high);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: var(--on-surface);
   }
 
   .nav-search__result-item.selected {
-    background: var(--primary-container);
-    color: var(--on-primary-container);
+    background: var(--surface-container-high);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: var(--on-surface);
   }
 
   .nav-search__result-icon {
@@ -299,6 +303,14 @@
 
   // 搜索框键盘导航
   searchInput?.addEventListener('keydown', (e) => {
+    console.log(
+      'NavSearch: Keydown event:',
+      e.key,
+      'selectedIndex:',
+      selectedIndex,
+      'results:',
+      currentResults.length
+    )
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       if (currentResults.length > 0) {
