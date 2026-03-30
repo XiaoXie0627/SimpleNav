@@ -27,16 +27,23 @@
 
   <div class="header__center">
     <div class="search-bar">
-      <button class="search-bar__engine" id="search-engine-btn">
-        <img src="/assets/images/search/bing.svg" alt="Bing" width="20" height="20" />
+      <button class="search-bar__engine" id="search-engine-btn" title="切换搜索引擎 (Tab)">
+        <img
+          src="/assets/images/search/bing.svg"
+          alt="Bing"
+          width="20"
+          height="20"
+          id="engine-icon"
+        />
       </button>
       <span class="search-bar__divider"></span>
       <input
         type="text"
         id="network-search-input"
         class="search-bar__input"
-        placeholder="搜索网络..."
+        placeholder="输入关键词搜索..."
       />
+      <span class="search-bar__shortcut" id="search-shortcut">Ctrl+K</span>
       <button class="search-bar__submit" id="search-submit-btn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -261,6 +268,20 @@
     color: var(--on-surface-variant);
   }
 
+  .search-bar__shortcut {
+    font-size: 11px;
+    color: var(--on-surface-variant);
+    background: var(--surface-container-high);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 4px;
+    user-select: none;
+  }
+
+  .search-bar__input:focus + .search-bar__shortcut {
+    display: none;
+  }
+
   .search-bar__submit {
     flex-shrink: 0;
     width: 30px;
@@ -406,22 +427,109 @@
     window.scrollTo({ top: 0, behavior: 'smooth' })
   })
 
+  interface SearchEngine {
+    id: string
+    name: string
+    url: string
+    icon: string
+  }
+
+  const searchEngines: SearchEngine[] = [
+    {
+      id: 'bing',
+      name: 'Bing',
+      url: 'https://www.bing.com/search?q=',
+      icon: '/assets/images/search/bing.svg',
+    },
+    {
+      id: 'google',
+      name: 'Google',
+      url: 'https://www.google.com/search?q=',
+      icon: '/assets/images/search/google.svg',
+    },
+  ]
+
+  let currentEngineIndex = 0
+  const originalPlaceholder = '输入关键词搜索...'
+  const hintPlaceholder = 'Ctrl+K 或 / 聚焦搜索'
+
   const searchInput = document.getElementById('network-search-input') as HTMLInputElement
   const searchSubmitBtn = document.getElementById('search-submit-btn')
+  const engineBtn = document.getElementById('search-engine-btn')
+  const engineIcon = document.getElementById('engine-icon') as HTMLImageElement
+  const searchShortcut = document.getElementById('search-shortcut')
 
-  searchSubmitBtn?.addEventListener('click', () => {
+  function updateEngineButton() {
+    const engine = searchEngines[currentEngineIndex]
+    if (engineIcon && engine) {
+      engineIcon.src = engine.icon
+      engineIcon.alt = engine.name
+      engineBtn!.title = `当前引擎: ${engine.name}，点击或按 Tab 切换`
+    }
+  }
+
+  function switchEngine() {
+    currentEngineIndex = (currentEngineIndex + 1) % searchEngines.length
+    updateEngineButton()
+  }
+
+  function performSearch() {
     const query = searchInput?.value.trim()
     if (query) {
-      window.open(`https://www.bing.com/search?q=${encodeURIComponent(query)}`, '_blank')
+      const engine = searchEngines[currentEngineIndex]
+      window.open(`${engine.url}${encodeURIComponent(query)}`, '_blank')
     }
-  })
+  }
+
+  searchSubmitBtn?.addEventListener('click', performSearch)
 
   searchInput?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-      const query = searchInput.value.trim()
-      if (query) {
-        window.open(`https://www.bing.com/search?q=${encodeURIComponent(query)}`, '_blank')
-      }
+      performSearch()
+    }
+  })
+
+  engineBtn?.addEventListener('click', (e) => {
+    e.preventDefault()
+    switchEngine()
+  })
+
+  searchInput?.addEventListener('focus', () => {
+    searchInput.placeholder = originalPlaceholder
+    if (searchShortcut) {
+      searchShortcut.style.display = 'none'
+    }
+  })
+
+  searchInput?.addEventListener('blur', () => {
+    searchInput.placeholder = hintPlaceholder
+    if (searchShortcut) {
+      searchShortcut.style.display = 'block'
+    }
+  })
+
+  updateEngineButton()
+
+  document.addEventListener('keydown', (e) => {
+    const target = e.target as HTMLElement
+    const isInputFocused =
+      target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable
+
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault()
+      searchInput?.focus()
+      searchInput?.select()
+    }
+
+    if (e.key === '/' && !isInputFocused) {
+      e.preventDefault()
+      searchInput?.focus()
+      searchInput?.select()
+    }
+
+    if (e.key === 'Tab' && document.activeElement === searchInput) {
+      e.preventDefault()
+      switchEngine()
     }
   })
 

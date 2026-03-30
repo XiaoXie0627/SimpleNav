@@ -35,6 +35,7 @@ const { categories, activeCategory } = Astro.props
       placeholder="搜索导航项目..."
       class="sidebar__search-input"
     />
+    <span class="sidebar__search-hint" id="nav-search-hint">Ctrl+F</span>
     <div id="nav-search-results" class="sidebar__search-results"></div>
   </div>
 
@@ -159,6 +160,24 @@ const { categories, activeCategory } = Astro.props
 
   .sidebar__search-input::placeholder {
     color: var(--on-surface-variant);
+  }
+
+  .sidebar__search-hint {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: var(--on-surface-variant);
+    background: var(--surface-container-high);
+    padding: 2px 5px;
+    border-radius: 3px;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .sidebar__search-input:focus + .sidebar__search-hint {
+    display: none;
   }
 
   .sidebar__search-results {
@@ -382,6 +401,8 @@ const { categories, activeCategory } = Astro.props
 
   const searchInput = document.getElementById('nav-search-input') as HTMLInputElement
   const resultsContainer = document.getElementById('nav-search-results') as HTMLDivElement
+  const originalPlaceholder = '搜索导航项目...'
+  const hintPlaceholder = 'Ctrl+F 搜索导航...'
 
   // 初始化搜索
   async function initSearch() {
@@ -471,6 +492,11 @@ const { categories, activeCategory } = Astro.props
   // 失去焦点时隐藏结果
   searchInput?.addEventListener('blur', () => {
     setTimeout(hideResults, 200)
+    searchInput.placeholder = hintPlaceholder
+  })
+
+  searchInput?.addEventListener('focus', () => {
+    searchInput.placeholder = originalPlaceholder
   })
 
   // 快捷键 Ctrl+F
