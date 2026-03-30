@@ -530,8 +530,8 @@ const { categories, activeCategory } = Astro.props
     })
   }
 
-  // 快捷键 Ctrl+F 和 搜索结果键盘导航
-  searchInput?.addEventListener('keydown', (e) => {
+  // 快捷键 Ctrl+F 和 搜索结果键盘导航（绑定到document确保始终响应）
+  document.addEventListener('keydown', (e) => {
     const isResultsActive = resultsContainer.classList.contains('active')
     const itemsCount = currentResults.length
 
