@@ -208,13 +208,12 @@ const { categories, activeCategory } = Astro.props
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 6px 10px;
-    gap: 8px;
-    border-radius: 8px;
-    background: var(--surface-container-high);
+    padding: 8px 10px;
+    gap: 10px;
+    border-radius: 10px;
+    background: var(--surface-container);
     color: var(--on-surface);
     text-decoration: none;
-    border: 2px solid transparent;
     transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
   }
 
@@ -222,15 +221,14 @@ const { categories, activeCategory } = Astro.props
   .sidebar__search-result-item.selected {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    border: 2px solid var(--primary);
-    border-radius: 10px;
+    border-radius: 12px;
     background: var(--primary-container);
     color: var(--on-primary-container);
   }
 
   .sidebar__search-result-icon {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
     flex-shrink: 0;
     border-radius: 4px;
     object-fit: cover;
@@ -243,7 +241,7 @@ const { categories, activeCategory } = Astro.props
   }
 
   .sidebar__search-result-title {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
@@ -251,7 +249,7 @@ const { categories, activeCategory } = Astro.props
   }
 
   .sidebar__search-result-category {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--on-surface-variant);
   }
 
@@ -513,13 +511,11 @@ const { categories, activeCategory } = Astro.props
     resultsContainer.classList.add('active')
   })
 
-  // 失去焦点时隐藏结果（延迟更长，给键盘操作留时间）
+  // 失去焦点时隐藏结果
   searchInput?.addEventListener('blur', () => {
-    setTimeout(() => {
-      if (selectedIndex < 0) {
-        hideResults()
-      }
-    }, 800)
+    if (selectedIndex < 0) {
+      hideResults()
+    }
   })
 
   // 聚焦时重新显示结果
