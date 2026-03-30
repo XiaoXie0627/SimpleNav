@@ -224,7 +224,7 @@ const { categories, activeCategory } = Astro.props
     min-width: 0;
   }
 
-  .sidebar__search-result-title {
+  .sidebar__search-results.active .sidebar__search-result-title {
     margin: 0;
     font-size: 14px;
     font-weight: 500;
@@ -464,7 +464,7 @@ const { categories, activeCategory } = Astro.props
         (item) => `
       <a href="${item.href}" target="_blank" class="sidebar__search-result-item">
         <div class="sidebar__search-result-content">
-          <h3 class="sidebar__search-result-title">${item.title}</h3>
+          <h4 class="sidebar__search-result-title">${item.title}</h4>
           <p class="sidebar__search-result-category">${item.category}</p>
         </div>
       </a>
