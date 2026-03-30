@@ -206,8 +206,7 @@ const { categories, activeCategory } = Astro.props
 
   .sidebar__search-result-item {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
     padding: 12px 14px;
     border-radius: 12px;
     background: var(--surface-container);
@@ -217,31 +216,6 @@ const { categories, activeCategory } = Astro.props
   .sidebar__search-result-item:hover,
   .sidebar__search-result-item.selected {
     background: var(--surface-container-high);
-  }
-
-  .sidebar__search-result-item .sidebar__search-result-icon {
-    width: 24px;
-    height: 24px;
-    min-width: 24px;
-    flex-shrink: 0;
-    border-radius: 6px;
-    background: var(--primary-container);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .sidebar__search-result-item .sidebar__search-result-icon img {
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
-    object-fit: cover;
-  }
-
-  .sidebar__search-result-content {
-    flex: 1;
-    min-width: 0;
   }
 
   .sidebar__search-result-title {
@@ -481,13 +455,8 @@ const { categories, activeCategory } = Astro.props
       .map(
         (item) => `
       <a href="${item.href}" target="_blank" class="sidebar__search-result-item">
-        <div class="sidebar__search-result-icon">
-          <img src="${item.icon || '/assets/images/default-icon.svg'}" alt="${item.title}" loading="lazy" />
-        </div>
-        <div class="sidebar__search-result-content">
-          <span class="sidebar__search-result-title">${item.title}</span>
-          <span class="sidebar__search-result-category">${item.category}</span>
-        </div>
+        <span class="sidebar__search-result-title">${item.title}</span>
+        <span class="sidebar__search-result-category">${item.category}</span>
       </a>
     `
       )
