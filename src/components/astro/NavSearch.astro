@@ -1,17 +1,28 @@
 ---
+
 ---
 
 <div class="nav-search">
-  <svg class="nav-search__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+  <svg
+    class="nav-search__icon"
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+  >
     <circle cx="11" cy="11" r="8"></circle>
     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
   </svg>
-  <input 
-    type="text" 
+  <input
+    type="text"
     id="nav-search-local"
     class="nav-search__input"
     placeholder="搜索导航项目..."
   />
+  <div id="nav-search-results" class="nav-search__results"></div>
 </div>
 
 <style>
@@ -49,14 +60,92 @@
   .nav-search__input::placeholder {
     color: var(--on-surface-variant);
   }
+
+  .nav-search__results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 16px;
+    background: var(--surface-container);
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.12),
+      0 1px 3px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+    display: none;
+  }
+
+  .nav-search__results.active {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .nav-search__result-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 8px;
+    border-radius: 12px;
+    background: var(--surface-container-high);
+    color: var(--on-surface);
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.2s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .nav-search__result-item:hover {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+  }
+
+  .nav-search__result-icon {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .nav-search__result-title {
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .nav-search__result-category {
+    font-size: 10px;
+    color: var(--on-surface-variant);
+    margin-top: 2px;
+  }
 </style>
 
 <script>
   import Fuse from 'fuse.js'
   import type { NavigationData } from '../../types'
-  
-  let fuse: Fuse<unknown> | null = null
-  
+
+  interface SearchItem {
+    id: string
+    title: string
+    href: string
+    icon?: string
+    category: string
+  }
+
+  let fuse: Fuse<SearchItem> | null = null
+  const allItems: SearchItem[] = []
+
+  const searchInput = document.getElementById('nav-search-local') as HTMLInputElement
+  const resultsContainer = document.getElementById('nav-search-results') as HTMLDivElement
+
   // 初始化搜索
   async function initSearch() {
     try {
@@ -65,24 +154,33 @@
         const result = await response.json()
         if (result.success) {
           const data: NavigationData = result.data
-          
-          // 扁平化所有项目
-          const items: Array<{ id: string; title: string; href: string; category: string }> = []
-          
-          data.navigationItems.forEach(category => {
-            category.items.forEach(item => {
-              items.push({
+
+          data.navigationItems.forEach((category) => {
+            category.items.forEach((item) => {
+              allItems.push({
                 id: item.id,
                 title: item.title,
                 href: item.href,
-                category: category.title
+                icon: item.icon,
+                category: category.title,
+              })
+            })
+            category.subCategories?.forEach((subCat) => {
+              subCat.items.forEach((item) => {
+                allItems.push({
+                  id: item.id,
+                  title: item.title,
+                  href: item.href,
+                  icon: item.icon,
+                  category: `${category.title} / ${subCat.title}`,
+                })
               })
             })
           })
-          
-          fuse = new Fuse(items, {
+
+          fuse = new Fuse(allItems, {
             keys: ['title', 'category'],
-            threshold: 0.3
+            threshold: 0.3,
           })
         }
       }
@@ -90,42 +188,66 @@
       console.error('Failed to init search:', error)
     }
   }
-  
-  // 搜索输入处理
-  const searchInput = document.getElementById('nav-search-local') as HTMLInputElement
-  
-  searchInput?.addEventListener('input', (e) => {
-    const query = (e.target as HTMLInputElement).value.trim()
-    
-    if (!query || !fuse) {
-      // 显示所有项目
-      document.querySelectorAll('.sidebar__category-item').forEach(el => {
-        (el as HTMLElement).style.display = ''
-      })
+
+  // 显示搜索结果
+  function showResults(items: SearchItem[]) {
+    if (items.length === 0) {
+      resultsContainer.classList.remove('active')
+      resultsContainer.innerHTML = ''
       return
     }
-    
+
+    resultsContainer.innerHTML = items
+      .map(
+        (item) => `
+      <a href="${item.href}" target="_blank" class="nav-search__result-item">
+        <img src="${item.icon || '/assets/images/default-icon.svg'}" alt="${item.title}" class="nav-search__result-icon" loading="lazy" />
+        <span class="nav-search__result-title">${item.title}</span>
+        <span class="nav-search__result-category">${item.category}</span>
+      </a>
+    `
+      )
+      .join('')
+    resultsContainer.classList.add('active')
+  }
+
+  // 隐藏搜索结果
+  function hideResults() {
+    resultsContainer.classList.remove('active')
+    resultsContainer.innerHTML = ''
+  }
+
+  // 搜索输入处理
+  searchInput?.addEventListener('input', (e) => {
+    const query = (e.target as HTMLInputElement).value.trim()
+
+    if (!query || !fuse) {
+      hideResults()
+      return
+    }
+
     const results = fuse.search(query)
-    const matchedIds = new Set(results.map(r => (r.item as { id: string }).id))
-    
-    // 高亮匹配的项目
-    document.querySelectorAll('[data-item-id]').forEach(el => {
-      const itemId = el.getAttribute('data-item-id')
-      if (itemId && matchedIds.has(itemId)) {
-        (el as HTMLElement).style.display = ''
-      } else {
-        (el as HTMLElement).style.display = 'none'
-      }
-    })
+    const matchedItems = results.map((r) => r.item).slice(0, 12)
+    showResults(matchedItems)
   })
-  
+
+  // 失去焦点时隐藏结果
+  searchInput?.addEventListener('blur', () => {
+    setTimeout(hideResults, 200)
+  })
+
   // 快捷键 Ctrl+F
   document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
       e.preventDefault()
       searchInput?.focus()
     }
+    // Escape 关闭结果
+    if (e.key === 'Escape') {
+      hideResults()
+      searchInput?.blur()
+    }
   })
-  
+
   initSearch()
 </script>

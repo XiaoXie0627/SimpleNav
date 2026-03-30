@@ -216,17 +216,20 @@ FastNav 产品的功能模块可以分为以下几个主要部分：
 **移动端导航卡片样式调整**：
 
 ```css
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .nav-card {
-    padding: 12px;
-    min-height: 48px;
+    padding: 6px;
+    min-height: 36px;
   }
   .nav-card__icon {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
   }
   .nav-card__title {
-    font-size: 13px;
+    font-size: 12px;
+  }
+  .nav-card__description {
+    font-size: 10px;
   }
 }
 ```

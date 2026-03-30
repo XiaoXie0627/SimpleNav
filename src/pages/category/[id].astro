@@ -231,11 +231,29 @@ const activeCategory = id || categories[0]?.id || ''
   @media (max-width: 768px) {
     .main-content {
       margin-left: 0;
-      padding: 16px;
+      padding: 12px;
     }
 
     .nav-grid {
       grid-template-columns: 1fr;
+    }
+
+    .nav-card {
+      padding: 6px;
+      min-height: 36px;
+    }
+
+    .nav-card__icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    .nav-card__title {
+      font-size: 12px;
+    }
+
+    .nav-card__description {
+      font-size: 10px;
     }
   }
 </style>
