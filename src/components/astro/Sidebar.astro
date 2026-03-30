@@ -223,6 +223,12 @@ const { categories, activeCategory } = Astro.props
     color: var(--on-primary-container);
   }
 
+  .sidebar__search-result-item.selected {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    transform: scale(1.02);
+  }
+
   .sidebar__search-result-icon {
     width: 28px;
     height: 28px;
@@ -402,6 +408,9 @@ const { categories, activeCategory } = Astro.props
   const searchInput = document.getElementById('nav-search-input') as HTMLInputElement
   const resultsContainer = document.getElementById('nav-search-results') as HTMLDivElement
 
+  let selectedIndex = -1
+  let currentResults: SearchItem[] = []
+
   // 初始化搜索
   async function initSearch() {
     try {
@@ -450,8 +459,13 @@ const { categories, activeCategory } = Astro.props
     if (items.length === 0) {
       resultsContainer.classList.remove('active')
       resultsContainer.innerHTML = ''
+      currentResults = []
+      selectedIndex = -1
       return
     }
+
+    currentResults = items
+    selectedIndex = -1
 
     resultsContainer.innerHTML = items
       .map(
@@ -471,6 +485,8 @@ const { categories, activeCategory } = Astro.props
   function hideResults() {
     resultsContainer.classList.remove('active')
     resultsContainer.innerHTML = ''
+    selectedIndex = -1
+    currentResults = []
   }
 
   // 搜索输入处理
@@ -492,13 +508,48 @@ const { categories, activeCategory } = Astro.props
     setTimeout(hideResults, 200)
   })
 
+  function updateSelection() {
+    const items = resultsContainer.querySelectorAll('.sidebar__search-result-item')
+    items.forEach((item, index) => {
+      if (index === selectedIndex) {
+        item.classList.add('selected')
+        item.scrollIntoView({ block: 'nearest' })
+      } else {
+        item.classList.remove('selected')
+      }
+    })
+  }
+
   // 快捷键 Ctrl+F
   document.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
       e.preventDefault()
       searchInput?.focus()
     }
-    // Escape 关闭结果
+
+    const isResultsActive = resultsContainer.classList.contains('active')
+    const itemsCount = currentResults.length
+
+    if (e.key === 'ArrowDown' && isResultsActive && itemsCount > 0) {
+      e.preventDefault()
+      selectedIndex = Math.min(selectedIndex + 1, itemsCount - 1)
+      updateSelection()
+    }
+
+    if (e.key === 'ArrowUp' && isResultsActive && itemsCount > 0) {
+      e.preventDefault()
+      selectedIndex = Math.max(selectedIndex - 1, 0)
+      updateSelection()
+    }
+
+    if (e.key === 'Enter' && isResultsActive && selectedIndex >= 0) {
+      e.preventDefault()
+      const selectedItem = currentResults[selectedIndex]
+      if (selectedItem) {
+        window.open(selectedItem.href, '_blank')
+      }
+    }
+
     if (e.key === 'Escape') {
       hideResults()
       searchInput?.blur()
