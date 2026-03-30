@@ -401,8 +401,6 @@ const { categories, activeCategory } = Astro.props
 
   const searchInput = document.getElementById('nav-search-input') as HTMLInputElement
   const resultsContainer = document.getElementById('nav-search-results') as HTMLDivElement
-  const originalPlaceholder = '搜索导航项目...'
-  const hintPlaceholder = 'Ctrl+F 搜索导航...'
 
   // 初始化搜索
   async function initSearch() {
@@ -492,11 +490,6 @@ const { categories, activeCategory } = Astro.props
   // 失去焦点时隐藏结果
   searchInput?.addEventListener('blur', () => {
     setTimeout(hideResults, 200)
-    searchInput.placeholder = hintPlaceholder
-  })
-
-  searchInput?.addEventListener('focus', () => {
-    searchInput.placeholder = originalPlaceholder
   })
 
   // 快捷键 Ctrl+F
