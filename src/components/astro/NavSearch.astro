@@ -142,6 +142,7 @@
 
   let fuse: Fuse<SearchItem> | null = null
   const allItems: SearchItem[] = []
+  let isMouseOverResults = false
 
   const searchInput = document.getElementById('nav-search-local') as HTMLInputElement
   const resultsContainer = document.getElementById('nav-search-results') as HTMLDivElement
@@ -231,9 +232,22 @@
     showResults(matchedItems)
   })
 
-  // 失去焦点时隐藏结果
+  // 鼠标进入/离开结果框时更新状态
+  resultsContainer?.addEventListener('mouseenter', () => {
+    isMouseOverResults = true
+  })
+
+  resultsContainer?.addEventListener('mouseleave', () => {
+    isMouseOverResults = false
+  })
+
+  // 失去焦点时隐藏结果（仅当鼠标不在结果框内时）
   searchInput?.addEventListener('blur', () => {
-    setTimeout(hideResults, 200)
+    setTimeout(() => {
+      if (!isMouseOverResults) {
+        hideResults()
+      }
+    }, 200)
   })
 
   // 快捷键 Ctrl+F
