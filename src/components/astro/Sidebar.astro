@@ -218,15 +218,12 @@ const { categories, activeCategory } = Astro.props
     transition: background 0.2s cubic-bezier(0.2, 0, 0, 1);
   }
 
-  .sidebar__search-result-item:hover {
-    background: var(--primary-container);
-    color: var(--on-primary-container);
-  }
-
+  .sidebar__search-result-item:hover,
   .sidebar__search-result-item.selected {
     background: var(--primary-container);
     color: var(--on-primary-container);
-    transform: scale(1.02);
+    border: 2px solid var(--primary);
+    transform: scale(1.05);
   }
 
   .sidebar__search-result-icon {
@@ -501,11 +498,24 @@ const { categories, activeCategory } = Astro.props
     const results = fuse.search(query)
     const matchedItems = results.map((r) => r.item).slice(0, 12)
     showResults(matchedItems)
+    selectedIndex = -1
+    resultsContainer.classList.add('active')
   })
 
-  // 失去焦点时隐藏结果
+  // 失去焦点时隐藏结果（延迟更长，给键盘操作留时间）
   searchInput?.addEventListener('blur', () => {
-    setTimeout(hideResults, 200)
+    setTimeout(() => {
+      if (selectedIndex < 0) {
+        hideResults()
+      }
+    }, 800)
+  })
+
+  // 聚焦时重新显示结果
+  searchInput?.addEventListener('focus', () => {
+    if (currentResults.length > 0 && selectedIndex >= 0) {
+      resultsContainer.classList.add('active')
+    }
   })
 
   function updateSelection() {
@@ -520,25 +530,33 @@ const { categories, activeCategory } = Astro.props
     })
   }
 
-  // 快捷键 Ctrl+F
-  document.addEventListener('keydown', (e) => {
+  // 快捷键 Ctrl+F 和 搜索结果键盘导航
+  searchInput?.addEventListener('keydown', (e) => {
+    const isResultsActive = resultsContainer.classList.contains('active')
+    const itemsCount = currentResults.length
+
     if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
       e.preventDefault()
       searchInput?.focus()
     }
 
-    const isResultsActive = resultsContainer.classList.contains('active')
-    const itemsCount = currentResults.length
-
     if (e.key === 'ArrowDown' && isResultsActive && itemsCount > 0) {
       e.preventDefault()
-      selectedIndex = Math.min(selectedIndex + 1, itemsCount - 1)
+      if (selectedIndex < 0) {
+        selectedIndex = 0
+      } else {
+        selectedIndex = Math.min(selectedIndex + 1, itemsCount - 1)
+      }
       updateSelection()
     }
 
     if (e.key === 'ArrowUp' && isResultsActive && itemsCount > 0) {
       e.preventDefault()
-      selectedIndex = Math.max(selectedIndex - 1, 0)
+      if (selectedIndex < 0) {
+        selectedIndex = itemsCount - 1
+      } else {
+        selectedIndex = Math.max(selectedIndex - 1, 0)
+      }
       updateSelection()
     }
 
